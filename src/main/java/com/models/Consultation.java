@@ -23,6 +23,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  *
@@ -62,95 +65,14 @@ public class Consultation implements Serializable{
         inverseJoinColumns = @JoinColumn( name = "idAnimal" ) )
     private List<Animal> animaux = new ArrayList<>();
     
+    @ManyToOne
+    @JoinColumn(name="idPersonne")
+    private Personne personne;
 
 /**
 -- -----------------------------------------------------------------------------
 -- - Constructor                                                             ---
 -- -----------------------------------------------------------------------------
 */
-    public Consultation(Calendar date, Date heureDebut, Date heureFin, String Motif, double tarifGroupe) {
-        this.date = date;
-        this.heureDebut = heureDebut;
-        this.heureFin = heureFin;
-        this.Motif = Motif;
-        this.tarifGroupe = tarifGroupe;
-    }
-
-    public Consultation() {
-    }
-
-    public Long getIdConsultation() {
-        return idConsultation;
-    }
-
-    public void setIdConsultation(Long idConsultation) {
-        this.idConsultation = idConsultation;
-    }
-
-    public Calendar getDate() {
-        return date;
-    }
-
-    public void setDate(Calendar date) {
-        this.date = date;
-    }
-
-    public Date getHeureDebut() {
-        return heureDebut;
-    }
-
-    public void setHeureDebut(Date heureDebut) {
-        this.heureDebut = heureDebut;
-    }
-
-    public Date getHeureFin() {
-        return heureFin;
-    }
-
-    public void setHeureFin(Date heureFin) {
-        this.heureFin = heureFin;
-    }
-
-    public String getMotif() {
-        return Motif;
-    }
-
-    public void setMotif(String Motif) {
-        this.Motif = Motif;
-    }
-
-    public double getTarifGroupe() {
-        return tarifGroupe;
-    }
-
-    public void setTarifGroupe(double tarifGroupe) {
-        this.tarifGroupe = tarifGroupe;
-    }
-
-    public Employe getEmploye() {
-        return employe;
-    }
-
-    public void setEmploye(Employe employe) {
-        this.employe = employe;
-    }
-
-    public FactureConsult getFactureConsult() {
-        return factureConsult;
-    }
-
-    public void setFactureConsult(FactureConsult factureConsult) {
-        this.factureConsult = factureConsult;
-    }
-
-    public List<Animal> getAnimaux() {
-        return animaux;
-    }
-
-    public void setAnimaux(List<Animal> animaux) {
-        this.animaux = animaux;
-    }
-
-    
     
 }

@@ -19,6 +19,9 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  *
@@ -43,4 +46,11 @@ public class Service implements Serializable{
         joinColumns = @JoinColumn( name = "idService" ),
         inverseJoinColumns = @JoinColumn( name = "idPrestation" ) )
     private List<Prestation> prestations = new ArrayList<>();
+    
+/**
+-- -----------------------------------------------------------------------------
+-- - Constructor                                                             ---
+-- -----------------------------------------------------------------------------
+ */
+
 }

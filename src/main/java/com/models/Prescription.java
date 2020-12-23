@@ -6,16 +6,16 @@
 package com.models;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  *
@@ -38,51 +38,14 @@ public class Prescription implements Serializable{
     private Prestation prestation;
  
     @ManyToMany(mappedBy = "prescriptions")
-    private List<Posologie> posologies = new ArrayList<>();
-/**
-    @ManyToMany(fetch=FetchType.LAZY)
-    @JoinTable( name = "Posologie",
-        joinColumns = @JoinColumn( name = "idPrescription" ),
-        inverseJoinColumns = @JoinColumn( name = "idPosologie" ) )
-    private List<Posologie> posologies = new ArrayList<>();
+    private Set<Posologie> posologies;
+
 /**
 -- -----------------------------------------------------------------------------
 -- - Constructor                                                             ---
 -- -----------------------------------------------------------------------------
  */
-    public Prescription() {
-    }
 
-    public Prescription(Prestation prestation) {
-        this.prestation = prestation;
-    }
-
-    public Long getIdPrescription() {
-        return idPrescription;
-    }
-
-    public void setIdPrescription(Long idPrescription) {
-        this.idPrescription = idPrescription;
-    }
-
-    public Prestation getPrestation() {
-        return prestation;
-    }
-
-    public void setPrestation(Prestation prestation) {
-        this.prestation = prestation;
-    }
-
-    public List<Posologie> getPosologies() {
-        return posologies;
-    }
-
-    public void setPosologies(List<Posologie> posologies) {
-        this.posologies = posologies;
-    }
-
-
-    
 
     
 }

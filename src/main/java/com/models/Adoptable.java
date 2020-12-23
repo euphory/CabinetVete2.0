@@ -15,6 +15,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  *
@@ -42,56 +45,5 @@ public class Adoptable implements Serializable{
 -- - Constructor                                                             ---
 -- -----------------------------------------------------------------------------
 */
-    public Adoptable(Date dateAbandon, String motifAbandon) {
-        this.dateAbandon = dateAbandon;
-        this.motifAbandon = motifAbandon;
-    }
-    public Adoptable(Date dateAbandon, String motifAbandon, Animal animal) {
-        this.dateAbandon = dateAbandon;
-        this.motifAbandon = motifAbandon;
-        this.animal = animal;
-    }
-
-    public Adoptable() {
-    }
-
-    public Long getIdAdoptable() {
-        return idAdoptable;
-    }
-
-    public void setIdAdoptable(Long idAdoptable) {
-        this.idAdoptable = idAdoptable;
-    }
-
-    public Date getDateAbandon() {
-        return dateAbandon;
-    }
-
-    public void setDateAbandon(Date dateAbandon) {
-        this.dateAbandon = dateAbandon;
-    }
-
-    public String getMotifAbandon() {
-        return motifAbandon;
-    }
-
-    public void setMotifAbandon(String motifAbandon) {
-        this.motifAbandon = motifAbandon;
-    }
-
-    public Animal getAnimal() {
-        return animal;
-    }
-
-    public void setAnimal(Animal animal) {
-        this.animal = animal;
-    }
-    
-    
-
-
-
-    
-    
     
 }

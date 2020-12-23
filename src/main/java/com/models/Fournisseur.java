@@ -19,6 +19,9 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  *
@@ -68,90 +71,5 @@ public class Fournisseur implements Serializable{
 -- - Constructor                                                             ---
 -- -----------------------------------------------------------------------------
  */ 
-
-    public Fournisseur(String nom, String Adress, int numTVA, int telephone, String AdressMail, String numCompte) {
-        this.nom = nom;
-        this.Adress = Adress;
-        this.numTVA = numTVA;
-        this.telephone = telephone;
-        this.AdressMail = AdressMail;
-        this.numCompte = numCompte;
-    }
-
-    public Fournisseur() {
-    }
-
-    public Long getIdFournisseur() {
-        return idFournisseur;
-    }
-
-    public void setIdFournisseur(Long idFournisseur) {
-        this.idFournisseur = idFournisseur;
-    }
-
-    public String getNom() {
-        return nom;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    public String getAdress() {
-        return Adress;
-    }
-
-    public void setAdress(String Adress) {
-        this.Adress = Adress;
-    }
-
-    public int getNumTVA() {
-        return numTVA;
-    }
-
-    public void setNumTVA(int numTVA) {
-        this.numTVA = numTVA;
-    }
-
-    public int getTelephone() {
-        return telephone;
-    }
-
-    public void setTelephone(int telephone) {
-        this.telephone = telephone;
-    }
-
-    public String getAdressMail() {
-        return AdressMail;
-    }
-
-    public void setAdressMail(String AdressMail) {
-        this.AdressMail = AdressMail;
-    }
-
-    public String getNumCompte() {
-        return numCompte;
-    }
-
-    public void setNumCompte(String numCompte) {
-        this.numCompte = numCompte;
-    }
-
-    public List<ArticleMedical> getArticleMedicals() {
-        return articleMedicals;
-    }
-
-    public void setArticleMedicals(List<ArticleMedical> articleMedicals) {
-        this.articleMedicals = articleMedicals;
-    }
-
-    public List<Prestation> getPrestations() {
-        return prestations;
-    }
-
-    public void setPrestations(List<Prestation> prestations) {
-        this.prestations = prestations;
-    }
-    
 
 }

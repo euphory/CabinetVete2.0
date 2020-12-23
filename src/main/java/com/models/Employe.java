@@ -44,11 +44,11 @@ public abstract class Employe implements Serializable{
 -- - Constructor                                                             ---
 -- -----------------------------------------------------------------------------
 */
-    
+  
 
     public Long getIdEmploye() {
         return idEmploye;
-    }
+}
 
     public void setIdEmploye(Long idEmploye) {
         this.idEmploye = idEmploye;

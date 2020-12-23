@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,6 +24,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  *
@@ -44,7 +48,7 @@ public class Animal implements Serializable{
 -- -----------------------------------------------------------------------------   
  */
     @ManyToMany(mappedBy = "animaux")
-    private List<Consultation> consultations = new ArrayList<>();
+    private Set<Consultation> consultations;
    
     @ManyToOne
     @JoinColumn(name="idEspece")
@@ -58,122 +62,19 @@ public class Animal implements Serializable{
      private Adoptable adoptable ;
         
     @OneToMany(mappedBy="animal", fetch=FetchType.LAZY)
-    private List<Formulaire> formulaires = new ArrayList<>(); 
+    private Set<Formulaire> formulaires; 
     
     @OneToMany(mappedBy="animal", fetch=FetchType.LAZY)
-    private List<Prestation> prestations = new ArrayList<>();
+    private Set<Prestation> prestations;
     
     @OneToMany(mappedBy="animal", fetch=FetchType.LAZY,cascade={CascadeType.REMOVE})
-    private List<Antecedent> antecedents = new ArrayList<>();
+    private Set<Antecedent> antecedents;
 
 /**
 -- -----------------------------------------------------------------------------
 -- - Constructor                                                             ---
 -- -----------------------------------------------------------------------------
 */
-    
-    public Animal(Long idAnimal, String surnom, double poid, Date dateNaissance){
-        this.idAnimal = idAnimal;
-        this.surnom = surnom;
-        this.poid = poid;
-        this.dateNaissance = dateNaissance;
-}
-
-    public Animal() {
-    }
-
-    public Animal(String surnom, double poid, Date dateNaissance, Personne personne, Adoptable adoptable, List<Formulaire> formulaires) {
-        this.surnom = surnom;
-        this.poid = poid;
-        this.dateNaissance = dateNaissance;
-        this.personne = personne;
-        this.adoptable = adoptable;
-        this.formulaires = formulaires;
-    }
-
-    public Animal(String surnom, double poid, Date dateNaissance, Personne personne, List<Prestation> prestations, List<Antecedent> antecedents) {
-        this.surnom = surnom;
-        this.poid = poid;
-        this.dateNaissance = dateNaissance;
-        this.personne = personne;
-        this.prestations = prestations;
-        this.antecedents = antecedents;
-    }
-
-    public List<Prestation> getPrestations() {
-        return prestations;
-    }
-
-    public void setPrestations(List<Prestation> prestations) {
-        this.prestations = prestations;
-    }
-
-    public List<Antecedent> getAntcedents() {
-        return antecedents;
-    }
-
-    public void setAntcedents(List<Antecedent> antcedents) {
-        this.antecedents = antcedents;
-    }
-    
-
-    public Long getIdAnimal() {
-        return idAnimal;
-    }
-
-    public void setIdAnimal(Long idAnimal) {
-        this.idAnimal = idAnimal;
-    }
-
-    public String getSurnom() {
-        return surnom;
-    }
-
-    public void setSurnom(String surnom) {
-        this.surnom = surnom;
-    }
-
-    public double getPoid() {
-        return poid;
-    }
-
-    public void setPoid(double poid) {
-        this.poid = poid;
-    }
-
-    public Date getDateNaissance() {
-        return dateNaissance;
-    }
-
-    public void setDateNaissance(Date dateNaissance) {
-        this.dateNaissance = dateNaissance;
-    }
-
-    public Personne getPersonne() {
-        return personne;
-    }
-
-    public void setPersonne(Personne personne) {
-        this.personne = personne;
-    }
-
-    public Adoptable getAdoptable() {
-        return adoptable;
-    }
-
-    public void setAdoptable(Adoptable adoptable) {
-        this.adoptable = adoptable;
-    }
-
-    public Collection<Formulaire> getFormulaires() {
-        return formulaires;
-    }
-
-    public void setFormulaires(List<Formulaire> formulaires) {
-        this.formulaires = formulaires;
-    }
-    
-    
-
+ 
 
 }

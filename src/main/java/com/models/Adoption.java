@@ -18,17 +18,18 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  *
  * @author PC
  */
 @Entity
-@Table(name = "Adoption")
 public class Adoption implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idAdoption")
     private Long idAdoption;
     @Temporal(TemporalType.DATE)
     private Date dateAdoption;
@@ -39,7 +40,7 @@ public class Adoption implements Serializable{
 -- -----------------------------------------------------------------------------
 */    
     @OneToOne( cascade = CascadeType.ALL ) 
-    @JoinColumn( name="idFormulaire" )
+    @JoinColumn( name="idFormulaire", nullable = true)
     private Formulaire formulaire;
 /**
 -- -----------------------------------------------------------------------------
@@ -47,52 +48,5 @@ public class Adoption implements Serializable{
 -- -----------------------------------------------------------------------------
 */
 
-
-    public Adoption(Date dateAdoption, double frais) {
-        this.dateAdoption = dateAdoption;
-        this.frais = frais;
-    }
-
-    public Adoption(Date dateAdoption, double frais, Formulaire formulaire) {
-        this.dateAdoption = dateAdoption;
-        this.frais = frais;
-        this.formulaire = formulaire;
-    }
-
-    public Adoption() {
-    }
-    
-    
-    public Long getIdAdoption() {
-        return idAdoption;
-    }
-
-    public void setIdAdoption(Long idAdoption) {
-        this.idAdoption = idAdoption;
-    }
-
-    public Date getDateAdoption() {
-        return dateAdoption;
-    }
-
-    public void setDateAdoption(Date dateAdoption) {
-        this.dateAdoption = dateAdoption;
-    }
-
-    public double getFrais() {
-        return frais;
-    }
-
-    public void setFrais(double frais) {
-        this.frais = frais;
-    }
-
-    public Formulaire getFormulaire() {
-        return formulaire;
-    }
-
-    public void setFormulaire(Formulaire formulaire) {
-        this.formulaire = formulaire;
-    }
 
 }

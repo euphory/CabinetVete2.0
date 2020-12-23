@@ -6,7 +6,7 @@
 package com.models;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -29,58 +29,19 @@ public class Veterinaire extends Employe{
 -- - Association                                                          ---
 -- -----------------------------------------------------------------------------
 */   
-    @OneToMany(mappedBy="veterinaire", fetch=FetchType.LAZY)
-    private List<Formulaire> formulaires = new ArrayList<>();
+
     
     @OneToMany(mappedBy="employe", fetch=FetchType.LAZY)
-    private List<Commande> commandes = new ArrayList<>(); 
+    private Set<Commande> commandes ; 
     
     @OneToMany(mappedBy="employe", fetch=FetchType.LAZY)
-    private List<Consultation> consultation = new ArrayList<>(); 
+    private Set<Consultation> consultation ; 
 
 /**
 -- -----------------------------------------------------------------------------
 -- - Constructor                                                             ---
 -- -----------------------------------------------------------------------------
 */
-    public Veterinaire(Long numVet) {
-        this.numVet = numVet;
-    }
-
-    public Veterinaire() {
-    }
-
-    public Long getNumVet() {
-        return numVet;
-    }
-
-    public void setNumVet(Long numVet) {
-        this.numVet = numVet;
-    }
-
-    public List<Formulaire> getFormulaires() {
-        return formulaires;
-    }
-
-    public void setFormulaires(List<Formulaire> formulaires) {
-        this.formulaires = formulaires;
-    }
-
-    public List<Commande> getCommandes() {
-        return commandes;
-    }
-
-    public void setCommandes(List<Commande> commandes) {
-        this.commandes = commandes;
-    }
-
-    public List<Consultation> getConsultation() {
-        return consultation;
-    }
-
-    public void setConsultation(List<Consultation> consultation) {
-        this.consultation = consultation;
-    }
  
     
 }

@@ -6,8 +6,7 @@
 package com.models;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,16 +14,17 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  *
  * @author PC
  */
 @Entity
-@Table(name = "Espece")
 public class Espece implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,43 +39,11 @@ public class Espece implements Serializable{
 -- -----------------------------------------------------------------------------
  */  
     @OneToMany(mappedBy="espece", fetch=FetchType.LAZY, cascade={CascadeType.PERSIST})
-    private List<Animal> animaux = new ArrayList<>();
+    private Set<Animal> animaux ;
+    
 /**
 -- -----------------------------------------------------------------------------
 -- - Constructor                                                             ---
 -- -----------------------------------------------------------------------------
 */
-    public Espece(String nom) {
-        this.nom = nom;
-    }
-
-    public Espece() {
-    }
-
-    public Long getIdEspece() {
-        return idEspece;
-    }
-
-    public void setIdEspece(Long idEspece) {
-        this.idEspece = idEspece;
-    }
-
-    public String getNom() {
-        return nom;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    public List<Animal> getAnimaux() {
-        return animaux;
-    }
-
-    public void setAnimaux(List<Animal> animaux) {
-        this.animaux = animaux;
-    }
-
-
-    
 }

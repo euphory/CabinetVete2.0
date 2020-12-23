@@ -15,6 +15,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  *
@@ -46,9 +49,6 @@ public class Formulaire implements Serializable{
     @JoinColumn(name="idAnimal")
     private Animal animal;
  
-    @ManyToOne
-    @JoinColumn(name="idEmploye", nullable=true)
-    private Veterinaire veterinaire;
     
 /**
 -- -----------------------------------------------------------------------------
@@ -56,68 +56,5 @@ public class Formulaire implements Serializable{
 -- -----------------------------------------------------------------------------
 */
 
-    public Formulaire( Date dateFormulaire, String raison) {
-        this.dateFormulaire = dateFormulaire;
-        this.raison = raison;
-    }
-
-    public Formulaire() {
-    }
-
-    public Formulaire(Date dateFormulaire, String raison, Personne personne, Animal animal) {
-        this.dateFormulaire = dateFormulaire;
-        this.raison = raison;
-        this.personne = personne;
-        this.animal = animal;
-    }
-   
-    public Adoption getAdoption() {
-        return adoption;
-    }
-
-    public void setAdoption(Adoption adoption) {
-        this.adoption = adoption;
-    }
-
-    public Animal getAnimal() {
-        return animal;
-    }
-
-    public void setAnimal(Animal animal) {
-        this.animal = animal;
-    }
-    
-
-    public Long getIdFormulaire() {
-        return idFormulaire;
-    }
-
-    public void setIdFormulaire(Long idFormulaire) {
-        this.idFormulaire = idFormulaire;
-    }
-
-    public Date getDateFormulaire() {
-        return dateFormulaire;
-    }
-
-    public void setDateFormulaire(Date dateFormulaire) {
-        this.dateFormulaire = dateFormulaire;
-    }
-
-    public String getRaison() {
-        return raison;
-    }
-
-    public void setRaison(String raison) {
-        this.raison = raison;
-    }
-
-    public Personne getPersonne() {
-        return personne;
-    }
-
-    public void setPersonne(Personne personne) {
-        this.personne = personne;
-    }
     
 }

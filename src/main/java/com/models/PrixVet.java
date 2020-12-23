@@ -7,6 +7,9 @@ package com.models;
 
 import javax.persistence.Column;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  *
@@ -17,17 +20,4 @@ public class PrixVet {
         @Column(name="prixDuService")
         private double prixDuService;
 
-    public PrixVet(double prixDuService) {
-        this.prixDuService = prixDuService;
-    }
-
-    public double getPrixDuService() {
-        return prixDuService;
-    }
-
-    public void setPrixDuService(double prixDuService) {
-        this.prixDuService = prixDuService;
-    }
-        
-        
 }

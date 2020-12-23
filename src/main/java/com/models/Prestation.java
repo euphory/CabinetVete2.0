@@ -7,8 +7,10 @@ package com.models;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,13 +20,15 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  *
  * @author PC
  */
 @Entity
-@Table(name = "Prestation")
 public class Prestation{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -50,16 +54,23 @@ public class Prestation{
     @JoinTable( name = "T_ArticleMedicalFournisseur_Prestation",
             joinColumns = @JoinColumn( name = "idPrestation" ),
             inverseJoinColumns = @JoinColumn( name = "idArticleMedical" ) )
-    private List<ArticleMedical> articleMedicals = new ArrayList<>();
+    private Set<ArticleMedical> articleMedicals;
     
     @ManyToMany
     @JoinTable( name = "T_ArticleMedicalFournisseur_Prestation",
             joinColumns = @JoinColumn( name = "idPrestation" ),
             inverseJoinColumns = @JoinColumn( name = "idFournisseur" ) )
-    private List<Fournisseur> fournisseurs = new ArrayList<>();
+    private Set<Fournisseur> fournisseurs;
    
-    @OneToMany( targetEntity=Prescription.class, mappedBy="idPrescription" )
-    private List<Prescription> prescriptions = new ArrayList<>();
+    @OneToMany(mappedBy="idPrescription", fetch=FetchType.LAZY)
+    private Set<Prescription> prescriptions;   
+    
+    @ManyToMany
+    @JoinTable( name = "PrixVet",
+            joinColumns = @JoinColumn( name = "idPrestation" ),
+            inverseJoinColumns = @JoinColumn( name = "idService" ) )
+    private Set<Service> service;    
+    
  
 /**
 -- -----------------------------------------------------------------------------

@@ -14,6 +14,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  *
@@ -44,71 +47,6 @@ public class FactureConsult implements Serializable{
 -- - Constructor                                                             ---
 -- -----------------------------------------------------------------------------
 */
-    public FactureConsult(Calendar date, String modeReglement, Calendar dateReglement, double total) {
-        this.date = date;
-        this.modeReglement = modeReglement;
-        this.dateReglement = dateReglement;
-        this.total = total;
-    }
-
-    public FactureConsult() {
-    }
-
-    public FactureConsult(Calendar date, String modeReglement, Calendar dateReglement, double total, Consultation idConsultation) {
-        this.date = date;
-        this.modeReglement = modeReglement;
-        this.dateReglement = dateReglement;
-        this.total = total;
-        this.idConsultation = idConsultation;
-    }
-
-    public Long getIdFactureConsult() {
-        return idFactureConsult;
-    }
-
-    public void setIdFactureConsult(Long idFactureConsult) {
-        this.idFactureConsult = idFactureConsult;
-    }
-
-    public Calendar getDate() {
-        return date;
-    }
-
-    public void setDate(Calendar date) {
-        this.date = date;
-    }
-
-    public String getModeReglement() {
-        return modeReglement;
-    }
-
-    public void setModeReglement(String modeReglement) {
-        this.modeReglement = modeReglement;
-    }
-
-    public Calendar getDateReglement() {
-        return dateReglement;
-    }
-
-    public void setDateReglement(Calendar dateReglement) {
-        this.dateReglement = dateReglement;
-    }
-
-    public double getTotal() {
-        return total;
-    }
-
-    public void setTotal(double total) {
-        this.total = total;
-    }
-
-    public Consultation getIdConsultation() {
-        return idConsultation;
-    }
-
-    public void setIdConsultation(Consultation idConsultation) {
-        this.idConsultation = idConsultation;
-    }
-   
+  
     
 }

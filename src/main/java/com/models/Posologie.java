@@ -6,8 +6,7 @@
 package com.models;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -18,6 +17,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  *
@@ -38,10 +40,10 @@ public class Posologie implements Serializable{
 -- -----------------------------------------------------------------------------
    */
     @ManyToMany(fetch=FetchType.LAZY)
-      @JoinTable( name = "T_Posologie",
-        joinColumns = @JoinColumn( name = "idPosologie" ),
+      @JoinTable( name = "Posologie",
+        joinColumns = @JoinColumn( name = "idMedicament" ),
         inverseJoinColumns = @JoinColumn( name = "idPrescription" ) )
-    private List<Prescription> prescriptions = new ArrayList<>();
+    private Set<Prescription> prescriptions;
     
     @ManyToOne
     @JoinColumn(name="idMedicament")
@@ -51,59 +53,6 @@ public class Posologie implements Serializable{
 -- - Constructor                                                             ---
 -- -----------------------------------------------------------------------------
  */
-    public Posologie(String dosage, String usa) {
-        this.dosage = dosage;
-        this.usa = usa;
-    }
-
-    public Posologie() {
-    }
-
-    public Posologie(String dosage, String usage, Medicament medicament) {
-        this.dosage = dosage;
-        this.usa = usage;
-        this.medicament = medicament;
-    }
-
-    public Long getIdPosologie() {
-        return idPosologie;
-    }
-
-    public void setIdPosologie(Long idPosologie) {
-        this.idPosologie = idPosologie;
-    }
-
-    public String getDosage() {
-        return dosage;
-    }
-
-    public void setDosage(String dosage) {
-        this.dosage = dosage;
-    }
-
-    public String getUsage() {
-        return usa;
-    }
-
-    public void setUsage(String usage) {
-        this.usa = usage;
-    }
-
-    public List<Prescription> getPrescriptions() {
-        return prescriptions;
-    }
-
-    public void setPrescriptions(List<Prescription> prescriptions) {
-        this.prescriptions = prescriptions;
-    }
-
-    public Medicament getMedicament() {
-        return medicament;
-    }
-
-    public void setMedicament(Medicament medicament) {
-        this.medicament = medicament;
-    }
-
+   
 }
 

@@ -16,6 +16,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  *
@@ -49,56 +52,6 @@ public class LigneCommande implements Serializable{
 -- - Constructor                                                             ---
 -- -----------------------------------------------------------------------------
 */
-    public LigneCommande(int quantiteCommande, double prixHTarticle, double prixHTLigne) {
-        this.quantiteCommande = quantiteCommande;
-        this.prixHTarticle = prixHTarticle;
-        this.prixHTLigne = prixHTLigne;
-    }
-
-    public LigneCommande() {
-    }
-
-
-    public Long getIdLigneCommande() {
-        return idLigneCommande;
-    }
-
-    public void setIdLigneCommande(Long idLigneCommande) {
-        this.idLigneCommande = idLigneCommande;
-    }
-
-    public int getQuantiteCommande() {
-        return quantiteCommande;
-    }
-
-    public void setQuantiteCommande(int quantiteCommande) {
-        this.quantiteCommande = quantiteCommande;
-    }
-
-    public double getPrixHTarticle() {
-        return prixHTarticle;
-    }
-
-    public void setPrixHTarticle(double prixHTarticle) {
-        this.prixHTarticle = prixHTarticle;
-    }
-
-    public double getPrixHTLigne() {
-        return prixHTLigne;
-    }
-
-    public void setPrixHTLigne(double prixHTLigne) {
-        this.prixHTLigne = prixHTLigne;
-    }
-/**
-    public List<Commande> getCommandes() {
-        return commandes;
-    }
-
-    public void setCommandes(ArrayList<Commande> commandes) {
-        this.commandes = commandes;
-    }
-*/
-    
+ 
     
 }

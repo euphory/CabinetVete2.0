@@ -19,6 +19,9 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  *
@@ -60,62 +63,6 @@ public class ArticleMedical implements Serializable{
 -- - Constructor                                                             ---
 -- -----------------------------------------------------------------------------
  */ 
-    public ArticleMedical(int reference, String nom, int quantite) {
-        this.reference = reference;
-        this.nom = nom;
-        this.quantite = quantite;
-    }
-
-    public ArticleMedical() {
-    }
-
-    public Long getIdArticleMedical() {
-        return idArticleMedical;
-    }
-
-    public void setIdArticleMedical(Long idArticleMedical) {
-        this.idArticleMedical = idArticleMedical;
-    }
-
-    public int getReference() {
-        return reference;
-    }
-
-    public void setReference(int reference) {
-        this.reference = reference;
-    }
-
-    public String getNom() {
-        return nom;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    public int getQuantite() {
-        return quantite;
-    }
-
-    public void setQuantite(int quantite) {
-        this.quantite = quantite;
-    }
-
-    public List<Prestation> getPrestations() {
-        return prestations;
-    }
-
-    public void setPrestations(List<Prestation> prestations) {
-        this.prestations = prestations;
-    }
-
-    public List<Fournisseur> getFournisseurs() {
-        return fournisseurs;
-    }
-
-    public void setFournisseurs(List<Fournisseur> fournisseurs) {
-        this.fournisseurs = fournisseurs;
-    }
-    
+ 
     
 }

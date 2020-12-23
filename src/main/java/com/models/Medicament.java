@@ -6,14 +6,17 @@
 package com.models;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  *
@@ -38,69 +41,14 @@ public class Medicament implements Serializable{
 */
     
     @OneToMany(mappedBy="medicament", fetch=FetchType.LAZY)
-    private List<Posologie> posologies;   
+    private Set<Posologie> posologies;   
+    
 /**
 -- -----------------------------------------------------------------------------
 -- - Constructor                                                             ---
 -- -----------------------------------------------------------------------------  
 */
-    public Medicament(String nom, String dosageMedic, String usageMedic) {
-        this.nom = nom;
-        this.dosageMedic = dosageMedic;
-        this.usageMedic = usageMedic;
-    }
-
-    public Medicament(String nom, String dosageMedic, String usageMedic, List<Posologie> posologies) {
-        this.nom = nom;
-        this.dosageMedic = dosageMedic;
-        this.usageMedic = usageMedic;
-        this.posologies = posologies;
-    }
-    
-
-    public Medicament() {
-    }
-
-    public Long getIdMedicament() {
-        return idMedicament;
-    }
-
-    public void setIdMedicament(Long idMedicament) {
-        this.idMedicament = idMedicament;
-    }
-
-    public String getNom() {
-        return nom;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    public String getDosageMedic() {
-        return dosageMedic;
-    }
-
-    public void setDosageMedic(String dosageMedic) {
-        this.dosageMedic = dosageMedic;
-    }
-
-    public String getUsageMedic() {
-        return usageMedic;
-    }
-
-    public void setUsageMedic(String usageMedic) {
-        this.usageMedic = usageMedic;
-    }
-
-    public List<Posologie> getPosologies() {
-        return posologies;
-    }
-
-    public void setPosologies(List<Posologie> posologies) {
-        this.posologies = posologies;
-    }
-    
+  
 
     
 }
