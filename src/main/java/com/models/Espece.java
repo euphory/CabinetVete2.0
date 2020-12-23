@@ -1,0 +1,81 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.models;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+/**
+ *
+ * @author PC
+ */
+@Entity
+@Table(name = "Espece")
+public class Espece implements Serializable{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idEspece")
+    private Long idEspece;
+    @Column(length=70)
+    private String nom;
+    
+/**
+-- -----------------------------------------------------------------------------
+-- - Associations                                                            ---
+-- -----------------------------------------------------------------------------
+ */  
+    @OneToMany(mappedBy="espece", fetch=FetchType.LAZY, cascade={CascadeType.PERSIST})
+    private List<Animal> animaux = new ArrayList<>();
+/**
+-- -----------------------------------------------------------------------------
+-- - Constructor                                                             ---
+-- -----------------------------------------------------------------------------
+*/
+    public Espece(String nom) {
+        this.nom = nom;
+    }
+
+    public Espece() {
+    }
+
+    public Long getIdEspece() {
+        return idEspece;
+    }
+
+    public void setIdEspece(Long idEspece) {
+        this.idEspece = idEspece;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public List<Animal> getAnimaux() {
+        return animaux;
+    }
+
+    public void setAnimaux(List<Animal> animaux) {
+        this.animaux = animaux;
+    }
+
+
+    
+}
