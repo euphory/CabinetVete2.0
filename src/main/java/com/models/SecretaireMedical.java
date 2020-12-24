@@ -20,7 +20,6 @@ import lombok.NoArgsConstructor;
  * @author PC
  */
 @Entity
-@DiscriminatorValue("2")
 public class SecretaireMedical extends Employe{
     
     /**

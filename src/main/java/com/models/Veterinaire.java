@@ -18,7 +18,6 @@ import javax.persistence.OneToMany;
  * @author PC
  */
 @Entity
-@DiscriminatorValue("1")
 public class Veterinaire extends Employe{
     
     @Column(name = "numVet")

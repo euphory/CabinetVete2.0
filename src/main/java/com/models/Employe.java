@@ -20,9 +20,7 @@ import javax.persistence.InheritanceType;
  * @author PC
  */
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="Employe_type", 
-  discriminatorType = DiscriminatorType.INTEGER)
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Employe implements Serializable{
     @Id
     @GeneratedValue
