@@ -5,8 +5,6 @@
  */
 package com.models;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,10 +17,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 /**
  *
@@ -41,6 +35,8 @@ public class Prestation{
 -- - Associations                                                            ---
 -- -----------------------------------------------------------------------------
 */
+    @OneToMany(mappedBy = "prestation")
+    Set<FournisseurArticlePrestation> FAP;
     
     @ManyToOne
     @JoinColumn( name="idAnimal", nullable=false)
@@ -50,26 +46,12 @@ public class Prestation{
     @JoinColumn( name="idConsultation", nullable=false)
     private Consultation consultation;
     
-    @ManyToMany
-    @JoinTable( name = "T_ArticleMedicalFournisseur_Prestation",
-            joinColumns = @JoinColumn( name = "idPrestation" ),
-            inverseJoinColumns = @JoinColumn( name = "idArticleMedical" ) )
-    private Set<ArticleMedical> articleMedicals;
-    
-    @ManyToMany
-    @JoinTable( name = "T_ArticleMedicalFournisseur_Prestation",
-            joinColumns = @JoinColumn( name = "idPrestation" ),
-            inverseJoinColumns = @JoinColumn( name = "idFournisseur" ) )
-    private Set<Fournisseur> fournisseurs;
    
     @OneToMany(mappedBy="idPrescription", fetch=FetchType.LAZY)
     private Set<Prescription> prescriptions;   
-    
-    @ManyToMany
-    @JoinTable( name = "PrixVet",
-            joinColumns = @JoinColumn( name = "idPrestation" ),
-            inverseJoinColumns = @JoinColumn( name = "idService" ) )
-    private Set<Service> service;    
+/**    
+    @OneToMany(mappedBy="Prestation")
+    private Set<PrixVet> prixVet ;  
     
  
 /**

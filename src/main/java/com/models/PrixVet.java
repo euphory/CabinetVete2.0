@@ -5,7 +5,10 @@
  */
 package com.models;
 
+import java.io.Serializable;
 import javax.persistence.Column;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,8 +19,18 @@ import lombok.NoArgsConstructor;
  * @author PC
  */
 @Table
-public class PrixVet {
-        @Column(name="prixDuService")
-        private double prixDuService;
-
+public class PrixVet implements Serializable{
+    
+    @Column(name="prixDuService")
+    private double prixDuService;
+        
+/**
+-- -----------------------------------------------------------------------------
+-- - Associations                                                            ---
+-- -----------------------------------------------------------------------------
+  
+    @ManyToOne
+    @JoinColumn(name="idPrestation")
+    private Prestation Prestation;
+*/
 }

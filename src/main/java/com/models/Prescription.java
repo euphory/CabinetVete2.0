@@ -36,9 +36,10 @@ public class Prescription implements Serializable{
     @ManyToOne
     @JoinColumn(name="idPrestation")
     private Prestation prestation;
- 
+/**
     @ManyToMany(mappedBy = "prescriptions")
     private Set<Posologie> posologies;
+
 
 /**
 -- -----------------------------------------------------------------------------

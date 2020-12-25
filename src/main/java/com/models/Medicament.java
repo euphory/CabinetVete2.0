@@ -8,6 +8,7 @@ package com.models;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -40,9 +41,8 @@ public class Medicament implements Serializable{
 -- -----------------------------------------------------------------------------
 */
     
-    @OneToMany(mappedBy="medicament", fetch=FetchType.LAZY)
-    private Set<Posologie> posologies;   
-    
+    @OneToMany(mappedBy="medicament")
+    private Set<Posologie> posologies;
 /**
 -- -----------------------------------------------------------------------------
 -- - Constructor                                                             ---

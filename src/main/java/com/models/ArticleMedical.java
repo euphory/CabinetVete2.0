@@ -6,22 +6,12 @@
 package com.models;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 /**
  *
@@ -40,15 +30,15 @@ public class ArticleMedical implements Serializable{
 -- -----------------------------------------------------------------------------
 -- - Associations                                                            ---
 -- -----------------------------------------------------------------------------
-*/
+
     @ManyToMany
-    @JoinTable( name = "ArticleMedical_Fournisseur_Prestation",
+    @JoinTable( name = "FournisseurArticlePrestation",
             joinColumns = @JoinColumn( name = "idArticleMedical" ),
             inverseJoinColumns = @JoinColumn( name = "idPrestation" ) )
     private List<Prestation> prestations = new ArrayList<>();
     
     @ManyToMany
-    @JoinTable( name = "ArticleMedical_Fournisseur_Prestation",
+    @JoinTable( name = "FournisseurArticlePrestation",
             joinColumns = @JoinColumn( name = "idArticleMedical" ),
             inverseJoinColumns = @JoinColumn( name = "idFournisseur" ) )
     private List<Fournisseur> fournisseurs = new ArrayList<>(); 
@@ -58,6 +48,11 @@ public class ArticleMedical implements Serializable{
  /**   
     @OneToMany(mappedBy="articleMedical", fetch=FetchType.LAZY)
     private ArrayList<LigneCommande> ligneCommandes;
+    * 
+    */
+        
+    @OneToMany(mappedBy = "articleMedical")
+    Set<FournisseurArticlePrestation> FAP;
 /**
 -- -----------------------------------------------------------------------------
 -- - Constructor                                                             ---
