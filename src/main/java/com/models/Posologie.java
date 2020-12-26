@@ -6,12 +6,16 @@
 package com.models;
 
 import java.io.Serializable;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 /**
@@ -32,13 +36,11 @@ public class Posologie implements Serializable{
 -- - Associations                                                            ---
 -- -----------------------------------------------------------------------------
    */
-    /**
+
     @ManyToMany(fetch=FetchType.LAZY)
-    @JoinTable( name = "Posologie",
-        joinColumns = @JoinColumn( name = "idPosologie" ),
-        inverseJoinColumns = @JoinColumn( name = "idPrescription" ) )
+    @JoinTable( name = "T_posologie")
     private Set<Prescription> prescriptions;
-*/
+
     @ManyToOne
     @JoinColumn(name="idMedicament")
     private Medicament medicament;

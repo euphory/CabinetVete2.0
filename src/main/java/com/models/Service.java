@@ -8,6 +8,7 @@ package com.models;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -35,12 +36,9 @@ public class Service implements Serializable{
 -- -----------------------------------------------------------------------------
   */
     
-    @ManyToMany(fetch=FetchType.LAZY)
-    @JoinTable(name = "PrixVet",
-        joinColumns = @JoinColumn( name = "idService" ),
-        inverseJoinColumns = @JoinColumn( name = "idPrestation" ) )
-    private List<Prestation> prestations = new ArrayList<>();
-    
+    @ManyToMany(mappedBy = "services")
+    private Set<PrixVet> prixVet;
+
 /**
 -- -----------------------------------------------------------------------------
 -- - Constructor                                                             ---

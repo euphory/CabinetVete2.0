@@ -6,8 +6,7 @@
 package com.models;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -16,9 +15,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 /**
  *
@@ -43,6 +39,14 @@ public class LigneCommande implements Serializable{
             joinColumns = @JoinColumn( name = "idLigneCommandee" ),
             inverseJoinColumns = @JoinColumn( name = "idCommande" ) )
     private ArrayList<Commande> commandes = new ArrayList<>();
+    */ 
+    @ManyToMany(fetch=FetchType.LAZY)
+    @JoinTable( name = "T_LigneCommande")
+    private Set<ArticleMedical> articleMedical;
+    
+    @ManyToOne
+    @JoinColumn(name="idCommande")
+    private Commande commande;
 /**    
     @ManyToOne
     @JoinColumn(name="idArticleMedical")

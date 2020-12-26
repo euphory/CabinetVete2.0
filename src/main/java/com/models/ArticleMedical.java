@@ -11,6 +11,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 /**
@@ -30,29 +31,17 @@ public class ArticleMedical implements Serializable{
 -- -----------------------------------------------------------------------------
 -- - Associations                                                            ---
 -- -----------------------------------------------------------------------------
-
-    @ManyToMany
-    @JoinTable( name = "FournisseurArticlePrestation",
-            joinColumns = @JoinColumn( name = "idArticleMedical" ),
-            inverseJoinColumns = @JoinColumn( name = "idPrestation" ) )
-    private List<Prestation> prestations = new ArrayList<>();
-    
-    @ManyToMany
-    @JoinTable( name = "FournisseurArticlePrestation",
-            joinColumns = @JoinColumn( name = "idArticleMedical" ),
-            inverseJoinColumns = @JoinColumn( name = "idFournisseur" ) )
-    private List<Fournisseur> fournisseurs = new ArrayList<>(); 
-/**    
-    @ManyToMany(mappedBy = "articleMedicals")
-    private ArrayList<Prix> prix = new ArrayList<>(); 
- /**   
-    @OneToMany(mappedBy="articleMedical", fetch=FetchType.LAZY)
-    private ArrayList<LigneCommande> ligneCommandes;
-    * 
-    */
+*/
         
     @OneToMany(mappedBy = "articleMedical")
     Set<FournisseurArticlePrestation> FAP;
+    
+    @OneToMany(mappedBy="articleMedical")
+    private Set<Prix> prix;
+    
+    @ManyToMany(mappedBy = "articleMedical")
+    private Set<LigneCommande> ligneCommandes;
+    
 /**
 -- -----------------------------------------------------------------------------
 -- - Constructor                                                             ---

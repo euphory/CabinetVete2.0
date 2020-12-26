@@ -6,8 +6,10 @@
 package com.models;
 
 import java.util.ArrayList;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -36,16 +38,15 @@ public class Prix {
 -- -----------------------------------------------------------------------------
 -- - Associations                                                            ---
 -- -----------------------------------------------------------------------------
-
-    @ManyToMany
-    @JoinTable( name = "T_Prix",
-            joinColumns = @JoinColumn( name = "idPrix" ),
-            inverseJoinColumns = @JoinColumn( name = "idArticleMedical" ) )
-    private ArrayList<ArticleMedical> articleMedicals = new ArrayList<>();
 */    
+    @ManyToMany(fetch=FetchType.LAZY)
+    @JoinTable( name = "T_Prix")
+    private Set<Fournisseur> fournisseurs;
+    
     @ManyToOne
-    @JoinColumn( name="idFourniseur", nullable=false)
-    private Fournisseur fournisseur;
+    @JoinColumn( name="idArticleMedical")
+    private ArticleMedical articleMedical;
+    
 /**
 -- -----------------------------------------------------------------------------
 -- - Constructor                                                             ---

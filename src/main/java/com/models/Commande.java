@@ -6,20 +6,15 @@
 package com.models;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
+import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 /**
  *
@@ -42,10 +37,10 @@ public class Commande implements Serializable{
     @ManyToOne
     @JoinColumn(name="idEmploye")
     private Employe employe;
-/**       
-    @ManyToMany(mappedBy = "commandes")
-    private List<LigneCommande> Lignecomande = new ArrayList<>();
-   */ 
+
+    @OneToMany(mappedBy="commande")
+    private Set<LigneCommande> ligneCommandes; 
+        
     @ManyToOne
     @JoinColumn(name="idFournisseur", nullable=true)
     private Fournisseur fournisseur;

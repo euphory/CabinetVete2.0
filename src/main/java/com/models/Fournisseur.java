@@ -45,24 +45,12 @@ public class Fournisseur implements Serializable{
 -- -----------------------------------------------------------------------------
 -- - Associations                                                            ---
 -- -----------------------------------------------------------------------------
- 
-    @ManyToMany
-    @JoinTable( name = "FournisseurArticlePrestation",
-        joinColumns = @JoinColumn( name = "idFournisseur" ),
-        inverseJoinColumns = @JoinColumn( name = "idArticleMedical" ) )
-    private List<ArticleMedical> articleMedicals = new ArrayList<>();
-    
-    @ManyToMany
-    @JoinTable( name = "FournisseurArticlePrestation",
-        joinColumns = @JoinColumn( name = "idFournisseur" ),
-        inverseJoinColumns = @JoinColumn( name = "idPrestation" ) )
-    private List<Prestation> prestations = new ArrayList<>();
 */
     @OneToMany(mappedBy = "fournisseur")
     Set<FournisseurArticlePrestation> FAP;
     
-    @OneToMany(mappedBy="fournisseur", fetch=FetchType.LAZY)
-    private List<Prix> prix = new ArrayList<>();
+    @ManyToMany(mappedBy = "fournisseurs")
+    private Set<Prix> prix;
     
     
     

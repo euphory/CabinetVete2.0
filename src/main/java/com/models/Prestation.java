@@ -46,12 +46,11 @@ public class Prestation{
     @JoinColumn( name="idConsultation", nullable=false)
     private Consultation consultation;
     
-   
     @OneToMany(mappedBy="idPrescription", fetch=FetchType.LAZY)
     private Set<Prescription> prescriptions;   
-/**    
-    @OneToMany(mappedBy="Prestation")
-    private Set<PrixVet> prixVet ;  
+  
+    @OneToMany(mappedBy="prestation")
+    private Set<PrixVet> prixVet;
     
  
 /**
