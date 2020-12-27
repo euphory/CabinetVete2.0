@@ -36,12 +36,84 @@ public abstract class Employe implements Serializable{
     @Column(length=140)
     private String adress;
     private int telephone;
-
+    
 /**
 -- -----------------------------------------------------------------------------
 -- - Constructor                                                             ---
 -- -----------------------------------------------------------------------------
 */
+    
+    public Employe(Long idEmploye, String login, String mdp, String nom, String prenom, String adress, int telephone) {
+        this.idEmploye = idEmploye;
+        this.login = login;
+        this.mdp = mdp;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.adress = adress;
+        this.telephone = telephone;
+    }
+
+    public Employe() {
+    }
+
+    public Long getIdEmploye() {
+        return idEmploye;
+    }
+
+    public void setIdEmploye(Long idEmploye) {
+        this.idEmploye = idEmploye;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getMdp() {
+        return mdp;
+    }
+
+    public void setMdp(String mdp) {
+        this.mdp = mdp;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public String getPrenom() {
+        return prenom;
+    }
+
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
+
+    public String getAdress() {
+        return adress;
+    }
+
+    public void setAdress(String adress) {
+        this.adress = adress;
+    }
+
+    public int getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(int telephone) {
+        this.telephone = telephone;
+    }
+
+
+    
   
 
 

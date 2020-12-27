@@ -47,6 +47,76 @@ public class ArticleMedical implements Serializable{
 -- - Constructor                                                             ---
 -- -----------------------------------------------------------------------------
  */ 
+    public ArticleMedical(Long idArticleMedical, int reference, String nom, int quantite, Set<FournisseurArticlePrestation> FAP, Set<Prix> prix, Set<LigneCommande> ligneCommandes) {
+        this.idArticleMedical = idArticleMedical;
+        this.reference = reference;
+        this.nom = nom;
+        this.quantite = quantite;
+        this.FAP = FAP;
+        this.prix = prix;
+        this.ligneCommandes = ligneCommandes;
+    }
+
+    public ArticleMedical() {
+    }
+
+    public Long getIdArticleMedical() {
+        return idArticleMedical;
+    }
+
+    public void setIdArticleMedical(Long idArticleMedical) {
+        this.idArticleMedical = idArticleMedical;
+    }
+
+    public int getReference() {
+        return reference;
+    }
+
+    public void setReference(int reference) {
+        this.reference = reference;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public int getQuantite() {
+        return quantite;
+    }
+
+    public void setQuantite(int quantite) {
+        this.quantite = quantite;
+    }
+
+    public Set<FournisseurArticlePrestation> getFAP() {
+        return FAP;
+    }
+
+    public void setFAP(Set<FournisseurArticlePrestation> FAP) {
+        this.FAP = FAP;
+    }
+
+    public Set<Prix> getPrix() {
+        return prix;
+    }
+
+    public void setPrix(Set<Prix> prix) {
+        this.prix = prix;
+    }
+
+    public Set<LigneCommande> getLigneCommandes() {
+        return ligneCommandes;
+    }
+
+    public void setLigneCommandes(Set<LigneCommande> ligneCommandes) {
+        this.ligneCommandes = ligneCommandes;
+    }
+    
+
  
     
 }

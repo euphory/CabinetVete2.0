@@ -70,4 +70,111 @@ public class Consultation implements Serializable{
 -- -----------------------------------------------------------------------------
 */
     
+    public Consultation(Long idConsultation, Calendar date, Date heureDebut, Date heureFin, String Motif, double tarifGroupe, Employe veterinaire, Employe secretaireMedical, FactureConsult factureConsult, Set<Animal> animaux, Personne personne) {
+        this.idConsultation = idConsultation;
+        this.date = date;
+        this.heureDebut = heureDebut;
+        this.heureFin = heureFin;
+        this.Motif = Motif;
+        this.tarifGroupe = tarifGroupe;
+        this.veterinaire = veterinaire;
+        this.secretaireMedical = secretaireMedical;
+        this.factureConsult = factureConsult;
+        this.animaux = animaux;
+        this.personne = personne;
+    }
+
+    public Consultation() {
+    }
+
+    public Long getIdConsultation() {
+        return idConsultation;
+    }
+
+    public void setIdConsultation(Long idConsultation) {
+        this.idConsultation = idConsultation;
+    }
+
+    public Calendar getDate() {
+        return date;
+    }
+
+    public void setDate(Calendar date) {
+        this.date = date;
+    }
+
+    public Date getHeureDebut() {
+        return heureDebut;
+    }
+
+    public void setHeureDebut(Date heureDebut) {
+        this.heureDebut = heureDebut;
+    }
+
+    public Date getHeureFin() {
+        return heureFin;
+    }
+
+    public void setHeureFin(Date heureFin) {
+        this.heureFin = heureFin;
+    }
+
+    public String getMotif() {
+        return Motif;
+    }
+
+    public void setMotif(String Motif) {
+        this.Motif = Motif;
+    }
+
+    public double getTarifGroupe() {
+        return tarifGroupe;
+    }
+
+    public void setTarifGroupe(double tarifGroupe) {
+        this.tarifGroupe = tarifGroupe;
+    }
+
+    public Employe getVeterinaire() {
+        return veterinaire;
+    }
+
+    public void setVeterinaire(Employe veterinaire) {
+        this.veterinaire = veterinaire;
+    }
+
+    public Employe getSecretaireMedical() {
+        return secretaireMedical;
+    }
+
+    public void setSecretaireMedical(Employe secretaireMedical) {
+        this.secretaireMedical = secretaireMedical;
+    }
+
+    public FactureConsult getFactureConsult() {
+        return factureConsult;
+    }
+
+    public void setFactureConsult(FactureConsult factureConsult) {
+        this.factureConsult = factureConsult;
+    }
+
+    public Set<Animal> getAnimaux() {
+        return animaux;
+    }
+
+    public void setAnimaux(Set<Animal> animaux) {
+        this.animaux = animaux;
+    }
+
+    public Personne getPersonne() {
+        return personne;
+    }
+
+    public void setPersonne(Personne personne) {
+        this.personne = personne;
+    }
+
+
+    
 }

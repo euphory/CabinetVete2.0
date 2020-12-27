@@ -51,10 +51,80 @@ public class Prestation{
     @OneToMany(mappedBy="prestation")
     private Set<PrixVet> prixVet;
     
- 
 /**
 -- -----------------------------------------------------------------------------
 -- - Constructor                                                             ---
 -- -----------------------------------------------------------------------------
 */
+    public Prestation(long idPrestation, int quantiteUtilise, Set<FournisseurArticlePrestation> FAP, Animal animal, Consultation consultation, Set<Prescription> prescriptions, Set<PrixVet> prixVet) {
+        this.idPrestation = idPrestation;
+        this.quantiteUtilise = quantiteUtilise;
+        this.FAP = FAP;
+        this.animal = animal;
+        this.consultation = consultation;
+        this.prescriptions = prescriptions;
+        this.prixVet = prixVet;
+    }
+
+    public Prestation() {
+    }
+
+    public long getIdPrestation() {
+        return idPrestation;
+    }
+
+    public void setIdPrestation(long idPrestation) {
+        this.idPrestation = idPrestation;
+    }
+
+    public int getQuantiteUtilise() {
+        return quantiteUtilise;
+    }
+
+    public void setQuantiteUtilise(int quantiteUtilise) {
+        this.quantiteUtilise = quantiteUtilise;
+    }
+
+    public Set<FournisseurArticlePrestation> getFAP() {
+        return FAP;
+    }
+
+    public void setFAP(Set<FournisseurArticlePrestation> FAP) {
+        this.FAP = FAP;
+    }
+
+    public Animal getAnimal() {
+        return animal;
+    }
+
+    public void setAnimal(Animal animal) {
+        this.animal = animal;
+    }
+
+    public Consultation getConsultation() {
+        return consultation;
+    }
+
+    public void setConsultation(Consultation consultation) {
+        this.consultation = consultation;
+    }
+
+    public Set<Prescription> getPrescriptions() {
+        return prescriptions;
+    }
+
+    public void setPrescriptions(Set<Prescription> prescriptions) {
+        this.prescriptions = prescriptions;
+    }
+
+    public Set<PrixVet> getPrixVet() {
+        return prixVet;
+    }
+
+    public void setPrixVet(Set<PrixVet> prixVet) {
+        this.prixVet = prixVet;
+    }
+    
+ 
+
 }

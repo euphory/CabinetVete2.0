@@ -42,11 +42,52 @@ public class Adoption implements Serializable{
     @OneToOne( cascade = CascadeType.ALL ) 
     @JoinColumn( name="idFormulaire", nullable = true)
     private Formulaire formulaire;
+
 /**
 -- -----------------------------------------------------------------------------
 -- - Constructor                                                             ---
 -- -----------------------------------------------------------------------------
 */
+    public Adoption(Long idAdoption, Date dateAdoption, double frais, Formulaire formulaire) {
+        this.idAdoption = idAdoption;
+        this.dateAdoption = dateAdoption;
+        this.frais = frais;
+        this.formulaire = formulaire;
+    }
+
+    public Long getIdAdoption() {
+        return idAdoption;
+    }
+
+    public void setIdAdoption(Long idAdoption) {
+        this.idAdoption = idAdoption;
+    }
+
+    public Date getDateAdoption() {
+        return dateAdoption;
+    }
+
+    public void setDateAdoption(Date dateAdoption) {
+        this.dateAdoption = dateAdoption;
+    }
+
+    public double getFrais() {
+        return frais;
+    }
+
+    public void setFrais(double frais) {
+        this.frais = frais;
+    }
+
+    public Formulaire getFormulaire() {
+        return formulaire;
+    }
+
+    public void setFormulaire(Formulaire formulaire) {
+        this.formulaire = formulaire;
+    }
+
+    
 
 
 }

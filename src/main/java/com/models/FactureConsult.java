@@ -42,11 +42,73 @@ public class FactureConsult implements Serializable{
     @OneToOne 
     @JoinColumn( name="idConsultation", nullable= true )
     private Consultation idConsultation;
+    
 /**
 -- -----------------------------------------------------------------------------
 -- - Constructor                                                             ---
 -- -----------------------------------------------------------------------------
 */
+    public FactureConsult(Long idFactureConsult, Calendar date, String modeReglement, Calendar dateReglement, double total, Consultation idConsultation) {
+        this.idFactureConsult = idFactureConsult;
+        this.date = date;
+        this.modeReglement = modeReglement;
+        this.dateReglement = dateReglement;
+        this.total = total;
+        this.idConsultation = idConsultation;
+    }
+
+    public FactureConsult() {
+    }
+
+    public Long getIdFactureConsult() {
+        return idFactureConsult;
+    }
+
+    public void setIdFactureConsult(Long idFactureConsult) {
+        this.idFactureConsult = idFactureConsult;
+    }
+
+    public Calendar getDate() {
+        return date;
+    }
+
+    public void setDate(Calendar date) {
+        this.date = date;
+    }
+
+    public String getModeReglement() {
+        return modeReglement;
+    }
+
+    public void setModeReglement(String modeReglement) {
+        this.modeReglement = modeReglement;
+    }
+
+    public Calendar getDateReglement() {
+        return dateReglement;
+    }
+
+    public void setDateReglement(Calendar dateReglement) {
+        this.dateReglement = dateReglement;
+    }
+
+    public double getTotal() {
+        return total;
+    }
+
+    public void setTotal(double total) {
+        this.total = total;
+    }
+
+    public Consultation getIdConsultation() {
+        return idConsultation;
+    }
+
+    public void setIdConsultation(Consultation idConsultation) {
+        this.idConsultation = idConsultation;
+    }
+    
+
   
     
 }

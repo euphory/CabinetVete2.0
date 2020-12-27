@@ -43,4 +43,57 @@ public class Prix {
 -- - Constructor                                                             ---
 -- -----------------------------------------------------------------------------
 */
+
+    public Prix(Long idPrix, double prixHT, double prixTTC, Set<Fournisseur> fournisseurs, ArticleMedical articleMedical) {
+        this.idPrix = idPrix;
+        this.prixHT = prixHT;
+        this.prixTTC = prixTTC;
+        this.fournisseurs = fournisseurs;
+        this.articleMedical = articleMedical;
+    }
+
+    public Prix() {
+    }
+
+    public Long getIdPrix() {
+        return idPrix;
+    }
+
+    public void setIdPrix(Long idPrix) {
+        this.idPrix = idPrix;
+    }
+
+    public double getPrixHT() {
+        return prixHT;
+    }
+
+    public void setPrixHT(double prixHT) {
+        this.prixHT = prixHT;
+    }
+
+    public double getPrixTTC() {
+        return prixTTC;
+    }
+
+    public void setPrixTTC(double prixTTC) {
+        this.prixTTC = prixTTC;
+    }
+
+    public Set<Fournisseur> getFournisseurs() {
+        return fournisseurs;
+    }
+
+    public void setFournisseurs(Set<Fournisseur> fournisseurs) {
+        this.fournisseurs = fournisseurs;
+    }
+
+    public ArticleMedical getArticleMedical() {
+        return articleMedical;
+    }
+
+    public void setArticleMedical(ArticleMedical articleMedical) {
+        this.articleMedical = articleMedical;
+    }
+    
+
 }

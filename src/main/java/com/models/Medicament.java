@@ -37,11 +37,64 @@ public class Medicament implements Serializable{
     
     @OneToMany(mappedBy="medicament")
     private Set<Posologie> posologies;
+    
 /**
 -- -----------------------------------------------------------------------------
 -- - Constructor                                                             ---
--- -----------------------------------------------------------------------------  
+-- -----------------------------------------------------------------------------
 */
+
+    public Medicament(Long idMedicament, String nom, String dosageMedic, String usageMedic, Set<Posologie> posologies) {
+        this.idMedicament = idMedicament;
+        this.nom = nom;
+        this.dosageMedic = dosageMedic;
+        this.usageMedic = usageMedic;
+        this.posologies = posologies;
+    }
+
+    public Medicament() {
+    }
+
+    public Long getIdMedicament() {
+        return idMedicament;
+    }
+
+    public void setIdMedicament(Long idMedicament) {
+        this.idMedicament = idMedicament;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public String getDosageMedic() {
+        return dosageMedic;
+    }
+
+    public void setDosageMedic(String dosageMedic) {
+        this.dosageMedic = dosageMedic;
+    }
+
+    public String getUsageMedic() {
+        return usageMedic;
+    }
+
+    public void setUsageMedic(String usageMedic) {
+        this.usageMedic = usageMedic;
+    }
+
+    public Set<Posologie> getPosologies() {
+        return posologies;
+    }
+
+    public void setPosologies(Set<Posologie> posologies) {
+        this.posologies = posologies;
+    }
+
   
 
     

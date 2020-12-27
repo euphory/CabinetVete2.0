@@ -43,5 +43,51 @@ public class PrixVet implements Serializable{
     @ManyToOne
     @JoinColumn(name="idPrestation")
     private Prestation prestation;
+/**
+-- -----------------------------------------------------------------------------
+-- - Constructor                                                             ---
+-- -----------------------------------------------------------------------------
+*/
+    public PrixVet(Long idPosologie, double prixDuService, Set<Service> services, Prestation prestation) {
+        this.idPosologie = idPosologie;
+        this.prixDuService = prixDuService;
+        this.services = services;
+        this.prestation = prestation;
+    }
+
+    public PrixVet() {
+    }
+
+    public Long getIdPosologie() {
+        return idPosologie;
+    }
+
+    public void setIdPosologie(Long idPosologie) {
+        this.idPosologie = idPosologie;
+    }
+
+    public double getPrixDuService() {
+        return prixDuService;
+    }
+
+    public void setPrixDuService(double prixDuService) {
+        this.prixDuService = prixDuService;
+    }
+
+    public Set<Service> getServices() {
+        return services;
+    }
+
+    public void setServices(Set<Service> services) {
+        this.services = services;
+    }
+
+    public Prestation getPrestation() {
+        return prestation;
+    }
+
+    public void setPrestation(Prestation prestation) {
+        this.prestation = prestation;
+    }
 
 }

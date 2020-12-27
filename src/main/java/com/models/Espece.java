@@ -39,10 +39,46 @@ public class Espece implements Serializable{
  */  
     @OneToMany(mappedBy="espece", fetch=FetchType.LAZY, cascade={CascadeType.PERSIST})
     private Set<Animal> animaux ;
-    
 /**
 -- -----------------------------------------------------------------------------
 -- - Constructor                                                             ---
 -- -----------------------------------------------------------------------------
 */
+    public Espece(Long idEspece, String nom, Set<Animal> animaux) {
+        this.idEspece = idEspece;
+        this.nom = nom;
+        this.animaux = animaux;
+    }
+
+    public Espece() {
+    }
+
+    public Long getIdEspece() {
+        return idEspece;
+    }
+
+    public void setIdEspece(Long idEspece) {
+        this.idEspece = idEspece;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public Set<Animal> getAnimaux() {
+        return animaux;
+    }
+
+    public void setAnimaux(Set<Animal> animaux) {
+        this.animaux = animaux;
+    }
+    
+    
+    
+
+    
 }

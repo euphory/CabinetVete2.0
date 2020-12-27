@@ -33,28 +33,79 @@ public class LigneCommande implements Serializable{
 -- -----------------------------------------------------------------------------
 -- - Associations                                                            ---
 -- -----------------------------------------------------------------------------
-  
-    @ManyToMany(fetch=FetchType.LAZY)
-    @JoinTable( name = "LigneCommande",
-            joinColumns = @JoinColumn( name = "idLigneCommandee" ),
-            inverseJoinColumns = @JoinColumn( name = "idCommande" ) )
-    private ArrayList<Commande> commandes = new ArrayList<>();
-    */ 
+*/ 
     @ManyToMany(fetch=FetchType.LAZY)
     private Set<ArticleMedical> articleMedical;
     
     @ManyToOne
     @JoinColumn(name="idCommande")
     private Commande commande;
-/**    
-    @ManyToOne
-    @JoinColumn(name="idArticleMedical")
-    private ArticleMedical articleMedical;
 /**
 -- -----------------------------------------------------------------------------
 -- - Constructor                                                             ---
 -- -----------------------------------------------------------------------------
 */
+    public LigneCommande(Long idLigneCommande, int quantiteCommande, double prixHTarticle, double prixHTLigne, Set<ArticleMedical> articleMedical, Commande commande) {
+        this.idLigneCommande = idLigneCommande;
+        this.quantiteCommande = quantiteCommande;
+        this.prixHTarticle = prixHTarticle;
+        this.prixHTLigne = prixHTLigne;
+        this.articleMedical = articleMedical;
+        this.commande = commande;
+    }
+
+    public LigneCommande() {
+    }
+
+    public Long getIdLigneCommande() {
+        return idLigneCommande;
+    }
+
+    public void setIdLigneCommande(Long idLigneCommande) {
+        this.idLigneCommande = idLigneCommande;
+    }
+
+    public int getQuantiteCommande() {
+        return quantiteCommande;
+    }
+
+    public void setQuantiteCommande(int quantiteCommande) {
+        this.quantiteCommande = quantiteCommande;
+    }
+
+    public double getPrixHTarticle() {
+        return prixHTarticle;
+    }
+
+    public void setPrixHTarticle(double prixHTarticle) {
+        this.prixHTarticle = prixHTarticle;
+    }
+
+    public double getPrixHTLigne() {
+        return prixHTLigne;
+    }
+
+    public void setPrixHTLigne(double prixHTLigne) {
+        this.prixHTLigne = prixHTLigne;
+    }
+
+    public Set<ArticleMedical> getArticleMedical() {
+        return articleMedical;
+    }
+
+    public void setArticleMedical(Set<ArticleMedical> articleMedical) {
+        this.articleMedical = articleMedical;
+    }
+
+    public Commande getCommande() {
+        return commande;
+    }
+
+    public void setCommande(Commande commande) {
+        this.commande = commande;
+    }
+
+
  
     
 }

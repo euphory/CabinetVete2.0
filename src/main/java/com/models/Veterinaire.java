@@ -36,12 +36,62 @@ public class Veterinaire extends Employe implements Serializable{
     
     @OneToMany(mappedBy="veterinaire", fetch=FetchType.LAZY)
     private Set<Formulaire> formulaire; 
-
+ 
 /**
 -- -----------------------------------------------------------------------------
 -- - Constructor                                                             ---
 -- -----------------------------------------------------------------------------
-*/
+ */
+    public Veterinaire(Long numVet, Set<Commande> commandesVet, Set<Consultation> consultations, Set<Formulaire> formulaire, Long idEmploye, String login, String mdp, String nom, String prenom, String adress, int telephone) {
+        super(idEmploye, login, mdp, nom, prenom, adress, telephone);
+        this.numVet = numVet;
+        this.commandesVet = commandesVet;
+        this.consultations = consultations;
+        this.formulaire = formulaire;
+    }
+
+    public Veterinaire(Long numVet, Set<Commande> commandesVet, Set<Consultation> consultations, Set<Formulaire> formulaire) {
+        this.numVet = numVet;
+        this.commandesVet = commandesVet;
+        this.consultations = consultations;
+        this.formulaire = formulaire;
+    }
+
+    public Veterinaire() {
+    }
+
+    public Long getNumVet() {
+        return numVet;
+    }
+
+    public void setNumVet(Long numVet) {
+        this.numVet = numVet;
+    }
+
+    public Set<Commande> getCommandesVet() {
+        return commandesVet;
+    }
+
+    public void setCommandesVet(Set<Commande> commandesVet) {
+        this.commandesVet = commandesVet;
+    }
+
+    public Set<Consultation> getConsultations() {
+        return consultations;
+    }
+
+    public void setConsultations(Set<Consultation> consultations) {
+        this.consultations = consultations;
+    }
+
+    public Set<Formulaire> getFormulaire() {
+        return formulaire;
+    }
+
+    public void setFormulaire(Set<Formulaire> formulaire) {
+        this.formulaire = formulaire;
+    }
+
  
     
 }

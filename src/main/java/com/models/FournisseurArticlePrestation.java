@@ -36,6 +36,50 @@ public class FournisseurArticlePrestation implements Serializable{
     @MapsId("idPrestation")
     @JoinColumn(name = "idPrestation")
     Prestation prestation;
+
+    public FournisseurArticlePrestation(Long idFAP, Fournisseur fournisseur, ArticleMedical articleMedical, Prestation prestation) {
+        this.idFAP = idFAP;
+        this.fournisseur = fournisseur;
+        this.articleMedical = articleMedical;
+        this.prestation = prestation;
+    }
+
+    public FournisseurArticlePrestation() {
+    }
+
+    
+    public Long getIdFAP() {
+        return idFAP;
+    }
+
+    public void setIdFAP(Long idFAP) {
+        this.idFAP = idFAP;
+    }
+
+    public Fournisseur getFournisseur() {
+        return fournisseur;
+    }
+
+    public void setFournisseur(Fournisseur fournisseur) {
+        this.fournisseur = fournisseur;
+    }
+
+    public ArticleMedical getArticleMedical() {
+        return articleMedical;
+    }
+
+    public void setArticleMedical(ArticleMedical articleMedical) {
+        this.articleMedical = articleMedical;
+    }
+
+    public Prestation getPrestation() {
+        return prestation;
+    }
+
+    public void setPrestation(Prestation prestation) {
+        this.prestation = prestation;
+    }
+    
     
     
 }

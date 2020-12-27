@@ -43,12 +43,63 @@ public class Posologie implements Serializable{
     @ManyToOne
     @JoinColumn(name="idMedicament")
     private Medicament medicament;
-    
+
 /**
 -- -----------------------------------------------------------------------------
 -- - Constructor                                                             ---
 -- -----------------------------------------------------------------------------
- */
-   
+*/
+    public Posologie(Long idPosologie, String dosage, String usa, Set<Prescription> prescriptions, Medicament medicament) {
+        this.idPosologie = idPosologie;
+        this.dosage = dosage;
+        this.usa = usa;
+        this.prescriptions = prescriptions;
+        this.medicament = medicament;
+    }
+
+    public Posologie() {
+    }
+
+    public Long getIdPosologie() {
+        return idPosologie;
+    }
+
+    public void setIdPosologie(Long idPosologie) {
+        this.idPosologie = idPosologie;
+    }
+
+    public String getDosage() {
+        return dosage;
+    }
+
+    public void setDosage(String dosage) {
+        this.dosage = dosage;
+    }
+
+    public String getUsa() {
+        return usa;
+    }
+
+    public void setUsa(String usa) {
+        this.usa = usa;
+    }
+
+    public Set<Prescription> getPrescriptions() {
+        return prescriptions;
+    }
+
+    public void setPrescriptions(Set<Prescription> prescriptions) {
+        this.prescriptions = prescriptions;
+    }
+
+    public Medicament getMedicament() {
+        return medicament;
+    }
+
+    public void setMedicament(Medicament medicament) {
+        this.medicament = medicament;
+    }
+    
+
 }
 
