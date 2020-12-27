@@ -41,7 +41,6 @@ public class LigneCommande implements Serializable{
     private ArrayList<Commande> commandes = new ArrayList<>();
     */ 
     @ManyToMany(fetch=FetchType.LAZY)
-    @JoinTable( name = "T_LigneCommande")
     private Set<ArticleMedical> articleMedical;
     
     @ManyToOne

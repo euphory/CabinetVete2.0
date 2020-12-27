@@ -5,34 +5,30 @@
  */
 package com.models;
 
-import java.util.ArrayList;
-import java.util.List;
-import javax.persistence.DiscriminatorValue;
+import java.io.Serializable;
+import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 /**
  *
  * @author PC
  */
 @Entity
-public class SecretaireMedical extends Employe{
+public class SecretaireMedical extends Employe implements Serializable{
     
     /**
 -- -----------------------------------------------------------------------------
 -- - Association                                                             ---
 -- -----------------------------------------------------------------------------
     */ 
-    @OneToMany(mappedBy="employe", fetch=FetchType.LAZY)
-    private List<Consultation> consultations = new ArrayList<>();
- 
-    @OneToMany(mappedBy="employe", fetch=FetchType.LAZY)
-    private List<Commande> commandes = new ArrayList<>();
-  
+    @OneToMany(mappedBy="secretaireMedical", fetch=FetchType.LAZY)
+    private Set<Commande> commandes;
+    
+    @OneToMany(mappedBy="secretaireMedical", fetch=FetchType.LAZY)
+    private Set<Consultation> consultations;
+
 /**
 -- -----------------------------------------------------------------------------
 -- - Constructor                                                           ---

@@ -35,18 +35,20 @@ public class Commande implements Serializable{
 -- -----------------------------------------------------------------------------
 */
     @ManyToOne
-    @JoinColumn(name="idEmploye")
-    private Employe employe;
+    @JoinColumn(name="idEmployeVeterinaire")
+    private Employe veterinaire;
+    
+    @ManyToOne
+    @JoinColumn(name="idEmployeSecretaireMedical")
+    private Employe secretaireMedical;
+    
+    @ManyToOne
+    private Fournisseur fournisseur;
 
     @OneToMany(mappedBy="commande")
     private Set<LigneCommande> ligneCommandes; 
-        
-    @ManyToOne
-    @JoinColumn(name="idFournisseur", nullable=true)
-    private Fournisseur fournisseur;
     
     @OneToOne
-    @JoinColumn( name="commande", nullable=true )
     private Facture facture ;
     
     

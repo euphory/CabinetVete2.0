@@ -52,6 +52,8 @@ public class Fournisseur implements Serializable{
     @ManyToMany(mappedBy = "fournisseurs")
     private Set<Prix> prix;
     
+    @OneToMany(mappedBy = "fournisseur")
+    Set<Commande> commandes;
     
     
 /**

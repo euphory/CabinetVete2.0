@@ -6,26 +6,20 @@
 package com.models;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 /**
  *
@@ -52,18 +46,19 @@ public class Consultation implements Serializable{
 -- -----------------------------------------------------------------------------
 */
     @ManyToOne
-    @JoinColumn(name="idEmploye")
-    private Employe employe;
+    @JoinColumn(name="idEmployeVeterinaire")
+    private Employe veterinaire;
+    
+    @ManyToOne
+    @JoinColumn(name="idEmployeSecretaireMedical")
+    private Employe secretaireMedical;
         
     @OneToOne
     @JoinColumn( name="factureConsult", nullable=false )
     private FactureConsult factureConsult;
         
     @ManyToMany(fetch=FetchType.LAZY)
-    @JoinTable( name = "T_Consultation",
-        joinColumns = @JoinColumn( name = "idConsultation" ),
-        inverseJoinColumns = @JoinColumn( name = "idAnimal" ) )
-    private List<Animal> animaux = new ArrayList<>();
+    private Set<Animal> animaux;
     
     @ManyToOne
     @JoinColumn(name="idPersonne")

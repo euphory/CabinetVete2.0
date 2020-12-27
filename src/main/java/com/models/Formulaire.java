@@ -48,6 +48,10 @@ public class Formulaire implements Serializable{
     @ManyToOne
     @JoinColumn(name="idAnimal")
     private Animal animal;
+    
+    @ManyToOne
+    @JoinColumn(name="idEmployeVeterinaire")
+    private Employe veterinaire;
  
     
 /**

@@ -40,7 +40,6 @@ public class Prix {
 -- -----------------------------------------------------------------------------
 */    
     @ManyToMany(fetch=FetchType.LAZY)
-    @JoinTable( name = "T_Prix")
     private Set<Fournisseur> fournisseurs;
     
     @ManyToOne

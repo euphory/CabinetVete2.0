@@ -5,10 +5,9 @@
  */
 package com.models;
 
-import java.util.ArrayList;
+import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.Column;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
@@ -18,7 +17,7 @@ import javax.persistence.OneToMany;
  * @author PC
  */
 @Entity
-public class Veterinaire extends Employe{
+public class Veterinaire extends Employe implements Serializable{
     
     @Column(name = "numVet")
     private Long numVet; 
@@ -30,11 +29,14 @@ public class Veterinaire extends Employe{
 */   
 
     
-    @OneToMany(mappedBy="employe", fetch=FetchType.LAZY)
-    private Set<Commande> commandes ; 
+    @OneToMany(mappedBy="veterinaire", fetch=FetchType.LAZY)
+    private Set<Commande> commandesVet; 
     
-    @OneToMany(mappedBy="employe", fetch=FetchType.LAZY)
-    private Set<Consultation> consultation ; 
+    @OneToMany(mappedBy="veterinaire", fetch=FetchType.LAZY)
+    private Set<Consultation> consultations;
+    
+    @OneToMany(mappedBy="veterinaire", fetch=FetchType.LAZY)
+    private Set<Formulaire> formulaire; 
 
 /**
 -- -----------------------------------------------------------------------------

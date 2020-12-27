@@ -38,7 +38,6 @@ public class Posologie implements Serializable{
    */
 
     @ManyToMany(fetch=FetchType.LAZY)
-    @JoinTable( name = "T_posologie")
     private Set<Prescription> prescriptions;
 
     @ManyToOne
