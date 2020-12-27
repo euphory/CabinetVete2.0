@@ -26,9 +26,8 @@ import javax.persistence.ManyToOne;
 public class PrixVet implements Serializable{
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     private Long idPosologie; 
-    @Column(name="prixDuService")
     private double prixDuService;
     
     

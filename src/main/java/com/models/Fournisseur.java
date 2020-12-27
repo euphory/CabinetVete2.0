@@ -28,7 +28,7 @@ import javax.persistence.OneToMany;
 @Entity
 public class Fournisseur implements Serializable{
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     private Long idFournisseur;
     @Column(length=70)
     private String nom;

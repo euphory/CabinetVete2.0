@@ -19,7 +19,6 @@ import javax.persistence.OneToMany;
 @Entity
 public class Veterinaire extends Employe implements Serializable{
     
-    @Column(name = "numVet")
     private Long numVet; 
     
 /**

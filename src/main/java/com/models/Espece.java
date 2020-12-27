@@ -27,8 +27,7 @@ import lombok.NoArgsConstructor;
 @Entity
 public class Espece implements Serializable{
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idEspece")
+    @GeneratedValue
     private Long idEspece;
     @Column(length=70)
     private String nom;

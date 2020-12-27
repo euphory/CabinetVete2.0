@@ -25,7 +25,7 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Posologie implements Serializable{
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     private Long idPosologie; 
     @Column(length=70)
     private String dosage;

@@ -25,8 +25,7 @@ import javax.persistence.OneToMany;
 @Entity
 public class Prestation{
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "idPrestation")
+    @GeneratedValue
     private long idPrestation;
     private int quantiteUtilise;
     

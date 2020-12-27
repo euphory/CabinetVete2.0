@@ -26,7 +26,7 @@ import lombok.NoArgsConstructor;
 @Entity
 public class Formulaire implements Serializable{
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private Long idFormulaire;
     private Date dateFormulaire;
     @Column(length=140)

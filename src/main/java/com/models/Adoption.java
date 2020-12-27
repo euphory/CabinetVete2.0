@@ -29,7 +29,7 @@ import lombok.NoArgsConstructor;
 @Entity
 public class Adoption implements Serializable{
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private Long idAdoption;
     @Temporal(TemporalType.DATE)
     private Date dateAdoption;
