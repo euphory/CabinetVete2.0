@@ -11,6 +11,7 @@ import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
@@ -23,7 +24,7 @@ import javax.persistence.InheritanceType;
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Employe implements Serializable{
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy= GenerationType.AUTO)
     private Long idEmploye;
     @Column(length=70)
     private String login;
@@ -35,7 +36,8 @@ public abstract class Employe implements Serializable{
     private String prenom;
     @Column(length=140)
     private String adress;
-    private int telephone;
+    @Column(length=70)
+    private String telephone;
     
 /**
 -- -----------------------------------------------------------------------------
@@ -43,7 +45,7 @@ public abstract class Employe implements Serializable{
 -- -----------------------------------------------------------------------------
 */
     
-    public Employe(Long idEmploye, String login, String mdp, String nom, String prenom, String adress, int telephone) {
+    public Employe(Long idEmploye, String login, String mdp, String nom, String prenom, String adress, String telephone) {
         this.idEmploye = idEmploye;
         this.login = login;
         this.mdp = mdp;
@@ -104,11 +106,11 @@ public abstract class Employe implements Serializable{
         this.adress = adress;
     }
 
-    public int getTelephone() {
+    public String getTelephone() {
         return telephone;
     }
 
-    public void setTelephone(int telephone) {
+    public void setTelephone(String telephone) {
         this.telephone = telephone;
     }
 

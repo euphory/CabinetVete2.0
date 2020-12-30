@@ -42,7 +42,7 @@ public class Veterinaire extends Employe implements Serializable{
 -- - Constructor                                                             ---
 -- -----------------------------------------------------------------------------
  */
-    public Veterinaire(Long numVet, Set<Commande> commandesVet, Set<Consultation> consultations, Set<Formulaire> formulaire, Long idEmploye, String login, String mdp, String nom, String prenom, String adress, int telephone) {
+    public Veterinaire(Long numVet, Set<Commande> commandesVet, Set<Consultation> consultations, Set<Formulaire> formulaire, Long idEmploye, String login, String mdp, String nom, String prenom, String adress, String telephone) {
         super(idEmploye, login, mdp, nom, prenom, adress, telephone);
         this.numVet = numVet;
         this.commandesVet = commandesVet;

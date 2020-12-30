@@ -27,7 +27,7 @@ public class PrixVet implements Serializable{
     
     @Id
     @GeneratedValue
-    private Long idPosologie; 
+    private Long idPrixVet; 
     private double prixDuService;
     
     
@@ -48,8 +48,8 @@ public class PrixVet implements Serializable{
 -- - Constructor                                                             ---
 -- -----------------------------------------------------------------------------
 */
-    public PrixVet(Long idPosologie, double prixDuService, Set<Service> services, Prestation prestation) {
-        this.idPosologie = idPosologie;
+    public PrixVet(Long idPrixVet, double prixDuService, Set<Service> services, Prestation prestation) {
+        this.idPrixVet = idPrixVet;
         this.prixDuService = prixDuService;
         this.services = services;
         this.prestation = prestation;
@@ -59,11 +59,11 @@ public class PrixVet implements Serializable{
     }
 
     public Long getIdPosologie() {
-        return idPosologie;
+        return idPrixVet;
     }
 
     public void setIdPosologie(Long idPosologie) {
-        this.idPosologie = idPosologie;
+        this.idPrixVet = idPosologie;
     }
 
     public double getPrixDuService() {

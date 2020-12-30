@@ -22,7 +22,7 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Prix {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy= GenerationType.AUTO)
     private Long idPrix;
     private double prixHT;
     private double prixTTC;    

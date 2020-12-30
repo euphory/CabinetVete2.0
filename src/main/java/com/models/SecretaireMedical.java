@@ -35,7 +35,7 @@ public class SecretaireMedical extends Employe implements Serializable{
 -- -
 */
 
-    public SecretaireMedical(Set<Commande> commandes, Set<Consultation> consultations, Long idEmploye, String login, String mdp, String nom, String prenom, String adress, int telephone) {
+    public SecretaireMedical(Set<Commande> commandes, Set<Consultation> consultations, Long idEmploye, String login, String mdp, String nom, String prenom, String adress, String telephone) {
         super(idEmploye, login, mdp, nom, prenom, adress, telephone);
         this.commandes = commandes;
         this.consultations = consultations;
