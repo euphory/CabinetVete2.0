@@ -50,6 +50,10 @@ public class Adoption implements Serializable{
         this.formulaire = formulaire;
     }
 
+    public Adoption() {
+    }
+    
+
     public Long getIdAdoption() {
         return idAdoption;
     }

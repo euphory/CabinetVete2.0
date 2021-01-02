@@ -30,7 +30,7 @@ public class Fournisseur implements Serializable{
     @Column(length=140)
     private String Adress;
     private int numTVA;
-    private int telephone;
+    private String telephone;
     @Column(length=70)
     private String AdressMail;
     @Column(length=70)
@@ -57,7 +57,7 @@ public class Fournisseur implements Serializable{
     public Fournisseur() {
     }
 
-    public Fournisseur(Long idFournisseur, String nom, String Adress, int numTVA, int telephone, String AdressMail, String numCompte, Set<FournisseurArticlePrestation> FAP, Set<Prix> prix, Set<Commande> commandes) {
+    public Fournisseur(Long idFournisseur, String nom, String Adress, int numTVA, String telephone, String AdressMail, String numCompte, Set<FournisseurArticlePrestation> FAP, Set<Prix> prix, Set<Commande> commandes) {
         this.idFournisseur = idFournisseur;
         this.nom = nom;
         this.Adress = Adress;
@@ -102,11 +102,11 @@ public class Fournisseur implements Serializable{
         this.numTVA = numTVA;
     }
 
-    public int getTelephone() {
+    public String getTelephone() {
         return telephone;
     }
 
-    public void setTelephone(int telephone) {
+    public void setTelephone(String telephone) {
         this.telephone = telephone;
     }
 

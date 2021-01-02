@@ -41,6 +41,9 @@ public class SecretaireMedical extends Employe implements Serializable{
         this.consultations = consultations;
     }
 
+    public SecretaireMedical() {
+    }
+
     public SecretaireMedical(Set<Commande> commandes, Set<Consultation> consultations) {
         this.commandes = commandes;
         this.consultations = consultations;

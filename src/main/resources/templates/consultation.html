@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"/>
 <html lang="fr">
 
 <head>
@@ -106,12 +108,34 @@
       <div class="container">
 
         <div class="d-flex justify-content-between align-items-center">
-          <h2>Inner Page</h2>
+          <h2>Liste Des Consultations</h2>
           <ol>
             <li><a href="index.html">Home</a></li>
-            <li>Inner Page</li>
+            <li>Consultations</li>
           </ol>
         </div>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal" >+</button>
+          <table class="table">
+              <thead>
+                <tr>
+                   <th>Date</th>
+                   <th>Heure de la consultation</th>
+                   <th>fin de consultation</th>
+                   <th>Motif</th>
+                   <th>tarif Groupe</th>
+                </tr>
+              </thead>
+              <tbody>
+                  <tr th:each="consultation:${consultations}">
+                      <td th:text="${consultation.date}"></td>
+                      <td th:text="${consultation.heureDebut}"></td>
+                      <td th:text="${consultation.heureFin}"></td>
+                      <td th:text="${consultation.motif}"></td>
+                      <td th:text="${consultation.tarifGroup}"></td>
+                  </tr>
+              </tbody>
+              
+          </table>
 
       </div>
     </section><!-- End Breadcrumbs Section -->
@@ -119,11 +143,51 @@
     <section class="inner-page">
       <div class="container">
         <p>
-          Example inner page template
+          
         </p>
       </div>
     </section>
-
+    <!-- bouton ajouter-->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form th:action="@{/consultations/addNew}">
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Date</label>
+            <input type="text" class="form-control" id="recipient-name" name="date">
+          </div>          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Heure du debut de la consultation</label>
+            <input type="text" class="form-control" id="recipient-name"name="heureDebut">
+          </div>          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Fin de la consultation</label>
+            <input type="text" class="form-control" id="recipient-name"name="heureFin">
+          </div>
+                    <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Motif</label>
+            <input type="text" class="form-control" id="recipient-name" name="motif">
+          </div>
+                    <div class="form-group">
+            <label for="recipient-name" class="col-form-label">tarif de Groupe</label>
+            <input type="text" class="form-control" id="recipient-name" name="tarifGroupe">
+          </div>
+          <div class="form-group">
+        <button type="submit" class="btn btn-primary">Ajouter</button>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->

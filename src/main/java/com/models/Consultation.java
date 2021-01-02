@@ -38,7 +38,7 @@ public class Consultation implements Serializable{
     @Temporal(TemporalType.TIMESTAMP)
     private Date heureFin;
     @Column(length=70)
-    private String Motif;
+    private String motif;
     private double tarifGroupe;
     
 /**
@@ -55,7 +55,7 @@ public class Consultation implements Serializable{
     private Employe secretaireMedical;
         
     @OneToOne
-    @JoinColumn( name="factureConsult", nullable=false )
+    @JoinColumn( name="factureConsult")
     private FactureConsult factureConsult;
         
     @ManyToMany(fetch=FetchType.LAZY)
@@ -76,7 +76,7 @@ public class Consultation implements Serializable{
         this.date = date;
         this.heureDebut = heureDebut;
         this.heureFin = heureFin;
-        this.Motif = Motif;
+        this.motif = Motif;
         this.tarifGroupe = tarifGroupe;
         this.veterinaire = veterinaire;
         this.secretaireMedical = secretaireMedical;
@@ -121,11 +121,11 @@ public class Consultation implements Serializable{
     }
 
     public String getMotif() {
-        return Motif;
+        return motif;
     }
 
     public void setMotif(String Motif) {
-        this.Motif = Motif;
+        this.motif = Motif;
     }
 
     public double getTarifGroupe() {

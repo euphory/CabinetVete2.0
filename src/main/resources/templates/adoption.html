@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"/>
+<html lang="fr">
 
 <head>
   <meta charset="utf-8">
@@ -106,12 +108,30 @@
       <div class="container">
 
         <div class="d-flex justify-content-between align-items-center">
-          <h2>Liste de consultations</h2>
+          <h2>Liste des Adoptions</h2>
           <ol>
-            <li><a href="index.html">Home</a></li>
-            <li>Inner Page</li>
+            <li><a href="/index">Home</a></li>
+            <li>Adoptions</li>
           </ol>
         </div>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal" >+</button>
+          <table class="table">
+              <thead>
+                <tr>
+                   <th>id</th>
+                   <th>date de l'adoption</th>
+                   <th>frais d'adoption</th>
+                </tr>
+              </thead>
+              <tbody>
+                  <tr th:each="adoption:${adoptions}">
+                      <td th:text="${adoption.idAdoption}"></td>
+                      <td th:text="${adoption.dateAdoption}"></td>
+                      <td th:text="${adoption.frais}"></td>
+                  </tr>
+              </tbody>
+              
+          </table>
 
       </div>
     </section><!-- End Breadcrumbs Section -->
@@ -119,11 +139,41 @@
     <section class="inner-page">
       <div class="container">
         <p>
-          Example inner page template
+          
         </p>
       </div>
     </section>
-
+    <!-- bouton ajouter-->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <form th:action="@{/adoptions/addNew}" method="post">         
+            <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Date d'adoption</label>
+            <input type="text" class="form-control" id="recipient-name"name="dateAdoption">
+          </div>          
+            <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Frai d'adoption</label>
+            <input type="text" class="form-control" id="recipient-name"name="frais">
+          </div>
+          <div class="form-group">
+        <button type="submit" class="btn btn-primary">Ajouter</button>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->

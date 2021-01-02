@@ -35,10 +35,12 @@ public class Personne implements Serializable {
     private String prenom;
     @Column(length=140)
     private String adress;
-    private int numAssurence;
+        @Column(length=70)
+    private String numAssurence;
     @Column(length=70)
     private String adressMail;
-    private int telephone;
+        @Column(length=70)
+    private String telephone;
 /**
 -- -----------------------------------------------------------------------------
 -- - Associations                                                            ---
@@ -59,7 +61,7 @@ public class Personne implements Serializable {
 -- -----------------------------------------------------------------------------
 */
 
-    public Personne(Long idPersonne, String nom, String prenom, String adress, int numAssurence, String adressMail, int telephone, Set<Formulaire> formulaires, Set<Animal> animaux, Set<Consultation> consultations) {
+    public Personne(Long idPersonne, String nom, String prenom, String adress, String numAssurence, String adressMail, String telephone, Set<Formulaire> formulaires, Set<Animal> animaux, Set<Consultation> consultations) {
         this.idPersonne = idPersonne;
         this.nom = nom;
         this.prenom = prenom;
@@ -107,11 +109,11 @@ public class Personne implements Serializable {
         this.adress = adress;
     }
 
-    public int getNumAssurence() {
+    public String getNumAssurence() {
         return numAssurence;
     }
 
-    public void setNumAssurence(int numAssurence) {
+    public void setNumAssurence(String numAssurence) {
         this.numAssurence = numAssurence;
     }
 
@@ -123,11 +125,11 @@ public class Personne implements Serializable {
         this.adressMail = adressMail;
     }
 
-    public int getTelephone() {
+    public String getTelephone() {
         return telephone;
     }
 
-    public void setTelephone(int telephone) {
+    public void setTelephone(String telephone) {
         this.telephone = telephone;
     }
 
