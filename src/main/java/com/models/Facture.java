@@ -19,6 +19,7 @@ import javax.persistence.TemporalType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
@@ -30,9 +31,11 @@ public class Facture implements Serializable{
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long idFacture;
     @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern="dd-MM-yyyy")
     private Date date;
     private String modeReglement;
     @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern="dd-MM-yyyy")
     private Calendar dateReglement;
     private double total;
     private double totalTTC;

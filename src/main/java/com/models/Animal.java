@@ -22,6 +22,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
@@ -36,6 +37,7 @@ public class Animal implements Serializable{
     private String surnom;
     private double poid;
     @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern="dd-MM-yyyy")
     private Date dateNaissance;
 /**
 -- -----------------------------------------------------------------------------

@@ -15,6 +15,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
@@ -25,6 +28,8 @@ public class Formulaire implements Serializable{
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long idFormulaire;
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern="dd-MM-yyyy")
     private Date dateFormulaire;
     @Column(length=140)
     private String raison;

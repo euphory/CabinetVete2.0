@@ -35,11 +35,11 @@ public class Personne implements Serializable {
     private String prenom;
     @Column(length=140)
     private String adress;
-        @Column(length=70)
+    @Column(length=70)
     private String numAssurence;
     @Column(length=70)
     private String adressMail;
-        @Column(length=70)
+    @Column(length=70)
     private String telephone;
 /**
 -- -----------------------------------------------------------------------------

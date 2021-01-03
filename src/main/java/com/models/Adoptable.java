@@ -16,6 +16,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
@@ -27,6 +28,7 @@ public class Adoptable implements Serializable{
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long idAdoptable;
     @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern="dd-MM-yyyy")
     private Date dateAbandon;
     @Column(length=70)
     private String motifAbandon;

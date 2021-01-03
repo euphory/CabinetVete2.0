@@ -6,6 +6,8 @@
 package com.models;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -16,6 +18,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
@@ -25,8 +28,9 @@ import javax.persistence.TemporalType;
 public class Adoption implements Serializable{
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private Long idAdoption;
+    private int idAdoption;
     @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern="dd-MM-yyyy")
     private Date dateAdoption;
     private double frais;
 /**
@@ -43,7 +47,7 @@ public class Adoption implements Serializable{
 -- - Constructor                                                             ---
 -- -----------------------------------------------------------------------------
 */
-    public Adoption(Long idAdoption, Date dateAdoption, double frais, Formulaire formulaire) {
+    public Adoption(int idAdoption, Date dateAdoption, double frais, Formulaire formulaire) {
         this.idAdoption = idAdoption;
         this.dateAdoption = dateAdoption;
         this.frais = frais;
@@ -54,20 +58,23 @@ public class Adoption implements Serializable{
     }
     
 
-    public Long getIdAdoption() {
+    public int getIdAdoption() {
         return idAdoption;
     }
 
-    public void setIdAdoption(Long idAdoption) {
+    public void setIdAdoption(int idAdoption) {
         this.idAdoption = idAdoption;
     }
 
-    public Date getDateAdoption() {
-        return dateAdoption;
+    public String getDateAdoption() {  
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+        return formatter.format(dateAdoption);
     }
 
-    public void setDateAdoption(Date dateAdoption) {
-        this.dateAdoption = dateAdoption;
+    public void setDateAdoption(String dateAdoption) throws ParseException {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        this.dateAdoption  = formatter.parse(dateAdoption);
+
     }
 
     public double getFrais() {

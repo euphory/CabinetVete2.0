@@ -7,7 +7,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Inner Page - Medilab Bootstrap Template</title>
+  <title>Cabinet Vétérinaire</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -45,9 +45,9 @@
   <div id="topbar" class="d-none d-lg-flex align-items-center fixed-top">
     <div class="container d-flex">
       <div class="contact-info mr-auto">
-        <i class="icofont-envelope"></i> <a href="mailto:contact@example.com">contact@example.com</a>
-        <i class="icofont-phone"></i> +1 5589 55488 55
-        <i class="icofont-google-map"></i> A108 Adam Street, NY
+        <i class="icofont-envelope"></i> <a href="mailto:contact@example.com">CabinetVeterinaire@gmail.com</a>
+        <i class="icofont-phone"></i> +2 542 14 20 14
+        <i class="icofont-google-map"></i> Avenue Paul Dejaer 2, 1060 Saint-Gilles
       </div>
       <div class="social-links">
         <a href="#" class="twitter"><i class="icofont-twitter"></i></a>
@@ -118,16 +118,22 @@
           <table class="table">
               <thead>
                 <tr>
-                   <th>id</th>
-                   <th>date de l'adoption</th>
-                   <th>frais d'adoption</th>
+                   <th>Date de l'adoption</th>
+                   <th>Frais d'adoption</th>
+                   <th>Modification</th>
                 </tr>
               </thead>
               <tbody>
                   <tr th:each="adoption:${adoptions}">
-                      <td th:text="${adoption.idAdoption}"></td>
                       <td th:text="${adoption.dateAdoption}"></td>
                       <td th:text="${adoption.frais}"></td>
+                      <td>
+                          <div class="btn-group"> 
+                              <a th:href="@{/adoptions/findById/(id=${adoption.idAdoption})}" class=" btn btn-primary" id="editButton">éditer</a>
+                              <a class=" btn btn-success" id="detailButton">détails</a>
+                              <a th:href="@{/adoptions/delete/(id=${adoption.idAdoption})}" class=" btn btn-danger" id="deleteButton">supprimer</a>
+                          </div>
+                      </td>
                   </tr>
               </tbody>
               
@@ -148,7 +154,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Ajouter une adoption</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -157,10 +163,10 @@
           <form th:action="@{/adoptions/addNew}" method="post">         
             <div class="form-group">
             <label for="recipient-name" class="col-form-label">Date d'adoption</label>
-            <input type="text" class="form-control" id="recipient-name"name="dateAdoption">
+            <input type="date" class="form-control" id="recipient-name"name="dateAdoption">
           </div>          
             <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Frai d'adoption</label>
+            <label for="recipient-name" class="col-form-label">Frais d'adoption</label>
             <input type="text" class="form-control" id="recipient-name"name="frais">
           </div>
           <div class="form-group">
@@ -170,6 +176,61 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+        <!-- bouton moddifier pour les lignes-->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modifier une adoption</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <form th:action="@{/adoptions/update}" method="put">  
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">id</label>
+            <input type="text" class="form-control" id="idAdoptionEdit"name="idAdoption" readonly>
+          </div> 
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Date d'adoption</label>
+            <input type="date" class="form-control" id="dateAdoptionEdit"name="dateAdoption">
+          </div>          
+            <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Frai d'adoption</label>
+            <input type="text" class="form-control" id="fraisAdoptionEdit"name="frais">
+          </div>
+          <div class="form-group">
+        <button type="submit" class="btn btn-primary">Modifier</button>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+          <!-- bouton supprimer pour les lignes-->  
+ <div class="modal" id="deleteModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Confirmer la suppression</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Etes-vous sûr de vouloir supprimer cette ligne ?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">non</button>
+        <a class="btn btn-primary" id="confirmDeleteButton" href="">supprimer</a>
       </div>
     </div>
   </div>
@@ -265,6 +326,7 @@
   <script src="assets/vendor/counterup/counterup.min.js"></script>
   <script src="assets/vendor/owl.carousel/owl.carousel.min.js"></script>
   <script src="assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+  <script src="assets/js/adoption.js"></script>
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>

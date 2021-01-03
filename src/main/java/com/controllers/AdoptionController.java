@@ -6,14 +6,17 @@
 package com.controllers;
 
 import com.models.Adoption;
-import com.models.Consultation;
 import com.services.AdoptionService;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  *
@@ -37,5 +40,22 @@ public class AdoptionController {
     public String addNew(Adoption adoption){
         adoptionService.save(adoption);
         return "redirect:/adoptions";
+    }
+    
+    @RequestMapping("adoptions/findById")
+    @ResponseBody
+    public Optional<Adoption> findById(int id){
+        return adoptionService.findById(id);
+    }
+    @RequestMapping(value="/adoptions/update", method= {RequestMethod.PUT, RequestMethod.GET})
+    public String update(Adoption adoption){
+    adoptionService.save(adoption);
+    return "redirect:/adoptions";
+    }
+    
+    @RequestMapping(value="/adoptions/delete", method= {RequestMethod.DELETE, RequestMethod.GET})
+    public String delete(Integer id){
+    adoptionService.delete(id);
+    return "redirect:/adoptions";
     }
 }

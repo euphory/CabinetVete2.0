@@ -16,6 +16,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
@@ -27,7 +28,8 @@ public class Commande implements Serializable{
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long idCommande;
     private int reference;
-    private Calendar dateCoammande;
+    @DateTimeFormat(pattern="dd-MM-yyyy")
+    private Calendar dateCommande;
     private double total;
     
 /**

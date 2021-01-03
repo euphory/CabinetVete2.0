@@ -24,7 +24,7 @@ public class Antecedent implements Serializable{
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long idAntecedents;
-    private Date age;
+    private String age;
     @Column(length=70)
     private String antecedent;
     @Column(length=140)
@@ -44,7 +44,7 @@ public class Antecedent implements Serializable{
 -- - Constructor                                                             ---
 -- -----------------------------------------------------------------------------
 */
-    public Antecedent(Long idAntecedents, Date age, String antecedent, String Description, Animal animal) {
+    public Antecedent(Long idAntecedents, String age, String antecedent, String Description, Animal animal) {
         this.idAntecedents = idAntecedents;
         this.age = age;
         this.antecedent = antecedent;
@@ -63,11 +63,11 @@ public class Antecedent implements Serializable{
         this.idAntecedents = idAntecedents;
     }
 
-    public Date getAge() {
+    public String getAge() {
         return age;
     }
 
-    public void setAge(Date age) {
+    public void setAge(String age) {
         this.age = age;
     }
 
