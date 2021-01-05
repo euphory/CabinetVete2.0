@@ -26,7 +26,7 @@ public class AdoptionService {
         return adoptionRepository.findAll();
     }
     
-        public void save(Adoption adoption){
+    public void save(Adoption adoption){
         adoptionRepository.save(adoption);
     }
     

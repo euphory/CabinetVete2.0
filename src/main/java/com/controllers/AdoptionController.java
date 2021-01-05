@@ -6,7 +6,9 @@
 package com.controllers;
 
 import com.models.Adoption;
+import com.models.Formulaire;
 import com.services.AdoptionService;
+import com.services.FormulaireService;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,10 +29,16 @@ public class AdoptionController {
     
     @Autowired
     private AdoptionService adoptionService;
+    @Autowired
+    private FormulaireService formulaireService;
     
     //retourne les adoptions
     @GetMapping("/adoptions")
     public String getAdoptions(Model model){
+        
+        List<Formulaire> formulaireList = formulaireService.getFormulaires();
+        model.addAttribute("formulaires", formulaireList);
+        
         List<Adoption> adoptionList = adoptionService.getAdoptions();
         model.addAttribute("adoptions", adoptionList);
         return "adoption";
@@ -58,4 +66,5 @@ public class AdoptionController {
     adoptionService.delete(id);
     return "redirect:/adoptions";
     }
+    
 }

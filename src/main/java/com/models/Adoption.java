@@ -5,6 +5,8 @@
  */
 package com.models;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -25,6 +27,7 @@ import org.springframework.format.annotation.DateTimeFormat;
  * @author PC
  */
 @Entity
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class)
 public class Adoption implements Serializable{
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
@@ -39,7 +42,7 @@ public class Adoption implements Serializable{
 -- -----------------------------------------------------------------------------
 */    
     @OneToOne( cascade = CascadeType.ALL ) 
-    @JoinColumn( name="idFormulaire", nullable = true)
+    @JoinColumn( name="idFormulaire", nullable = false)
     private Formulaire formulaire;
 
 /**
@@ -47,6 +50,8 @@ public class Adoption implements Serializable{
 -- - Constructor                                                             ---
 -- -----------------------------------------------------------------------------
 */
+
+
     public Adoption(int idAdoption, Date dateAdoption, double frais, Formulaire formulaire) {
         this.idAdoption = idAdoption;
         this.dateAdoption = dateAdoption;

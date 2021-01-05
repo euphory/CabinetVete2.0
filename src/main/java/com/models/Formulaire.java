@@ -5,7 +5,11 @@
  */
 package com.models;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -24,10 +28,11 @@ import org.springframework.format.annotation.DateTimeFormat;
  * @author PC
  */
 @Entity
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class)
 public class Formulaire implements Serializable{
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private Long idFormulaire;
+    private int idFormulaire;
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern="dd-MM-yyyy")
     private Date dateFormulaire;
@@ -44,7 +49,7 @@ public class Formulaire implements Serializable{
     private Personne personne;
 
     @OneToOne
-    @JoinColumn( name="idAdoption", nullable=false)
+    @JoinColumn( name="idAdoption", nullable=true)
     private Adoption adoption;
   
     @ManyToOne
@@ -60,9 +65,8 @@ public class Formulaire implements Serializable{
 -- - Constructor                                                             ---
 -- -----------------------------------------------------------------------------
 */
-    
 
-    public Formulaire(Long idFormulaire, Date dateFormulaire, String raison, Personne personne, Adoption adoption, Animal animal, Employe veterinaire) {
+    public Formulaire(int idFormulaire, Date dateFormulaire, String raison, Personne personne, Adoption adoption, Animal animal, Employe veterinaire) {
         this.idFormulaire = idFormulaire;
         this.dateFormulaire = dateFormulaire;
         this.raison = raison;
@@ -75,20 +79,22 @@ public class Formulaire implements Serializable{
     public Formulaire() {
     }
 
-    public Long getIdFormulaire() {
+    public int getIdFormulaire() {
         return idFormulaire;
     }
 
-    public void setIdFormulaire(Long idFormulaire) {
+    public void setIdFormulaire(int idFormulaire) {
         this.idFormulaire = idFormulaire;
     }
 
-    public Date getDateFormulaire() {
-        return dateFormulaire;
+    public String getDateFormulaire() {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+        return formatter.format(dateFormulaire);
     }
 
-    public void setDateFormulaire(Date dateFormulaire) {
-        this.dateFormulaire = dateFormulaire;
+    public void setDateFormulaire(String dateFormulaire) throws ParseException{
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+        this.dateFormulaire = formatter.parse(dateFormulaire);
     }
 
     public String getRaison() {
