@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
  * @author PC
  */
 @Repository
-public interface VeterinaireRepository extends JpaRepository<Veterinaire, Integer> {
+public interface VeterinaireRepository extends JpaRepository<Veterinaire, Long> {
 
     
 }

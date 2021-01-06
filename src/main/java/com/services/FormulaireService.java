@@ -31,11 +31,11 @@ public class FormulaireService {
     }
     
     //Get by Id
-    public Optional<Formulaire> findById(int id){
+    public Optional<Formulaire> findById(Long id){
         return formulaireRepository.findById(id);
     }
     
-    public void delete(Integer id){
+    public void delete(Long id){
         formulaireRepository.deleteById(id);
     }
     

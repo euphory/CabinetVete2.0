@@ -32,9 +32,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Formulaire implements Serializable{
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private int idFormulaire;
+    private Long idFormulaire;
     @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern="dd-MM-yyyy")
     private Date dateFormulaire;
     @Column(length=140)
     private String raison;
@@ -66,7 +65,7 @@ public class Formulaire implements Serializable{
 -- -----------------------------------------------------------------------------
 */
 
-    public Formulaire(int idFormulaire, Date dateFormulaire, String raison, Personne personne, Adoption adoption, Animal animal, Employe veterinaire) {
+    public Formulaire(Long idFormulaire, Date dateFormulaire, String raison, Personne personne, Adoption adoption, Animal animal, Employe veterinaire) {
         this.idFormulaire = idFormulaire;
         this.dateFormulaire = dateFormulaire;
         this.raison = raison;
@@ -79,22 +78,21 @@ public class Formulaire implements Serializable{
     public Formulaire() {
     }
 
-    public int getIdFormulaire() {
+    public Long getIdFormulaire() {
         return idFormulaire;
     }
 
-    public void setIdFormulaire(int idFormulaire) {
+    public void setIdFormulaire(Long idFormulaire) {
         this.idFormulaire = idFormulaire;
     }
-
-    public String getDateFormulaire() {
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-        return formatter.format(dateFormulaire);
+    
+    @DateTimeFormat(pattern="dd-mm-yyyy")
+    public Date getDateFormulaire() {
+        return dateFormulaire;
     }
-
-    public void setDateFormulaire(String dateFormulaire) throws ParseException{
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-        this.dateFormulaire = formatter.parse(dateFormulaire);
+    @DateTimeFormat(pattern="yyyy-mm-dd")
+    public void setDateFormulaire(Date dateFormulaire) {
+        this.dateFormulaire = dateFormulaire;
     }
 
     public String getRaison() {

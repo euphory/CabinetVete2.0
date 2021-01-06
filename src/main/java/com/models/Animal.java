@@ -6,6 +6,8 @@
 package com.models;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Set;
 import javax.persistence.CascadeType;
@@ -35,10 +37,11 @@ public class Animal implements Serializable{
     private Long idAnimal;
     @Column(length=70)
     private String surnom;
-    private double poid;
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern="dd-MM-yyyy")
     private Date dateNaissance;
+    private double poid;
+
 /**
 -- -----------------------------------------------------------------------------
 -- - Associations                                                            ---
@@ -56,7 +59,7 @@ public class Animal implements Serializable{
     private Personne personne;
         
     @OneToOne(mappedBy="animal")  
-     private Adoptable adoptable ;
+    private Adoptable adoptable ;
         
     @OneToMany(mappedBy="animal", fetch=FetchType.LAZY)
     private Set<Formulaire> formulaires; 
@@ -66,16 +69,20 @@ public class Animal implements Serializable{
     
     @OneToMany(mappedBy="animal", fetch=FetchType.LAZY,cascade={CascadeType.REMOVE})
     private Set<Antecedent> antecedents;
+    
 /**
 -- -----------------------------------------------------------------------------
 -- - Constructor                                                             ---
 -- -----------------------------------------------------------------------------
 */
-    public Animal(Long idAnimal, String surnom, double poid, Date dateNaissance, Set<Consultation> consultations, Espece espece, Personne personne, Adoptable adoptable, Set<Formulaire> formulaires, Set<Prestation> prestations, Set<Antecedent> antecedents) {
+    public Animal() {
+    }
+
+    public Animal(Long idAnimal, String surnom, Date dateNaissance, double poid, Set<Consultation> consultations, Espece espece, Personne personne, Adoptable adoptable, Set<Formulaire> formulaires, Set<Prestation> prestations, Set<Antecedent> antecedents) {
         this.idAnimal = idAnimal;
         this.surnom = surnom;
-        this.poid = poid;
         this.dateNaissance = dateNaissance;
+        this.poid = poid;
         this.consultations = consultations;
         this.espece = espece;
         this.personne = personne;
@@ -83,9 +90,6 @@ public class Animal implements Serializable{
         this.formulaires = formulaires;
         this.prestations = prestations;
         this.antecedents = antecedents;
-    }
-    public Animal(){
-        
     }
 
     public Long getIdAnimal() {
@@ -103,6 +107,15 @@ public class Animal implements Serializable{
     public void setSurnom(String surnom) {
         this.surnom = surnom;
     }
+    @DateTimeFormat(pattern="yyyy-mm-dd")
+    public Date getDateNaissance() {
+        return dateNaissance;
+    }
+    @DateTimeFormat(pattern="yyyy-mm-dd")
+    public void setDateNaissance(Date dateNaissance) {
+        this.dateNaissance = dateNaissance;
+    }
+
 
     public double getPoid() {
         return poid;
@@ -110,14 +123,6 @@ public class Animal implements Serializable{
 
     public void setPoid(double poid) {
         this.poid = poid;
-    }
-
-    public Date getDateNaissance() {
-        return dateNaissance;
-    }
-
-    public void setDateNaissance(Date dateNaissance) {
-        this.dateNaissance = dateNaissance;
     }
 
     public Set<Consultation> getConsultations() {
@@ -175,7 +180,6 @@ public class Animal implements Serializable{
     public void setAntecedents(Set<Antecedent> antecedents) {
         this.antecedents = antecedents;
     }
-    
 
 
  

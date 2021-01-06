@@ -12,6 +12,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  *
  * @author PC
  */
-public interface PosologieRepository extends JpaRepository<Posologie, Integer>{
+public interface PosologieRepository extends JpaRepository<Posologie, Long>{
     
 }

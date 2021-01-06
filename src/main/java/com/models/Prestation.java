@@ -5,6 +5,7 @@
  */
 package com.models;
 
+import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -23,7 +24,7 @@ import javax.persistence.OneToMany;
 public class Prestation{
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private long idPrestation;
+    private long prestationId;
     private int quantiteUtilise;
     
 /**
@@ -31,9 +32,9 @@ public class Prestation{
 -- - Associations                                                            ---
 -- -----------------------------------------------------------------------------
 */
-    @OneToMany(mappedBy = "prestation")
-    Set<FournisseurArticlePrestation> FAP;
-    
+    @OneToMany(mappedBy="articleMedical")
+    private Set<FAP> fap = new HashSet<>();
+ 
     @ManyToOne
     @JoinColumn( name="idAnimal", nullable=false)
     private Animal animal;
@@ -42,36 +43,52 @@ public class Prestation{
     @JoinColumn( name="idConsultation", nullable=false)
     private Consultation consultation;
     
-    @OneToMany(mappedBy="idPrescription", fetch=FetchType.LAZY)
+    @OneToMany(mappedBy="prestation", fetch=FetchType.LAZY)
     private Set<Prescription> prescriptions;   
-  
-    @OneToMany(mappedBy="prestation")
-    private Set<PrixVet> prixVet;
-    
+
+    @OneToMany(mappedBy = "service")
+    private Set<PrixVet> prixVet= new HashSet<>();
 /**
--- -----------------------------------------------------------------------------
--- - Constructor                                                             ---
--- -----------------------------------------------------------------------------
-*/
-    public Prestation(long idPrestation, int quantiteUtilise, Set<FournisseurArticlePrestation> FAP, Animal animal, Consultation consultation, Set<Prescription> prescriptions, Set<PrixVet> prixVet) {
-        this.idPrestation = idPrestation;
+    -- -----------------------------------------------------------------------------
+    -- - Constructor                                                             ---
+    -- -----------------------------------------------------------------------------
+     */    
+
+
+    public long getPrestationId() {
+        return prestationId;
+    }
+
+    public void setPrestationId(long prestationId) {
+        this.prestationId = prestationId;
+    }
+
+    public Set<FAP> getFap() {
+        return fap;
+    }
+
+    public void setFap(Set<FAP> fap) {
+        this.fap = fap;
+    }
+
+    public Set<Prescription> getPrescriptions() {
+        return prescriptions;
+    }
+
+
+    public void setPrescriptions(Set<Prescription> prescriptions) {
+        this.prescriptions = prescriptions;
+    }
+
+    public Prestation(long prestationId, int quantiteUtilise, Animal animal, Consultation consultation, Set<Prescription> prescriptions) {
+        this.prestationId = prestationId;
         this.quantiteUtilise = quantiteUtilise;
-        this.FAP = FAP;
         this.animal = animal;
         this.consultation = consultation;
         this.prescriptions = prescriptions;
-        this.prixVet = prixVet;
     }
 
     public Prestation() {
-    }
-
-    public long getIdPrestation() {
-        return idPrestation;
-    }
-
-    public void setIdPrestation(long idPrestation) {
-        this.idPrestation = idPrestation;
     }
 
     public int getQuantiteUtilise() {
@@ -82,13 +99,7 @@ public class Prestation{
         this.quantiteUtilise = quantiteUtilise;
     }
 
-    public Set<FournisseurArticlePrestation> getFAP() {
-        return FAP;
-    }
 
-    public void setFAP(Set<FournisseurArticlePrestation> FAP) {
-        this.FAP = FAP;
-    }
 
     public Animal getAnimal() {
         return animal;
@@ -106,13 +117,7 @@ public class Prestation{
         this.consultation = consultation;
     }
 
-    public Set<Prescription> getPrescriptions() {
-        return prescriptions;
-    }
-
-    public void setPrescriptions(Set<Prescription> prescriptions) {
-        this.prescriptions = prescriptions;
-    }
+ 
 
     public Set<PrixVet> getPrixVet() {
         return prixVet;

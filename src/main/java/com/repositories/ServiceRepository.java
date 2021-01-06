@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
  * @author PC
  */
 @Repository
-public interface ServiceRepository extends JpaRepository<Service, Integer> {
+public interface ServiceRepository extends JpaRepository<Service, Long> {
 
     
 }

@@ -5,16 +5,11 @@
  */
 package com.models;
 
-import java.io.Serializable;
 import java.util.Set;
+import javax.persistence.CascadeType;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 /**
@@ -22,10 +17,10 @@ import javax.persistence.ManyToOne;
  * @author PC
  */
 @Entity
-public class LigneCommande implements Serializable{
-    @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    private Long idLigneCommande;
+public class LigneCommande {
+
+    @EmbeddedId
+    private LigneCommandeId id = new LigneCommandeId();
     private int quantiteCommande;
     private double prixHTarticle;
     private double prixHTLigne;
@@ -35,35 +30,37 @@ public class LigneCommande implements Serializable{
 -- - Associations                                                            ---
 -- -----------------------------------------------------------------------------
 */ 
-    @ManyToMany(fetch=FetchType.LAZY)
-    private Set<ArticleMedical> articleMedical;
-    
-    @ManyToOne
-    @JoinColumn(name="idCommande")
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "commandeId",insertable = false, updatable = false, nullable = true)
     private Commande commande;
+
+    @ManyToOne(cascade= CascadeType.PERSIST)
+    @JoinColumn(name="articleMedicalId", insertable = false, updatable = false)
+    private ArticleMedical articleMedical;
 /**
 -- -----------------------------------------------------------------------------
 -- - Constructor                                                             ---
 -- -----------------------------------------------------------------------------
 */
-    public LigneCommande(Long idLigneCommande, int quantiteCommande, double prixHTarticle, double prixHTLigne, Set<ArticleMedical> articleMedical, Commande commande) {
-        this.idLigneCommande = idLigneCommande;
-        this.quantiteCommande = quantiteCommande;
-        this.prixHTarticle = prixHTarticle;
-        this.prixHTLigne = prixHTLigne;
-        this.articleMedical = articleMedical;
-        this.commande = commande;
-    }
+ 
 
     public LigneCommande() {
     }
 
-    public Long getIdLigneCommande() {
-        return idLigneCommande;
+    public LigneCommande(int quantiteCommande, double prixHTarticle, double prixHTLigne, Commande commande, ArticleMedical articleMedical) {
+        this.quantiteCommande = quantiteCommande;
+        this.prixHTarticle = prixHTarticle;
+        this.prixHTLigne = prixHTLigne;
+        this.commande = commande;
+        this.articleMedical = articleMedical;
     }
 
-    public void setIdLigneCommande(Long idLigneCommande) {
-        this.idLigneCommande = idLigneCommande;
+    public ArticleMedical getArticleMedical() {
+        return articleMedical;
+    }
+
+    public void setArticleMedical(ArticleMedical articleMedical) {
+        this.articleMedical = articleMedical;
     }
 
     public int getQuantiteCommande() {
@@ -90,13 +87,6 @@ public class LigneCommande implements Serializable{
         this.prixHTLigne = prixHTLigne;
     }
 
-    public Set<ArticleMedical> getArticleMedical() {
-        return articleMedical;
-    }
-
-    public void setArticleMedical(Set<ArticleMedical> articleMedical) {
-        this.articleMedical = articleMedical;
-    }
 
     public Commande getCommande() {
         return commande;

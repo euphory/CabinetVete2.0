@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
  * @author PC
  */
 @Repository
-public interface FormulaireRepository extends JpaRepository<Formulaire, Integer> {
+public interface FormulaireRepository extends JpaRepository<Formulaire, Long> {
 
     
 }

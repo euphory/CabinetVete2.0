@@ -31,7 +31,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Adoption implements Serializable{
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private int idAdoption;
+    private Long idAdoption;
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern="dd-MM-yyyy")
     private Date dateAdoption;
@@ -41,8 +41,7 @@ public class Adoption implements Serializable{
 -- - Associations                                                            ---
 -- -----------------------------------------------------------------------------
 */    
-    @OneToOne( cascade = CascadeType.ALL ) 
-    @JoinColumn( name="idFormulaire", nullable = false)
+    @OneToOne( mappedBy = "adoption")
     private Formulaire formulaire;
 
 /**
@@ -52,7 +51,7 @@ public class Adoption implements Serializable{
 */
 
 
-    public Adoption(int idAdoption, Date dateAdoption, double frais, Formulaire formulaire) {
+    public Adoption(Long idAdoption, Date dateAdoption, double frais, Formulaire formulaire) {
         this.idAdoption = idAdoption;
         this.dateAdoption = dateAdoption;
         this.frais = frais;
@@ -63,24 +62,22 @@ public class Adoption implements Serializable{
     }
     
 
-    public int getIdAdoption() {
+    public Long getIdAdoption() {
         return idAdoption;
     }
 
-    public void setIdAdoption(int idAdoption) {
+    public void setIdAdoption(Long idAdoption) {
         this.idAdoption = idAdoption;
     }
-
-    public String getDateAdoption() {  
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-        return formatter.format(dateAdoption);
+    @DateTimeFormat(pattern="yyyy-mm-dd")
+    public Date getDateAdoption() {
+        return dateAdoption;
+    }
+    @DateTimeFormat(pattern="yyyy-mm-dd")
+    public void setDateAdoption(Date dateAdoption) {
+        this.dateAdoption = dateAdoption;
     }
 
-    public void setDateAdoption(String dateAdoption) throws ParseException {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        this.dateAdoption  = formatter.parse(dateAdoption);
-
-    }
 
     public double getFrais() {
         return frais;

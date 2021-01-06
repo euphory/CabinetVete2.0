@@ -7,6 +7,7 @@ package com.models;
 
 import java.io.Serializable;
 import java.util.Calendar;
+import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,7 +29,6 @@ public class Commande implements Serializable{
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long idCommande;
     private int reference;
-    @DateTimeFormat(pattern="dd-MM-yyyy")
     private Calendar dateCommande;
     private double total;
     
@@ -48,11 +48,102 @@ public class Commande implements Serializable{
     @ManyToOne
     private Fournisseur fournisseur;
 
-    @OneToMany(mappedBy="commande")
-    private Set<LigneCommande> ligneCommandes; 
+    @OneToMany(mappedBy="articleMedical")
+    private Set<LigneCommande> ligneCommandes = new HashSet<>();
     
     @OneToOne
+    @JoinColumn(name="idFacture", nullable = true)
     private Facture facture ;
+/**
+-- -----------------------------------------------------------------------------
+-- - Constructeur                                                            ---
+-- -----------------------------------------------------------------------------
+*/
+    public Commande(Long idCommande, int reference, Calendar dateCommande, double total, Employe veterinaire, Employe secretaireMedical, Fournisseur fournisseur, Facture facture) {
+        this.idCommande = idCommande;
+        this.reference = reference;
+        this.dateCommande = dateCommande;
+        this.total = total;
+        this.veterinaire = veterinaire;
+        this.secretaireMedical = secretaireMedical;
+        this.fournisseur = fournisseur;
+        this.facture = facture;
+    }
+
+    public Commande() {
+    }
+
+    public Long getIdCommande() {
+        return idCommande;
+    }
+
+    public void setIdCommande(Long idCommande) {
+        this.idCommande = idCommande;
+    }
+
+    public int getReference() {
+        return reference;
+    }
+
+    public void setReference(int reference) {
+        this.reference = reference;
+    }
+    @DateTimeFormat(pattern="yyyy-mm-dd")
+    public Calendar getDateCommande() {
+        return dateCommande;
+    }
+    @DateTimeFormat(pattern="yyyy-mm-dd")
+    public void setDateCommande(Calendar dateCommande) {
+        this.dateCommande = dateCommande;
+    }
+
+    public double getTotal() {
+        return total;
+    }
+
+    public void setTotal(double total) {
+        this.total = total;
+    }
+
+    public Employe getVeterinaire() {
+        return veterinaire;
+    }
+
+    public void setVeterinaire(Employe veterinaire) {
+        this.veterinaire = veterinaire;
+    }
+
+    public Employe getSecretaireMedical() {
+        return secretaireMedical;
+    }
+
+    public void setSecretaireMedical(Employe secretaireMedical) {
+        this.secretaireMedical = secretaireMedical;
+    }
+
+    public Fournisseur getFournisseur() {
+        return fournisseur;
+    }
+
+    public void setFournisseur(Fournisseur fournisseur) {
+        this.fournisseur = fournisseur;
+    }
+
+    public Set<LigneCommande> getLigneCommandes() {
+        return ligneCommandes;
+    }
+
+    public void setLigneCommandes(Set<LigneCommande> ligneCommandes) {
+        this.ligneCommandes = ligneCommandes;
+    }
+
+    public Facture getFacture() {
+        return facture;
+    }
+
+    public void setFacture(Facture facture) {
+        this.facture = facture;
+    }
     
     
 /**
@@ -60,4 +151,7 @@ public class Commande implements Serializable{
 -- - Constructor                                                             ---
 -- -----------------------------------------------------------------------------
 */ 
+    
+    
+    
 }

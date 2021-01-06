@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"/>
+<html lang="en">
 
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Inner Page - Medilab Bootstrap Template</title>
+  <title>Cabinet Vétérinaire</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -43,9 +45,9 @@
   <div id="topbar" class="d-none d-lg-flex align-items-center fixed-top">
     <div class="container d-flex">
       <div class="contact-info mr-auto">
-        <i class="icofont-envelope"></i> <a href="mailto:contact@example.com">contact@example.com</a>
-        <i class="icofont-phone"></i> +1 5589 55488 55
-        <i class="icofont-google-map"></i> A108 Adam Street, NY
+        <i class="icofont-envelope"></i> <a href="mailto:contact@example.com">CabinetVeterinaire@gmail.com</a>
+        <i class="icofont-phone"></i> +2 542 14 20 14
+        <i class="icofont-google-map"></i> Avenue Paul Dejaer 2, 1060 Saint-Gilles
       </div>
       <div class="social-links">
         <a href="#" class="twitter"><i class="icofont-twitter"></i></a>
@@ -106,12 +108,37 @@
       <div class="container">
 
         <div class="d-flex justify-content-between align-items-center">
-          <h2>Inner Page</h2>
+          <h2>Liste des Animaux</h2>
           <ol>
-            <li><a href="index.html">Home</a></li>
-            <li>Inner Page</li>
+            <li><a href="/index">Home</a></li>
+            <li>Animaux</li>
           </ol>
         </div>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal" id="addButton">+</button>
+          <table class="table">
+              <thead>
+                <tr>
+                   <th>Surnom de l'animal</th>
+                   <th>Date de naissance présumée</th>
+                   <th>Poid en grammes</th>
+
+              </thead>
+              <tbody>
+                  <tr th:each="animal:${animaux}">
+                      <td th:text="${animal.surnom}"></td>
+                      <td th:text="${#dates.format(animal.dateNaissance, 'dd-MM-yyyy')}"></td>
+                      <td th:text="${animal.poid}"></td>
+                      <td>
+                          <div class="btn-group"> 
+                              <a th:href="@{/animaux/findById/(id=${animal.idAnimal})}" class=" btn btn-primary" id="editButton">éditer</a>
+                              <a th:href="@{/animaux/findById/(id=${animal.idAnimal})}" class=" btn btn-success" id="detailsButton">détails</a>
+                              <a th:href="@{/animaux/delete/(id=${animal.idAnimal})}" class=" btn btn-danger" id="deleteButton">supprimer</a>
+                          </div>
+                      </td>
+                  </tr>
+              </tbody>
+              
+          </table>
 
       </div>
     </section><!-- End Breadcrumbs Section -->
@@ -119,11 +146,145 @@
     <section class="inner-page">
       <div class="container">
         <p>
-          Example inner page template
+          
         </p>
       </div>
     </section>
+        <!-- bouton ajouter-->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Ajouter un animal</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form th:action="@{/animaux/addNew}" method="post">             
 
+        <div class="form-group">
+           <label for="recipient-name" class="col-form-label">Surnom</label>
+           <input type="text" class="form-control" id="recipient-name"name="surnom">
+        </div>          
+        <div class="form-group">
+           <label for="recipient-name" class="col-form-label">Date de naissance présumée</label>
+           <input type="date" class="form-control" id="recipient-name"name="dateNaissance">
+        </div>
+        <div class="form-group">
+           <label for="recipient-name" class="col-form-label">poid en grammes</label>
+           <input type="text" class="form-control" id="recipient-name"name="poid">
+        </div>   
+        <div class="form-group">
+        <button type="submit" class="btn btn-primary">Ajouter</button>
+        </div>
+            
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+        </div>          
+
+        </form>
+    </div>
+    </div>
+  </div>
+</div>
+        <!-- bouton modifier pour les lignes-->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modifier une adoption</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form th:action="@{/animaux/update}" method="put">  
+        <div class="form-group">
+          <label for="recipient-name" class="col-form-label">Numero d'identifiant d'un animal</label>
+          <input type="text" class="form-control" id="idAnimalEdit"name="idAnimal" readonly>
+        </div> 
+        <div class="form-group">
+          <label for="recipient-name" class="col-form-label">Surnom</label>
+          <input type="text" class="form-control" id="surnomAnimalEdit"name="surnom">
+        </div>          
+        <div class="form-group">
+          <label for="recipient-name" class="col-form-label">Date de naissance présumée</label>
+          <input type="date" class="form-control" id="dateNaissanceAnimalEdit"name="dateNaissance">
+        </div>            
+        <div class="form-group">
+          <label for="recipient-name" class="col-form-label">poid en gramme</label>
+          <input type="text" class="form-control" id="poidAnimalEdit"name="poid">
+        </div>        
+          <div class="form-group">
+        <button type="submit" class="btn btn-primary">Modifier</button>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- bouton detail pour les lignes-->
+<div class="modal fade" id="detailsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <form th:action="@{/animaux/update}" method="put">  
+    <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Details d'un animal</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <div class="form-group">
+          <label for="recipient-name" class="col-form-label">Numero d'identifiant d'une animal</label>
+          <input type="text" class="form-control" id="idAnimalDetail"name="idAnimal" readonly>
+        </div> 
+        <div class="form-group">
+          <label for="recipient-name" class="col-form-label">Surnom</label>
+          <input type="text" class="form-control" id="surnomAnimalDetail"name="surnom">
+        </div>          
+        <div class="form-group">
+          <label for="recipient-name" class="col-form-label">Date de Naissance présumé</label>
+          <input type="date" class="form-control" id="prenomAnimalDetail"name="dateNaissance">
+        </div>            
+        <div class="form-group">
+          <label for="recipient-name" class="col-form-label">poid de l'animal en grammes</label>
+          <input type="text" class="form-control" id="poidAnimalDetail"name="poid">
+        </div>        
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- bouton supprimer pour les lignes-->  
+ <div class="modal" id="deleteModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Confirmer la suppression</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Etes-vous sûr de vouloir supprimer cette ligne ?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">non</button>
+        <a class="btn btn-primary" id="confirmDeleteButton" href="">supprimer</a>
+      </div>
+    </div>
+  </div>
+</div>
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
@@ -215,6 +376,7 @@
   <script src="assets/vendor/counterup/counterup.min.js"></script>
   <script src="assets/vendor/owl.carousel/owl.carousel.min.js"></script>
   <script src="assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+  <script src="assets/js/animal.js"></script>
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>

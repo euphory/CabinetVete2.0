@@ -6,14 +6,17 @@
 package com.models;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  *
@@ -22,50 +25,43 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Prescription implements Serializable{
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    private Long idPrescription;
-    
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    private Long id;
 /**
 -- -----------------------------------------------------------------------------
 -- - Associations                                                            ---
 -- -----------------------------------------------------------------------------
 
 */ 
-    @ManyToOne
-    @JoinColumn(name="idPrestation")
-    private Prestation prestation;
+    @OneToMany(mappedBy = "medicament")
+    private Set<Posologie> posologies= new HashSet<>();
     
-    @ManyToMany(mappedBy = "prescriptions")
-    private Set<Posologie> posologies;
+    @ManyToOne
+    @JoinColumn( name="idPrestation", nullable=true)
+    private Prestation prestation;
+
     
 /**
 -- -----------------------------------------------------------------------------
 -- - Constructor                                                             ---
 -- -----------------------------------------------------------------------------
 */
-    public Prescription(Long idPrescription, Prestation prestation, Set<Posologie> posologies) {
-        this.idPrescription = idPrescription;
-        this.prestation = prestation;
-        this.posologies = posologies;
+
+
+    public Prescription(Long id, Prestation prestation) {
+        this.id = id;
+
     }
 
     public Prescription() {
     }
 
-    public Long getIdPrescription() {
-        return idPrescription;
+    public Long getId() {
+        return id;
     }
 
-    public void setIdPrescription(Long idPrescription) {
-        this.idPrescription = idPrescription;
-    }
-
-    public Prestation getPrestation() {
-        return prestation;
-    }
-
-    public void setPrestation(Prestation prestation) {
-        this.prestation = prestation;
+    public void setIdPrescription(Long id) {
+        this.id = id;
     }
 
     public Set<Posologie> getPosologies() {
@@ -76,8 +72,16 @@ public class Prescription implements Serializable{
         this.posologies = posologies;
     }
 
+    public Prestation getPrestation() {
+        return prestation;
+    }
 
+    public void setPrestation(Prestation prestation) {
+        this.prestation = prestation;
+    }
 
-
+    public void setId(Long id) {
+        this.id = id;
+    }
     
 }

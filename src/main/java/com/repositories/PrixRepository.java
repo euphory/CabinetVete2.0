@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
  * @author PC
  */
 @Repository
-public interface PrixRepository extends JpaRepository<Prix, Integer> {
+public interface PrixRepository extends JpaRepository<Prix, Long> {
 
     
 }

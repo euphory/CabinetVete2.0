@@ -6,6 +6,7 @@
 package com.models;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,16 +14,18 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  *
  * @author PC
  */
 @Entity
+
 public class Medicament implements Serializable{
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    private Long idMedicament;
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    private Long id;
     @Column(length=70)
     private String nom;
     @Column(length=70)
@@ -36,8 +39,8 @@ public class Medicament implements Serializable{
 -- -----------------------------------------------------------------------------
 */
     
-    @OneToMany(mappedBy="medicament")
-    private Set<Posologie> posologies;
+    @OneToMany(mappedBy="prescription")
+    private Set<Posologie> posologies = new HashSet<>();
     
 /**
 -- -----------------------------------------------------------------------------
@@ -45,23 +48,22 @@ public class Medicament implements Serializable{
 -- -----------------------------------------------------------------------------
 */
 
-    public Medicament(Long idMedicament, String nom, String dosageMedic, String usageMedic, Set<Posologie> posologies) {
-        this.idMedicament = idMedicament;
+    public Medicament(Long id, String nom, String dosageMedic, String usageMedic) {
+        this.id = id;
         this.nom = nom;
         this.dosageMedic = dosageMedic;
         this.usageMedic = usageMedic;
-        this.posologies = posologies;
     }
 
     public Medicament() {
     }
 
-    public Long getIdMedicament() {
-        return idMedicament;
+    public Long getId() {
+        return id;
     }
 
-    public void setIdMedicament(Long idMedicament) {
-        this.idMedicament = idMedicament;
+    public void setId(int idMedicament) {
+        this.id = id;
     }
 
     public String getNom() {
@@ -96,6 +98,7 @@ public class Medicament implements Serializable{
         this.posologies = posologies;
     }
 
+  
   
 
     

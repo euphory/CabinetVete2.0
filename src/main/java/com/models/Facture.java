@@ -31,11 +31,9 @@ public class Facture implements Serializable{
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long idFacture;
     @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern="dd-MM-yyyy")
     private Date date;
     private String modeReglement;
     @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern="dd-MM-yyyy")
     private Calendar dateReglement;
     private double total;
     private double totalTTC;
@@ -45,8 +43,7 @@ public class Facture implements Serializable{
 -- - Associations                                                            ---
 -- -----------------------------------------------------------------------------
 */
-    @OneToOne
-    @JoinColumn( name="commande", nullable=true )
+    @OneToOne(mappedBy ="facture")
     private Commande commande ;
     
 /**
@@ -74,11 +71,11 @@ public class Facture implements Serializable{
     public void setIdFacture(Long idFacture) {
         this.idFacture = idFacture;
     }
-
+    @DateTimeFormat(pattern="yyyy-mm-dd")
     public Date getDate() {
         return date;
     }
-
+    @DateTimeFormat(pattern="yyyy-mm-dd")
     public void setDate(Date date) {
         this.date = date;
     }
@@ -90,11 +87,11 @@ public class Facture implements Serializable{
     public void setModeReglement(String modeReglement) {
         this.modeReglement = modeReglement;
     }
-
+    @DateTimeFormat(pattern="yyyy-mm-dd")
     public Calendar getDateReglement() {
         return dateReglement;
     }
-
+    @DateTimeFormat(pattern="yyyy-mm-dd")
     public void setDateReglement(Calendar dateReglement) {
         this.dateReglement = dateReglement;
     }

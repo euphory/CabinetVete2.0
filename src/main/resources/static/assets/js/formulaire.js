@@ -14,7 +14,6 @@ $('document').ready(function(){
         var href = $(this).attr('href');
         $.get(href, function(formulaire, status){
            $('#idFormulaireDetail').val(formulaire.idFormulaire);
-           $('#idAdoptionDetail').val(formulaire.adoption.idAdoption);
            $('#dateFormulaireDetail').val(formulaire.dateFormulaire); 
            $('#raisonFormulaireDetail').val(formulaire.raison);
            $('#dateAdoptionDetail').val(formulaire.adoption.dateAdoption); 

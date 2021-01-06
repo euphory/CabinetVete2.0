@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
  * @author PC
  */
 @Repository
-public interface FournisseurRepository extends JpaRepository<Fournisseur, Integer> {
+public interface FournisseurRepository extends JpaRepository<Fournisseur, Long> {
 
     
 }

@@ -14,6 +14,6 @@ import org.springframework.stereotype.Repository;
  * @author PC
  */
 @Repository
-public interface AntecedentRepository extends JpaRepository<Antecedent, Integer> {
+public interface AntecedentRepository extends JpaRepository<Antecedent, Long> {
 
 }

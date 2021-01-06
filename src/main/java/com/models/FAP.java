@@ -5,55 +5,50 @@
  */
 package com.models;
 
-import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
 
 /**
  *
  * @author PC
  */
 @Entity
-public class FournisseurArticlePrestation implements Serializable{
+public class FAP {
 
     @EmbeddedId
-    private Long idFAP;
+    private FAPId id = new FAPId();
     
-    @ManyToOne
-    @MapsId("idFournisseur")
-    @JoinColumn(name = "idFournisseur")
-    Fournisseur fournisseur;
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "fournisseurId",insertable = false, updatable = false)
+    private Fournisseur fournisseur;
 
-    @ManyToOne
-    @MapsId("idArticleMedical")
-    @JoinColumn(name = "idArticleMedical")
-    ArticleMedical articleMedical;
+    @ManyToOne(cascade= CascadeType.PERSIST)
+    @JoinColumn(name="articleMedicalId", insertable = false, updatable = false)
+    private ArticleMedical articleMedical;    
     
-    @ManyToOne
-    @MapsId("idPrestation")
-    @JoinColumn(name = "idPrestation")
-    Prestation prestation;
+    @ManyToOne(cascade= CascadeType.PERSIST)
+    @JoinColumn(name="prestationId", insertable = false, updatable = false)
+    private Prestation prestation;
 
-    public FournisseurArticlePrestation(Long idFAP, Fournisseur fournisseur, ArticleMedical articleMedical, Prestation prestation) {
-        this.idFAP = idFAP;
+
+    public FAP() {
+    }
+
+    public FAP(Fournisseur fournisseur, ArticleMedical articleMedical, Prestation prestation) {
         this.fournisseur = fournisseur;
         this.articleMedical = articleMedical;
         this.prestation = prestation;
     }
 
-    public FournisseurArticlePrestation() {
+    public FAPId getId() {
+        return id;
     }
 
-    
-    public Long getIdFAP() {
-        return idFAP;
-    }
-
-    public void setIdFAP(Long idFAP) {
-        this.idFAP = idFAP;
+    public void setId(FAPId id) {
+        this.id = id;
     }
 
     public Fournisseur getFournisseur() {
@@ -79,7 +74,6 @@ public class FournisseurArticlePrestation implements Serializable{
     public void setPrestation(Prestation prestation) {
         this.prestation = prestation;
     }
-    
-    
-    
+
+ 
 }

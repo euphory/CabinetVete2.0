@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
  * @author PC
  */
 @Repository
-public interface FactureRepository extends JpaRepository<FactureConsult, Integer> {
+public interface FactureRepository extends JpaRepository<FactureConsult, Long> {
 
     
 }

@@ -125,7 +125,7 @@
               </thead>
               <tbody>
                   <tr th:each="formulaire:${formulaires}">
-                      <td th:text="${formulaire.dateFormulaire}"></td>
+                      <td th:text="${#dates.format(formulaire.dateFormulaire, 'dd-MM-yyyy')}"/></td>
                       <td th:text="${formulaire.raison}"></td>
                       <td>
                           <div class="btn-group"> 
@@ -167,16 +167,17 @@
         </div>          
          <div class="form-group">
           <label for="recipient-name" class="col-form-label">Motivation de l'adoption</label>
-          <input type="text" class="form-control" id="recipient-name"name="raison">
+          <textarea type="text" class="form-control" id="recipient-name"name="raison"></textarea>
         </div>
           <div class="form-group">
         <button type="submit" class="btn btn-primary">Ajouter</button>
           </div>
-        </form>
-      </div>
-      <div class="modal-footer">
+        <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
+        </form>
+      </div>
+
     </div>
   </div>
 </div>
@@ -202,16 +203,17 @@
           </div>          
             <div class="form-group">
             <label for="recipient-name" class="col-form-label">Motivation de l'Adoption</label>
-            <input type="text" class="form-control" id="raisonFormulaireEdit"name="raison">
+            <textarea type="text" class="form-control" id="raisonFormulaireEdit"name="raison"></textarea>
           </div>
           <div class="form-group">
         <button type="submit" class="btn btn-primary">Modifier</button>
           </div>
         </form>
-      </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
+      </div>
+
     </div>
   </div>
 </div>
@@ -233,30 +235,27 @@
             <input type="text" class="form-control" id="idFormulaireDetail"name="idFormulaire" readonly>
         </div>
         <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Numero de l'adoption</label>
-            <input type="text" class="form-control" id="idAdoptionDetail"name="idAdoption" readonly>
-        </div> 
-        <div class="form-group">
             <label for="recipient-name" class="col-form-label">Date d'émission du formulaire</label>
-            <input type="text" class="form-control" id="dateFormulaireDetail"name="dateFormulaire">
+            <input type="date" class="form-control" id="dateFormulaireDetail"name="dateFormulaire">
         </div>          
         <div class="form-group">
             <label for="recipient-name" class="col-form-label">Motivation de l'adoption</label>
-            <input type="text" class="form-control" id="raisonFormulaireDetail"name="raison">
+            <textarea type="text" class="form-control" id="raisonFormulaireDetail"name="raison"></textarea>
         </div>
         <div class="form-group">
             <label for="recipient-name" class="col-form-label">Date de l'adoption</label>
-            <input type="text" class="form-control" id="dateAdoptionDetail"name="raison">
+            <input type="text" class="form-control" id="dateAdoptionDetail"name="dateAdoption">
         </div>
         <div class="form-group">
             <label for="recipient-name" class="col-form-label">Frais de l'adoption</label>
-            <input type="text" class="form-control" id="fraisAdoptionDetail"name="raison">
+            <input type="text" class="form-control" id="fraisAdoptionDetail"name="frais">
         </div>
         </form>
-      </div>
-      <div class="modal-footer">
+          <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
+      </div>
+
     </div>
   </div>
 </div>

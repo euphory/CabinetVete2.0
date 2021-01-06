@@ -6,6 +6,7 @@
 package com.models;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,7 +24,7 @@ import javax.persistence.OneToMany;
 public class ArticleMedical implements Serializable{
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private Long idArticleMedical;
+    private Long articleMedicalId;
     private int reference;
     @Column(length=70)
     private String nom;
@@ -34,39 +35,43 @@ public class ArticleMedical implements Serializable{
 -- -----------------------------------------------------------------------------
 */
         
-    @OneToMany(mappedBy = "articleMedical")
-    Set<FournisseurArticlePrestation> FAP;
+    @OneToMany(mappedBy="fournisseur")
+    private Set<FAP> fap = new HashSet<>();
     
-    @OneToMany(mappedBy="articleMedical")
-    private Set<Prix> prix;
+    @OneToMany(mappedBy = "fournisseur")
+    private Set<Prix> prix = new HashSet<>();
     
-    @ManyToMany(mappedBy = "articleMedical")
-    private Set<LigneCommande> ligneCommandes;
-    
+    @OneToMany(mappedBy = "commande")
+    private Set<LigneCommande> ligneCommande = new HashSet<>();
+
+
 /**
--- -----------------------------------------------------------------------------
--- - Constructor                                                             ---
--- -----------------------------------------------------------------------------
- */ 
-    public ArticleMedical(Long idArticleMedical, int reference, String nom, int quantite, Set<FournisseurArticlePrestation> FAP, Set<Prix> prix, Set<LigneCommande> ligneCommandes) {
-        this.idArticleMedical = idArticleMedical;
+    -- -----------------------------------------------------------------------------
+    -- - Constructor                                                             ---
+    -- -----------------------------------------------------------------------------
+     */
+    
+    
+    public ArticleMedical(Long articleMedicalId, int reference, String nom, int quantite) {
+        this.articleMedicalId = articleMedicalId;
         this.reference = reference;
         this.nom = nom;
         this.quantite = quantite;
-        this.FAP = FAP;
-        this.prix = prix;
-        this.ligneCommandes = ligneCommandes;
+    }
+
+    public Set<LigneCommande> getLigneCommande() {
+        return ligneCommande;
+    }
+
+    public void setLigneCommande(Set<LigneCommande> ligneCommande) {
+        this.ligneCommande = ligneCommande;
+    }
+
+    public void setFap(Set<FAP> fap) {
+        this.fap = fap;
     }
 
     public ArticleMedical() {
-    }
-
-    public Long getIdArticleMedical() {
-        return idArticleMedical;
-    }
-
-    public void setIdArticleMedical(Long idArticleMedical) {
-        this.idArticleMedical = idArticleMedical;
     }
 
     public int getReference() {
@@ -93,13 +98,7 @@ public class ArticleMedical implements Serializable{
         this.quantite = quantite;
     }
 
-    public Set<FournisseurArticlePrestation> getFAP() {
-        return FAP;
-    }
 
-    public void setFAP(Set<FournisseurArticlePrestation> FAP) {
-        this.FAP = FAP;
-    }
 
     public Set<Prix> getPrix() {
         return prix;
@@ -109,14 +108,18 @@ public class ArticleMedical implements Serializable{
         this.prix = prix;
     }
 
-    public Set<LigneCommande> getLigneCommandes() {
-        return ligneCommandes;
+     
+    public Long getArticleMedicalId() {
+        return articleMedicalId;
     }
 
-    public void setLigneCommandes(Set<LigneCommande> ligneCommandes) {
-        this.ligneCommandes = ligneCommandes;
+    public void setArticleMedicalId(Long articleMedicalId) {
+        this.articleMedicalId = articleMedicalId;
     }
-    
+
+    public Set<FAP> getFap() {
+        return fap;
+    }
 
  
     

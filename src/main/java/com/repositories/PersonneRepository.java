@@ -6,6 +6,7 @@
 package com.repositories;
 
 import com.models.Personne;
+import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -14,7 +15,6 @@ import org.springframework.stereotype.Repository;
  * @author PC
  */
 @Repository
-public interface PersonneRepository extends JpaRepository<Personne, Integer> {
-
+public interface PersonneRepository extends JpaRepository<Personne, Long> {
     
 }

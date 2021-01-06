@@ -6,28 +6,17 @@
 package com.models;
 
 import java.io.Serializable;
-import java.util.Set;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-
+import java.util.Objects;
+import javax.persistence.*;
 /**
  *
  * @author PC
  */
 @Entity
-public class Posologie implements Serializable{
-    @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    private Long idPosologie; 
-    @Column(length=70)
+public class Posologie {
+    
+    @EmbeddedId
+    private PosologieId id = new PosologieId();
     private String dosage;
     private String usa;
 
@@ -37,11 +26,12 @@ public class Posologie implements Serializable{
 -- -----------------------------------------------------------------------------
    */
 
-    @ManyToMany(fetch=FetchType.LAZY)
-    private Set<Prescription> prescriptions;
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "prescriptionId",insertable = false, updatable = false, nullable = true)
+    private Prescription prescription;
 
-    @ManyToOne
-    @JoinColumn(name="idMedicament")
+    @ManyToOne(cascade= CascadeType.PERSIST)
+    @JoinColumn(name="medicamentId", insertable = false, updatable = false)
     private Medicament medicament;
 
 /**
@@ -49,23 +39,9 @@ public class Posologie implements Serializable{
 -- - Constructor                                                             ---
 -- -----------------------------------------------------------------------------
 */
-    public Posologie(Long idPosologie, String dosage, String usa, Set<Prescription> prescriptions, Medicament medicament) {
-        this.idPosologie = idPosologie;
-        this.dosage = dosage;
-        this.usa = usa;
-        this.prescriptions = prescriptions;
-        this.medicament = medicament;
-    }
+
 
     public Posologie() {
-    }
-
-    public Long getIdPosologie() {
-        return idPosologie;
-    }
-
-    public void setIdPosologie(Long idPosologie) {
-        this.idPosologie = idPosologie;
     }
 
     public String getDosage() {
@@ -83,15 +59,6 @@ public class Posologie implements Serializable{
     public void setUsa(String usa) {
         this.usa = usa;
     }
-
-    public Set<Prescription> getPrescriptions() {
-        return prescriptions;
-    }
-
-    public void setPrescriptions(Set<Prescription> prescriptions) {
-        this.prescriptions = prescriptions;
-    }
-
     public Medicament getMedicament() {
         return medicament;
     }
@@ -99,7 +66,6 @@ public class Posologie implements Serializable{
     public void setMedicament(Medicament medicament) {
         this.medicament = medicament;
     }
-    
 
 }
 

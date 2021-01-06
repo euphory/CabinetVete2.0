@@ -6,6 +6,8 @@
 package com.models;
 
 import java.util.Set;
+import javax.persistence.CascadeType;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -21,9 +23,9 @@ import javax.persistence.ManyToOne;
  */
 @Entity
 public class Prix {
-    @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    private Long idPrix;
+    
+    @EmbeddedId
+    private PrixId id = new PrixId();
     private double prixHT;
     private double prixTTC;    
 /**
@@ -31,36 +33,44 @@ public class Prix {
 -- - Associations                                                            ---
 -- -----------------------------------------------------------------------------
 */    
-    @ManyToMany(fetch=FetchType.LAZY)
-    private Set<Fournisseur> fournisseurs;
-    
-    @ManyToOne
-    @JoinColumn( name="idArticleMedical")
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "articleMedicalId",insertable = false, updatable = false, nullable = true)
     private ArticleMedical articleMedical;
-    
-/**
--- -----------------------------------------------------------------------------
--- - Constructor                                                             ---
--- -----------------------------------------------------------------------------
-*/
 
-    public Prix(Long idPrix, double prixHT, double prixTTC, Set<Fournisseur> fournisseurs, ArticleMedical articleMedical) {
-        this.idPrix = idPrix;
-        this.prixHT = prixHT;
-        this.prixTTC = prixTTC;
-        this.fournisseurs = fournisseurs;
-        this.articleMedical = articleMedical;
+    @ManyToOne(cascade= CascadeType.PERSIST)
+    @JoinColumn(name="fournisseurId", insertable = false, updatable = false)
+    private Fournisseur fournisseur;
+
+
+    public PrixId getId() {
+        return id;
+    }
+
+    public void setId(PrixId id) {
+        this.id = id;
+    }
+
+    public Fournisseur getFournisseur() {
+        return fournisseur;
+    }
+
+/**
+    -- -----------------------------------------------------------------------------
+    -- - Constructor                                                             ---
+    -- -----------------------------------------------------------------------------
+     */
+    public void setFournisseur(Fournisseur fournisseur) {
+        this.fournisseur = fournisseur;
     }
 
     public Prix() {
     }
 
-    public Long getIdPrix() {
-        return idPrix;
-    }
-
-    public void setIdPrix(Long idPrix) {
-        this.idPrix = idPrix;
+    public Prix(double prixHT, double prixTTC, ArticleMedical articleMedical, Fournisseur fournisseur) {
+        this.prixHT = prixHT;
+        this.prixTTC = prixTTC;
+        this.articleMedical = articleMedical;
+        this.fournisseur = fournisseur;
     }
 
     public double getPrixHT() {
@@ -77,14 +87,6 @@ public class Prix {
 
     public void setPrixTTC(double prixTTC) {
         this.prixTTC = prixTTC;
-    }
-
-    public Set<Fournisseur> getFournisseurs() {
-        return fournisseurs;
-    }
-
-    public void setFournisseurs(Set<Fournisseur> fournisseurs) {
-        this.fournisseurs = fournisseurs;
     }
 
     public ArticleMedical getArticleMedical() {

@@ -30,11 +30,9 @@ public class FactureConsult implements Serializable{
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long idFactureConsult;
     @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern="dd-MM-yyyy")
     private Calendar date;
     private String modeReglement;
     @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern="dd-MM-yyyy")
     private Calendar dateReglement;
     private double total;
     
@@ -71,11 +69,11 @@ public class FactureConsult implements Serializable{
     public void setIdFactureConsult(Long idFactureConsult) {
         this.idFactureConsult = idFactureConsult;
     }
-
+    @DateTimeFormat(pattern="yyyy-mm-dd")
     public Calendar getDate() {
         return date;
     }
-
+    @DateTimeFormat(pattern="yyyy-mm-dd")
     public void setDate(Calendar date) {
         this.date = date;
     }
@@ -87,11 +85,11 @@ public class FactureConsult implements Serializable{
     public void setModeReglement(String modeReglement) {
         this.modeReglement = modeReglement;
     }
-
+    @DateTimeFormat(pattern="yyyy-mm-dd")
     public Calendar getDateReglement() {
         return dateReglement;
     }
-
+    @DateTimeFormat(pattern="yyyy-mm-dd")
     public void setDateReglement(Calendar dateReglement) {
         this.dateReglement = dateReglement;
     }

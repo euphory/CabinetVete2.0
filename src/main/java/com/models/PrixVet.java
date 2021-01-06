@@ -5,14 +5,10 @@
  */
 package com.models;
 
-import java.io.Serializable;
-import java.util.Set;
+import javax.persistence.CascadeType;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 /**
@@ -20,11 +16,10 @@ import javax.persistence.ManyToOne;
  * @author PC
  */
 @Entity
-public class PrixVet implements Serializable{
+public class PrixVet{
     
-    @Id
-    @GeneratedValue
-    private Long idPrixVet; 
+    @EmbeddedId
+    private PrixVetId priVetId = new PrixVetId();
     private double prixDuService;
     
     
@@ -34,34 +29,48 @@ public class PrixVet implements Serializable{
 -- - Associations                                                            ---
 -- -----------------------------------------------------------------------------
 */  
-    @ManyToMany(fetch=FetchType.LAZY)
-    private Set<Service> services;
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "ServiceId",insertable = false, updatable = false, nullable = true)
+    private Service service;
 
-    @ManyToOne
-    @JoinColumn(name="idPrestation")
+    @ManyToOne(cascade= CascadeType.PERSIST)
+    @JoinColumn(name="prestationId", insertable = false, updatable = false)
     private Prestation prestation;
+
 /**
 -- -----------------------------------------------------------------------------
 -- - Constructor                                                             ---
 -- -----------------------------------------------------------------------------
 */
-    public PrixVet(Long idPrixVet, double prixDuService, Set<Service> services, Prestation prestation) {
-        this.idPrixVet = idPrixVet;
-        this.prixDuService = prixDuService;
-        this.services = services;
-        this.prestation = prestation;
-    }
-
+ 
     public PrixVet() {
     }
 
-    public Long getIdPosologie() {
-        return idPrixVet;
+    public PrixVet(double prixDuService, Service service, Prestation prestation) {
+        this.prixDuService = prixDuService;
+        this.service = service;
+        this.prestation = prestation;
     }
 
-    public void setIdPosologie(Long idPosologie) {
-        this.idPrixVet = idPosologie;
+    public PrixVetId getPriVetId() {
+        return priVetId;
     }
+
+    public void setPriVetId(PrixVetId priVetId) {
+        this.priVetId = priVetId;
+    }
+
+    public Service getService() {
+        return service;
+    }
+
+    public void setService(Service service) {
+        this.service = service;
+    }
+
+
+
+
 
     public double getPrixDuService() {
         return prixDuService;
@@ -71,13 +80,6 @@ public class PrixVet implements Serializable{
         this.prixDuService = prixDuService;
     }
 
-    public Set<Service> getServices() {
-        return services;
-    }
-
-    public void setServices(Set<Service> services) {
-        this.services = services;
-    }
 
     public Prestation getPrestation() {
         return prestation;

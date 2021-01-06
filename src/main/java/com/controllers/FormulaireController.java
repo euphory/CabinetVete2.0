@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -51,9 +52,14 @@ public class FormulaireController {
     
     @RequestMapping("formulaires/findById")
     @ResponseBody
-    public Optional<Formulaire> findById(int id){
+    public Optional<Formulaire> findById(Long id){
         return formulaireService.findById(id);
     }
+    @ModelAttribute("dateFormat")
+    public String dateFormat() {
+        return "dd/MM/yyyy";
+    }
+
     @RequestMapping(value="/formulaires/update", method= {RequestMethod.PUT, RequestMethod.GET})
     public String update(Formulaire formulaire){
     formulaireService.save(formulaire);
@@ -61,7 +67,7 @@ public class FormulaireController {
     }
     
     @RequestMapping(value="/formulaires/delete", method= {RequestMethod.DELETE, RequestMethod.GET})
-    public String delete(Integer id){
+    public String delete(Long id){
     formulaireService.delete(id);
     return "redirect:/formulaires";
     }

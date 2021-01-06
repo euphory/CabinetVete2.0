@@ -52,7 +52,7 @@ public class AdoptionController {
     
     @RequestMapping("adoptions/findById")
     @ResponseBody
-    public Optional<Adoption> findById(int id){
+    public Optional<Adoption> findById(Long id){
         return adoptionService.findById(id);
     }
     @RequestMapping(value="/adoptions/update", method= {RequestMethod.PUT, RequestMethod.GET})
@@ -62,7 +62,7 @@ public class AdoptionController {
     }
     
     @RequestMapping(value="/adoptions/delete", method= {RequestMethod.DELETE, RequestMethod.GET})
-    public String delete(Integer id){
+    public String delete(Long id){
     adoptionService.delete(id);
     return "redirect:/adoptions";
     }

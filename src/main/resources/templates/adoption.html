@@ -63,7 +63,7 @@
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
 
-      <h1 class="logo mr-auto"><a href="index.html">Medilab</a></h1>
+      <h1 class="logo mr-auto"><a href="index.html">Cabinet Vétérinaire</a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo mr-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
@@ -125,7 +125,7 @@
               </thead>
               <tbody>
                   <tr th:each="adoption:${adoptions}">
-                      <td th:text="${adoption.dateAdoption}"></td>
+                      <td th:text="${#dates.format(adoption.dateAdoption, 'dd-MM-yyyy')}"></td>
                       <td th:text="${adoption.frais}"></td>
                       <td>
                           <div class="btn-group"> 
@@ -162,7 +162,7 @@
     <div class="modal-body">
         <form th:action="@{/adoptions/addNew}" method="post">             
         <div class='form-group'>
-            <label for="ddlFormulaireAdd" class="col-form-label">Adoption:</label>
+            <label for="ddlFormulaireAdd" class="col-form-label">Formulaires:</label>
             <select class="form-control" id="ddlAdoptionAdd" name="adoptionidAdoption">
                 <option>-SELECTIONNER-</option>
                 <option th:each="formulaire: ${formulaires}"
@@ -217,11 +217,12 @@
           <div class="form-group">
         <button type="submit" class="btn btn-primary">Modifier</button>
           </div>
-        </form>
-      </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
+        </form>
+      </div>
+
     </div>
   </div>
 </div>
@@ -250,10 +251,12 @@
             <input type="text" class="form-control" id="fraisAdoptionDetail"name="frais">
           </div>
         </form>
-      </div>
+          
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
+      </div>
+
     </div>
   </div>
 </div>

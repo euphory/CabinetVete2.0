@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
  * @author PC
  */
 @Repository
-public interface LigneCommandeRepository extends JpaRepository<LigneCommande, Integer> {
+public interface LigneCommandeRepository extends JpaRepository<LigneCommande, Long> {
 
     
 }
