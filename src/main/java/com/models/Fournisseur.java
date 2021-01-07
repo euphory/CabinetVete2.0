@@ -29,11 +29,11 @@ public class Fournisseur implements Serializable{
     @Column(length=70)
     private String nom;
     @Column(length=140)
-    private String Adress;
+    private String adresse;
     private int numTVA;
     private String telephone;
     @Column(length=70)
-    private String AdressMail;
+    private String adresseMail;
     @Column(length=70)
     private String numCompte;
 
@@ -58,15 +58,14 @@ public class Fournisseur implements Serializable{
     public Fournisseur() {
     }
 
-    public Fournisseur(Long fournisseurId, String nom, String Adress, int numTVA, String telephone, String AdressMail, String numCompte, Set<Prix> prix, Set<Commande> commandes) {
+    public Fournisseur(Long fournisseurId, String nom, String adresse, int numTVA, String telephone, String adresseMail, String numCompte, Set<Commande> commandes) {
         this.fournisseurId = fournisseurId;
         this.nom = nom;
-        this.Adress = Adress;
+        this.adresse = adresse;
         this.numTVA = numTVA;
         this.telephone = telephone;
-        this.AdressMail = AdressMail;
+        this.adresseMail = adresseMail;
         this.numCompte = numCompte;
-        this.prix = prix;
         this.commandes = commandes;
     }
 
@@ -78,16 +77,6 @@ public class Fournisseur implements Serializable{
         this.fournisseurId = fournisseurId;
     }
 
-    public Set<FAP> getFap() {
-        return fap;
-    }
-
-    public void setFap(Set<FAP> fap) {
-        this.fap = fap;
-    }
-
-  
-
     public String getNom() {
         return nom;
     }
@@ -96,12 +85,12 @@ public class Fournisseur implements Serializable{
         this.nom = nom;
     }
 
-    public String getAdress() {
-        return Adress;
+    public String getAdresse() {
+        return adresse;
     }
 
-    public void setAdress(String Adress) {
-        this.Adress = Adress;
+    public void setAdresse(String adresse) {
+        this.adresse = adresse;
     }
 
     public int getNumTVA() {
@@ -120,12 +109,12 @@ public class Fournisseur implements Serializable{
         this.telephone = telephone;
     }
 
-    public String getAdressMail() {
-        return AdressMail;
+    public String getAdresseMail() {
+        return adresseMail;
     }
 
-    public void setAdressMail(String AdressMail) {
-        this.AdressMail = AdressMail;
+    public void setAdresseMail(String adresseMail) {
+        this.adresseMail = adresseMail;
     }
 
     public String getNumCompte() {
@@ -136,7 +125,13 @@ public class Fournisseur implements Serializable{
         this.numCompte = numCompte;
     }
 
+    public Set<FAP> getFap() {
+        return fap;
+    }
 
+    public void setFap(Set<FAP> fap) {
+        this.fap = fap;
+    }
 
     public Set<Prix> getPrix() {
         return prix;
@@ -153,8 +148,7 @@ public class Fournisseur implements Serializable{
     public void setCommandes(Set<Commande> commandes) {
         this.commandes = commandes;
     }
-    
-    
+
 
 
 }

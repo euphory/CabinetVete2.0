@@ -5,6 +5,8 @@
  */
 package com.models;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Entity;
@@ -21,6 +23,7 @@ import javax.persistence.OneToMany;
  * @author PC
  */
 @Entity
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class)
 public class Prestation{
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)

@@ -32,8 +32,8 @@
   <link href="assets/css/style.css" rel="stylesheet">
 
   <!-- =======================================================
-  * Template Name: Cabinet Vétérinaire - v2.1.0
-  * Template URL: https://bootstrapmade.com/cabinetvet-free-medical-bootstrap-theme/
+  * Template Name: Medilab - v2.1.0
+  * Template URL: https://bootstrapmade.com/medilab-free-medical-bootstrap-theme/
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
@@ -63,7 +63,7 @@
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
 
-      <h1 class="logo mr-auto"><a href="/index">Cabinet Vétérinaire</a></h1>
+      <h1 class="logo mr-auto"><a href="index.html">Cabinet Vétérinaire</a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo mr-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
@@ -105,31 +105,29 @@
       <div class="container">
 
         <div class="d-flex justify-content-between align-items-center">
-          <h2>Liste des Animaux</h2>
+          <h2>Liste des quantitée utilisée lors de la Prestation</h2>
           <ol>
             <li><a href="/index">Home</a></li>
-            <li>Animaux</li>
+            <li>Quantitée utilisée</li>
           </ol>
         </div>
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal" id="addButton">+</button>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal" id="addButton">+</button>
           <table class="table">
               <thead>
                 <tr>
-                   <th>Surnom de l'animal</th>
-                   <th>Date de naissance présumée</th>
-                   <th>Poid en grammes</th>
-
+                   <th>Identifiant de la quantite utilisée</th>
+                   <th>Quantite utilisée lors de la Prestation</th>
+                </tr>
               </thead>
               <tbody>
-                  <tr th:each="animal:${animaux}">
-                      <td th:text="${animal.surnom}"></td>
-                      <td th:text="${#dates.format(animal.dateNaissance, 'dd-MM-yyyy')}"></td>
-                      <td th:text="${animal.poid}"></td>
+                  <tr th:each="prestation:${prestations}">
+                      <td th:text="${prestation.prestationId}"></td>
+                      <td th:text="${prestation.quantiteUtilise}"></td>                
                       <td>
                           <div class="btn-group"> 
-                              <a th:href="@{/animaux/findById/(id=${animal.idAnimal})}" class=" btn btn-primary" id="editButton">éditer</a>
-                              <a th:href="@{/animaux/findById/(id=${animal.idAnimal})}" class=" btn btn-success" id="detailsButton">détails</a>
-                              <a th:href="@{/animaux/delete/(id=${animal.idAnimal})}" class=" btn btn-danger" id="deleteButton">supprimer</a>
+                              <a th:href="@{/prestations/findById/(id=${prestation.prestationId})}" class=" btn btn-primary" id="editButton">éditer</a>
+                              <a th:href="@{/prestations/findById/(id=${prestation.prestationId})}" class=" btn btn-success" id="detailButton">détails</a>
+                              <a th:href="@{/prestations/delete/(id=${prestation.prestationId})}" class=" btn btn-danger" id="deleteButton">supprimer</a>
                           </div>
                       </td>
                   </tr>
@@ -147,122 +145,96 @@
         </p>
       </div>
     </section>
-        <!-- bouton ajouter-->
+    <!-- bouton ajouter-->
 <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Ajouter un animal</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Ajouter une prestation</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
     </div>
     <div class="modal-body">
-        <form th:action="@{/animaux/addNew}" method="post">             
-
-        <div class="form-group">
-           <label for="recipient-name" class="col-form-label">Surnom</label>
-           <input type="text" class="form-control" id="recipient-name"name="surnom">
-        </div>          
-        <div class="form-group">
-           <label for="recipient-name" class="col-form-label">Date de naissance présumée</label>
-           <input type="date" class="form-control" id="recipient-name"name="dateNaissance">
-        </div>
-        <div class="form-group">
-           <label for="recipient-name" class="col-form-label">poid en grammes</label>
-           <input type="text" class="form-control" id="recipient-name"name="poid">
-        </div>   
-        <div class="form-group">
+        <form th:action="@{/prestations/addNew}" method="post">                  
+            <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Quantite utilisée lors de la Prestation</label>
+            <input type="number" class="form-control" id="recipient-name"name="quantiteUtilise">
+          </div>
+          <div class="form-group">
         <button type="submit" class="btn btn-primary">Ajouter</button>
-        </div>
-            
+          </div>
+        </form>
+    </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
-        </div>          
-
-        </form>
-    </div>
     </div>
   </div>
 </div>
-        <!-- bouton modifier pour les lignes-->
+        <!-- bouton moddifier pour les lignes-->
 <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modifier une adoption</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Modifier une prestation</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <form th:action="@{/animaux/update}" method="put">  
-        <div class="form-group">
-          <label for="recipient-name" class="col-form-label">Numero d'identifiant d'un animal</label>
-          <input type="text" class="form-control" id="idAnimalEdit"name="idAnimal" readonly>
-        </div> 
-        <div class="form-group">
-          <label for="recipient-name" class="col-form-label">Surnom</label>
-          <input type="text" class="form-control" id="surnomAnimalEdit"name="surnom">
-        </div>          
-        <div class="form-group">
-          <label for="recipient-name" class="col-form-label">Date de naissance présumée</label>
-          <input type="date" class="form-control" id="dateNaissanceAnimalEdit"name="dateNaissance">
-        </div>            
-        <div class="form-group">
-          <label for="recipient-name" class="col-form-label">poid en gramme</label>
-          <input type="text" class="form-control" id="poidAnimalEdit"name="poid">
-        </div>        
+          <form th:action="@{/prestations/update}" method="put">  
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Identifiant de la quantite utilisée</label>
+            <input type="text" class="form-control" id="idPrestationEdit"name="prestationId" readonly>
+          </div>        
+            <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Quantite utilisée lors de la Prestation</label>
+            <input type="text" class="form-control" id="quantiteUtilisePrestationEdit"name="quantiteUtilise">
+          </div>
           <div class="form-group">
         <button type="submit" class="btn btn-primary">Modifier</button>
           </div>
-        </form>
-      </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
+        </form>
+      </div>
+
     </div>
   </div>
 </div>
-<!-- bouton detail pour les lignes-->
-<div class="modal fade" id="detailsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <form th:action="@{/animaux/update}" method="put">  
-    <div class="modal-dialog" role="document">
+        <!-- bouton detail pour les lignes-->
+        <div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Details d'un animal</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Details d'une prestation</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-
-        <div class="form-group">
-          <label for="recipient-name" class="col-form-label">Numero d'identifiant d'une animal</label>
-          <input type="text" class="form-control" id="idAnimalDetail"name="idAnimal" readonly>
-        </div> 
-        <div class="form-group">
-          <label for="recipient-name" class="col-form-label">Surnom</label>
-          <input type="text" class="form-control" id="surnomAnimalDetail"name="surnom">
-        </div>          
-        <div class="form-group">
-          <label for="recipient-name" class="col-form-label">Date de Naissance présumé</label>
-          <input type="date" class="form-control" id="prenomAnimalDetail"name="dateNaissance">
-        </div>            
-        <div class="form-group">
-          <label for="recipient-name" class="col-form-label">poid de l'animal en grammes</label>
-          <input type="text" class="form-control" id="poidAnimalDetail"name="poid">
-        </div>        
+          <form th:action="@{/prestations/update}" method="put">  
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Identifiant de la quantite utilisée</label>
+            <input type="text" class="form-control" id="idPrestationDetail"name="prestationId" readonly>
+          </div>         
+            <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Quantite utilisée lors de la Prestation</label>
+            <input type="text" class="form-control" id="quantiteUtilisePrestationDetail"name="quantiteUtilise">
+          </div>
         </form>
-      </div>
+          
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
+      </div>
+
     </div>
   </div>
 </div>
-<!-- bouton supprimer pour les lignes-->  
+          <!-- bouton supprimer pour les lignes-->  
  <div class="modal" id="deleteModal" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -292,7 +264,7 @@
         <div class="row">
 
           <div class="col-lg-3 col-md-6 footer-contact">
-            <h3>Cabinet Vétérinaire</h3>
+            <h3>Medilab</h3>
             <p>
               A108 Adam Street <br>
               New York, NY 535022<br>
@@ -340,13 +312,13 @@
 
       <div class="mr-md-auto text-center text-md-left">
         <div class="copyright">
-          &copy; Copyright <strong><span>Cabinet Vétérinaire</span></strong>. All Rights Reserved
+          &copy; Copyright <strong><span>Medilab</span></strong>. All Rights Reserved
         </div>
         <div class="credits">
           <!-- All the links in the footer should remain intact. -->
           <!-- You can delete the links only if you purchased the pro version. -->
           <!-- Licensing information: https://bootstrapmade.com/license/ -->
-          <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/cabinetvet-free-medical-bootstrap-theme/ -->
+          <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/medilab-free-medical-bootstrap-theme/ -->
           Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
         </div>
       </div>
@@ -373,7 +345,7 @@
   <script src="assets/vendor/counterup/counterup.min.js"></script>
   <script src="assets/vendor/owl.carousel/owl.carousel.min.js"></script>
   <script src="assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
-  <script src="assets/js/animal.js"></script>
+  <script src="assets/js/prestation.js"></script>
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>

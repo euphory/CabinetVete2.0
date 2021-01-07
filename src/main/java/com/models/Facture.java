@@ -6,19 +6,16 @@
 package com.models;
 
 import java.io.Serializable;
-import java.util.Calendar;
 import java.util.Date;
+import java.util.Date;
+import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 /**
@@ -34,7 +31,7 @@ public class Facture implements Serializable{
     private Date date;
     private String modeReglement;
     @Temporal(TemporalType.DATE)
-    private Calendar dateReglement;
+    private Date dateReglement;
     private double total;
     private double totalTTC;
     
@@ -51,7 +48,7 @@ public class Facture implements Serializable{
 -- - Constructor                                                             ---
 -- -----------------------------------------------------------------------------
 */  
-    public Facture(Long idFacture, Date date, String modeReglement, Calendar dateReglement, double total, double totalTTC, Commande commande) {
+    public Facture(Long idFacture, Date date, String modeReglement, Date dateReglement, double total, double totalTTC, Commande commande) {
         this.idFacture = idFacture;
         this.date = date;
         this.modeReglement = modeReglement;
@@ -88,11 +85,11 @@ public class Facture implements Serializable{
         this.modeReglement = modeReglement;
     }
     @DateTimeFormat(pattern="yyyy-mm-dd")
-    public Calendar getDateReglement() {
+    public Date getDateReglement() {
         return dateReglement;
     }
-    @DateTimeFormat(pattern="yyyy-mm-dd")
-    public void setDateReglement(Calendar dateReglement) {
+    @DateTimeFormat(pattern="dd-mm-yyyy")
+    public void setDateReglement(Date dateReglement) {
         this.dateReglement = dateReglement;
     }
 
@@ -118,6 +115,55 @@ public class Facture implements Serializable{
 
     public void setCommande(Commande commande) {
         this.commande = commande;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 97 * hash + Objects.hashCode(this.idFacture);
+        hash = 97 * hash + Objects.hashCode(this.date);
+        hash = 97 * hash + Objects.hashCode(this.modeReglement);
+        hash = 97 * hash + Objects.hashCode(this.dateReglement);
+        hash = 97 * hash + (int) (Double.doubleToLongBits(this.total) ^ (Double.doubleToLongBits(this.total) >>> 32));
+        hash = 97 * hash + (int) (Double.doubleToLongBits(this.totalTTC) ^ (Double.doubleToLongBits(this.totalTTC) >>> 32));
+        hash = 97 * hash + Objects.hashCode(this.commande);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Facture other = (Facture) obj;
+        if (Double.doubleToLongBits(this.total) != Double.doubleToLongBits(other.total)) {
+            return false;
+        }
+        if (Double.doubleToLongBits(this.totalTTC) != Double.doubleToLongBits(other.totalTTC)) {
+            return false;
+        }
+        if (!Objects.equals(this.modeReglement, other.modeReglement)) {
+            return false;
+        }
+        if (!Objects.equals(this.idFacture, other.idFacture)) {
+            return false;
+        }
+        if (!Objects.equals(this.date, other.date)) {
+            return false;
+        }
+        if (!Objects.equals(this.dateReglement, other.dateReglement)) {
+            return false;
+        }
+        if (!Objects.equals(this.commande, other.commande)) {
+            return false;
+        }
+        return true;
     }
 
     

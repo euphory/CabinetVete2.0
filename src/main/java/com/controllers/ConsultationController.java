@@ -21,20 +21,4 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class ConsultationController {
     
-    @Autowired
-    private ConsultationService consultationService;
-    
-    @GetMapping("/consultations")
-    public String getConsultations(Model model){
-        List<Consultation> consultationList = consultationService.getConsultations();
-        model.addAttribute("consultation", consultationList);
-        return "consultation";
-    }
-    
-    @PostMapping("/consultations/addNew")
-    public String addNew(Consultation consultation){
-        consultationService.save(consultation);
-        return "redirect:/consultations";
-    }
-    
 }

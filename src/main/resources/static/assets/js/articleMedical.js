@@ -4,11 +4,11 @@ $('document').ready(function(){
         
         var href = $(this).attr('href');
         
-        $.get(href, function(antecedent, status){
-           $('#idAntecedentEdit').val(antecedent.idAntecedent);
-           $('#ageAntecedentEdit').val(antecedent.age); 
-           $('#anteceAntecedentEdit').val(antecedent.antece); 
-           $('#descriptionAntecedentEdit').val(antecedent.description); 
+        $.get(href, function(articleMedical, status){
+           $('#articleMedicalIdEdit').val(articleMedical.articleMedicalId);
+           $('#referenceArticleMedicalEdit').val(articleMedical.reference); 
+           $('#nomArticleMedicalEdit').val(articleMedical.nom); 
+           $('#quantiteArticleMedicalEdit').val(articleMedical.quantite); 
 
         })
         $('#editModal').modal();
@@ -18,11 +18,11 @@ $('document').ready(function(){
         
         var href = $(this).attr('href');
         
-        $.get(href, function(antecedent, status){
-           $('#idAntecedentDetail').val(antecedent.idAntecedent);
-           $('#ageAntecedentDetail').val(antecedent.age); 
-           $('#anteceAntecedentDetail').val(antecedent.antece);
-           $('#descriptionAntecedentDetail').val(antecedent.description);
+        $.get(href, function(articleMedical, status){
+           $('#articleMedicalIdDetail').val(articleMedical.articleMedicalId);
+           $('#referenceArticleMedicalDetail').val(articleMedical.reference); 
+           $('#nomArticleMedicalDetail').val(articleMedical.nom);
+           $('#quantiteArticleMedicalDetail').val(articleMedical.quantite);
         });
     $('#detailsModal').modal();
     });

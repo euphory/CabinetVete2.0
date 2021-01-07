@@ -5,6 +5,8 @@
  */
 package com.models;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -31,6 +33,7 @@ import org.springframework.format.annotation.DateTimeFormat;
  * @author PC
  */
 @Entity
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class)
 public class Animal implements Serializable{
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)

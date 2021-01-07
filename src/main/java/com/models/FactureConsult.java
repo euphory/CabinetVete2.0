@@ -6,7 +6,8 @@
 package com.models;
 
 import java.io.Serializable;
-import java.util.Calendar;
+import java.util.Date;
+import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,9 +16,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 /**
@@ -30,10 +28,10 @@ public class FactureConsult implements Serializable{
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long idFactureConsult;
     @Temporal(TemporalType.DATE)
-    private Calendar date;
+    private Date date;
     private String modeReglement;
     @Temporal(TemporalType.DATE)
-    private Calendar dateReglement;
+    private Date dateReglement;
     private double total;
     
 /**
@@ -50,16 +48,18 @@ public class FactureConsult implements Serializable{
 -- - Constructor                                                             ---
 -- -----------------------------------------------------------------------------
 */
-    public FactureConsult(Long idFactureConsult, Calendar date, String modeReglement, Calendar dateReglement, double total, Consultation idConsultation) {
+
+
+    public FactureConsult() {
+    }
+
+    public FactureConsult(Long idFactureConsult, Date date, String modeReglement, Date dateReglement, double total, Consultation idConsultation) {
         this.idFactureConsult = idFactureConsult;
         this.date = date;
         this.modeReglement = modeReglement;
         this.dateReglement = dateReglement;
         this.total = total;
         this.idConsultation = idConsultation;
-    }
-
-    public FactureConsult() {
     }
 
     public Long getIdFactureConsult() {
@@ -70,11 +70,11 @@ public class FactureConsult implements Serializable{
         this.idFactureConsult = idFactureConsult;
     }
     @DateTimeFormat(pattern="yyyy-mm-dd")
-    public Calendar getDate() {
+    public Date getDate() {
         return date;
     }
-    @DateTimeFormat(pattern="yyyy-mm-dd")
-    public void setDate(Calendar date) {
+    @DateTimeFormat(pattern="dd-mm-yyyy")
+    public void setDate(Date date) {
         this.date = date;
     }
 
@@ -86,11 +86,11 @@ public class FactureConsult implements Serializable{
         this.modeReglement = modeReglement;
     }
     @DateTimeFormat(pattern="yyyy-mm-dd")
-    public Calendar getDateReglement() {
+    public Date getDateReglement() {
         return dateReglement;
     }
     @DateTimeFormat(pattern="yyyy-mm-dd")
-    public void setDateReglement(Calendar dateReglement) {
+    public void setDateReglement(Date dateReglement) {
         this.dateReglement = dateReglement;
     }
 
@@ -108,6 +108,51 @@ public class FactureConsult implements Serializable{
 
     public void setIdConsultation(Consultation idConsultation) {
         this.idConsultation = idConsultation;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 37 * hash + Objects.hashCode(this.idFactureConsult);
+        hash = 37 * hash + Objects.hashCode(this.date);
+        hash = 37 * hash + Objects.hashCode(this.modeReglement);
+        hash = 37 * hash + Objects.hashCode(this.dateReglement);
+        hash = 37 * hash + (int) (Double.doubleToLongBits(this.total) ^ (Double.doubleToLongBits(this.total) >>> 32));
+        hash = 37 * hash + Objects.hashCode(this.idConsultation);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final FactureConsult other = (FactureConsult) obj;
+        if (Double.doubleToLongBits(this.total) != Double.doubleToLongBits(other.total)) {
+            return false;
+        }
+        if (!Objects.equals(this.modeReglement, other.modeReglement)) {
+            return false;
+        }
+        if (!Objects.equals(this.idFactureConsult, other.idFactureConsult)) {
+            return false;
+        }
+        if (!Objects.equals(this.date, other.date)) {
+            return false;
+        }
+        if (!Objects.equals(this.dateReglement, other.dateReglement)) {
+            return false;
+        }
+        if (!Objects.equals(this.idConsultation, other.idConsultation)) {
+            return false;
+        }
+        return true;
     }
     
 

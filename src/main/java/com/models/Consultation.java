@@ -33,13 +33,10 @@ public class Consultation implements Serializable{
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long idConsultation;
     @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern="dd-MM-yyyy")
     private Calendar date;
     @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(pattern="dd-MM-yyyy")
     private Date heureDebut;
     @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(pattern="dd-MM-yyyy")
     private Date heureFin;
     @Column(length=70)
     private String motif;

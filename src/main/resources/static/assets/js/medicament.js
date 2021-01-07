@@ -4,13 +4,13 @@ $('document').ready(function(){
         
         var href = $(this).attr('href');
         
-        $.get(href, function(antecedent, status){
-           $('#idAntecedentEdit').val(antecedent.idAntecedent);
-           $('#ageAntecedentEdit').val(antecedent.age); 
-           $('#anteceAntecedentEdit').val(antecedent.antece); 
-           $('#descriptionAntecedentEdit').val(antecedent.description); 
+        $.get(href, function(medicament, status){
+           $('#idEdit').val(medicament.id);
+           $('#nomMedicamentEdit').val(medicament.nom); 
+           $('#dosageMedicMedicamentEdit').val(medicament.dosageMedic); 
+           $('#usageMedicMedicamentEdit').val(medicament.usageMedic); 
 
-        })
+        });
         $('#editModal').modal();
     });   
     $('table #detailsButton').on('click',function(event){
@@ -18,11 +18,11 @@ $('document').ready(function(){
         
         var href = $(this).attr('href');
         
-        $.get(href, function(antecedent, status){
-           $('#idAntecedentDetail').val(antecedent.idAntecedent);
-           $('#ageAntecedentDetail').val(antecedent.age); 
-           $('#anteceAntecedentDetail').val(antecedent.antece);
-           $('#descriptionAntecedentDetail').val(antecedent.description);
+        $.get(href, function(medicament, status){
+           $('#idDetail').val(medicament.id);
+           $('#nomMedicamentDetail').val(medicament.nom); 
+           $('#dosageMedicMedicamentDetail').val(medicament.dosageMedic);
+           $('#usageMedicMedicamentDetail').val(medicament.usageMedic);
         });
     $('#detailsModal').modal();
     });
@@ -35,7 +35,7 @@ $('document').ready(function(){
         
         $('#deleteModal').modal();
         
-    })
+    });
     
     
 });

@@ -2,8 +2,8 @@ $('document').ready(function(){
     $('.table #addButton').on('click',function(event){
         event.preventDefault();
         var href = $(this).attr('href');        
-        $.get(href, function(espece, status){
-           $('#ddlFormulaireAdd').val(espece.formulaire.idFormulaire);
+        $.get(href, function(prestation, status){
+           $('#ddlFormulaireAdd').val(prestation.formulaire.idFormulaire);
         });
         $('#addModal').modal();
     });
@@ -12,9 +12,9 @@ $('document').ready(function(){
         
         var href = $(this).attr('href');
         
-        $.get(href, function(espece, status){
-           $('#idEspeceEdit').val(espece.idEspece);
-           $('#nomEspeceEdit').val(espece.nom); 
+        $.get(href, function(prestation, status){
+           $('#idPrestationEdit').val(prestation.prestationId);
+           $('#quantiteUtilisePrestationEdit').val(prestation.quantiteUtilise); 
         })
         $('#editModal').modal();
     });   
@@ -23,10 +23,9 @@ $('document').ready(function(){
         
         var href = $(this).attr('href');
         
-        $.get(href, function(espece, status){
-           $('#idEspeceDetail').val(espece.idEspece);
-           $('#nomEspeceDetail').val(espece.nom); 
-
+        $.get(href, function(prestation, status){
+           $('#idPrestationDetail').val(prestation.prestationId);
+           $('#quantiteUtilisePrestationDetail').val(prestation.quantiteUtilise); 
         })
         $('#detailModal').modal();
     });

@@ -32,8 +32,8 @@
   <link href="assets/css/style.css" rel="stylesheet">
 
   <!-- =======================================================
-  * Template Name: Cabinet Vétérinaire - v2.1.0
-  * Template URL: https://bootstrapmade.com/cabinetvet-free-medical-bootstrap-theme/
+  * Template Name: Medilab - v2.1.0
+  * Template URL: https://bootstrapmade.com/medilab-free-medical-bootstrap-theme/
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
@@ -63,7 +63,7 @@
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
 
-      <h1 class="logo mr-auto"><a href="/index">Cabinet Vétérinaire</a></h1>
+      <h1 class="logo mr-auto"><a href="/index">Medilab</a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo mr-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
@@ -81,6 +81,9 @@
                 <ul>
                   <li><a href="#">Deep Drop Down 1</a></li>
                   <li><a href="#">Deep Drop Down 2</a></li>
+                  <li><a href="#">Deep Drop Down 3</a></li>
+                  <li><a href="#">Deep Drop Down 4</a></li>
+                  <li><a href="#">Deep Drop Down 5</a></li>
                 </ul>
               </li>
               <li><a href="#">Drop Down 2</a></li>
@@ -105,31 +108,37 @@
       <div class="container">
 
         <div class="d-flex justify-content-between align-items-center">
-          <h2>Liste des Animaux</h2>
+          <h2>Liste des fournisseurs</h2>
           <ol>
             <li><a href="/index">Home</a></li>
-            <li>Animaux</li>
+            <li>Fournisseur</li>
           </ol>
         </div>
           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal" id="addButton">+</button>
           <table class="table">
               <thead>
                 <tr>
-                   <th>Surnom de l'animal</th>
-                   <th>Date de naissance présumée</th>
-                   <th>Poid en grammes</th>
+                   <th>Nom</th>
+                   <th>Adresse</th>
+                   <th>Numero de TVA</th>
+                   <th>Adresse email</th>
+                   <th>Téléphone</th>
+                   <th>Numéro de compte</th>
 
               </thead>
               <tbody>
-                  <tr th:each="animal:${animaux}">
-                      <td th:text="${animal.surnom}"></td>
-                      <td th:text="${#dates.format(animal.dateNaissance, 'dd-MM-yyyy')}"></td>
-                      <td th:text="${animal.poid}"></td>
+                  <tr th:each="fournisseur:${fournisseurs}">
+                      <td th:text="${fournisseur.nom}"></td>                      
+                      <td th:text="${fournisseur.adresse}"></td>
+                      <td th:text="${fournisseur.numTVA}"></td>
+                      <td th:text="${fournisseur.adresseMail}"></td>
+                      <td th:text="${fournisseur.telephone}"></td>
+                      <td th:text="${fournisseur.numCompte}"></td>
                       <td>
                           <div class="btn-group"> 
-                              <a th:href="@{/animaux/findById/(id=${animal.idAnimal})}" class=" btn btn-primary" id="editButton">éditer</a>
-                              <a th:href="@{/animaux/findById/(id=${animal.idAnimal})}" class=" btn btn-success" id="detailsButton">détails</a>
-                              <a th:href="@{/animaux/delete/(id=${animal.idAnimal})}" class=" btn btn-danger" id="deleteButton">supprimer</a>
+                              <a th:href="@{/fournisseurs/findById/(id=${fournisseur.fournisseurId})}" class=" btn btn-primary" id="editButton">éditer</a>
+                              <a th:href="@{/fournisseurs/findById/(id=${fournisseur.fournisseurId})}" class=" btn btn-success" id="detailsButton">détails</a>
+                              <a th:href="@{/fournisseurs/delete/(id=${fournisseur.fournisseurId})}" class=" btn btn-danger" id="deleteButton">supprimer</a>
                           </div>
                       </td>
                   </tr>
@@ -152,35 +161,50 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Ajouter un animal</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Ajouter un fournisseur</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
     </div>
     <div class="modal-body">
-        <form th:action="@{/animaux/addNew}" method="post">             
-
-        <div class="form-group">
-           <label for="recipient-name" class="col-form-label">Surnom</label>
-           <input type="text" class="form-control" id="recipient-name"name="surnom">
-        </div>          
-        <div class="form-group">
-           <label for="recipient-name" class="col-form-label">Date de naissance présumée</label>
-           <input type="date" class="form-control" id="recipient-name"name="dateNaissance">
-        </div>
-        <div class="form-group">
-           <label for="recipient-name" class="col-form-label">poid en grammes</label>
-           <input type="text" class="form-control" id="recipient-name"name="poid">
-        </div>   
+        <form th:action="@{/fournisseurs/addNew}" method="post">             
+           <div class="form-row">
+                <div class="col">
+                <label for="recipient-name" class="col-form-label">Nom</label>
+                <input type="text" class="form-control" id="recipient-name"   name="nom">
+                </div>
+            <div class="col">
+                <label for="recipient-name" class="col-form-label">numero de TVA</label>
+                <input type="text" class="form-control" id="recipient-name" name="numTVA">
+            </div>
+            </div>
+        <div class="form-row">
+  </div>
+   <div class="form-group">
+   <label for="inputEmail4">Email</label>
+   <input type="email" class="form-control" id="recipient-name" name="adresseMail">
+  </div>
+  <div class="form-group">
+    <label for="inputAddress">Adresse</label>
+    <input type="text" class="form-control" id="recipient-name" name="adresse">
+  </div>
+            <div class="form-row">
+                <div class="col">
+                    <label for="recipient-name" class="col-form-label">Numéro de téléphone</label>
+                    <input type="text" class="form-control" id="recipient-name"   name="telephone">
+                </div>
+            <div class="col">
+                <label for="recipient-name" class="col-form-label">Numéro de compte</label>
+                <input type="text" class="form-control" id="recipient-name" name="numCompte">
+            </div>
+        </div>  
+            
+      <div class="modal-footer">
         <div class="form-group">
         <button type="submit" class="btn btn-primary">Ajouter</button>
         </div>
-            
-      <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
-        </div>          
-
         </form>
     </div>
     </div>
@@ -191,29 +215,41 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modifier une adoption</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Modifier un Fournisseur</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <form th:action="@{/animaux/update}" method="put">  
+        <form th:action="@{/fournisseurs/update}" method="put">  
         <div class="form-group">
-          <label for="recipient-name" class="col-form-label">Numero d'identifiant d'un animal</label>
-          <input type="text" class="form-control" id="idAnimalEdit"name="idAnimal" readonly>
+          <label for="recipient-name" class="col-form-label">Numero d'identifiant d'un fournisseur</label>
+          <input type="text" class="form-control" id="fournisseurIdEdit" name="fournisseurId" readonly>
         </div> 
         <div class="form-group">
-          <label for="recipient-name" class="col-form-label">Surnom</label>
-          <input type="text" class="form-control" id="surnomAnimalEdit"name="surnom">
+          <label for="recipient-name" class="col-form-label">Nom du fournisseur</label>
+          <input type="text" class="form-control" id="nomFournisseurEdit" name="nom">
         </div>          
         <div class="form-group">
-          <label for="recipient-name" class="col-form-label">Date de naissance présumée</label>
-          <input type="date" class="form-control" id="dateNaissanceAnimalEdit"name="dateNaissance">
+          <label for="recipient-name" class="col-form-label">Adresse du fournisseur</label>
+          <input type="text" class="form-control" id="adresseFournisseurEdit" name="adresse">
         </div>            
         <div class="form-group">
-          <label for="recipient-name" class="col-form-label">poid en gramme</label>
-          <input type="text" class="form-control" id="poidAnimalEdit"name="poid">
+          <label for="recipient-name" class="col-form-label">Numero de TVA du fournisseur</label>
+          <input type="text" class="form-control" id="numTVAFournisseurEdit" name="numTVA">
         </div>        
+        <div class="form-group">
+          <label for="recipient-name" class="col-form-label">Telephone du fournisseur</label>
+          <input type="text" class="form-control" id="telephoneFournisseurEdit" name="telephone">
+        </div>      
+        <div class="form-group">
+          <label for="recipient-name" class="col-form-label">Adresse email du fournisseur</label>
+          <input type="text" class="form-control" id="adresseMailFournisseurEdit" name="adresseMail">
+        </div> 
+        <div class="form-group">
+          <label for="recipient-name" class="col-form-label">Numero de compte du fournisseur</label>
+          <input type="text" class="form-control" id="numCompteFournisseurEdit" name="numCompte">
+        </div>     
           <div class="form-group">
         <button type="submit" class="btn btn-primary">Modifier</button>
           </div>
@@ -227,11 +263,11 @@
 </div>
 <!-- bouton detail pour les lignes-->
 <div class="modal fade" id="detailsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <form th:action="@{/animaux/update}" method="put">  
+    <form th:action="@{/fournisseurs/update}" method="put">  
     <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Details d'un animal</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Details d'un fournisseur</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -239,21 +275,34 @@
       <div class="modal-body">
 
         <div class="form-group">
-          <label for="recipient-name" class="col-form-label">Numero d'identifiant d'une animal</label>
-          <input type="text" class="form-control" id="idAnimalDetail"name="idAnimal" readonly>
+        <div class="form-group">
+          <label for="recipient-name" class="col-form-label">Numero d'identifiant d'un fournisseur</label>
+          <input type="text" class="form-control" id="fournisseurIdDetail" name="fournisseurIdDetail" readonly>
         </div> 
         <div class="form-group">
-          <label for="recipient-name" class="col-form-label">Surnom</label>
-          <input type="text" class="form-control" id="surnomAnimalDetail"name="surnom">
+          <label for="recipient-name" class="col-form-label">Nom du fournisseur</label>
+          <input type="text" class="form-control" id="nomFournisseurDetail" name="nom">
         </div>          
         <div class="form-group">
-          <label for="recipient-name" class="col-form-label">Date de Naissance présumé</label>
-          <input type="date" class="form-control" id="prenomAnimalDetail"name="dateNaissance">
+          <label for="recipient-name" class="col-form-label">Adresse du fournisseur</label>
+          <input type="text" class="form-control" id="adresseFournisseurDetail" name="adresse">
         </div>            
         <div class="form-group">
-          <label for="recipient-name" class="col-form-label">poid de l'animal en grammes</label>
-          <input type="text" class="form-control" id="poidAnimalDetail"name="poid">
+          <label for="recipient-name" class="col-form-label">Numero de TVA du fournisseur</label>
+          <input type="text" class="form-control" id="numTVAFournisseurDetail" name="numTVA">
         </div>        
+        <div class="form-group">
+          <label for="recipient-name" class="col-form-label">Telephone du fournisseur</label>
+          <input type="text" class="form-control" id="telephoneFournisseurDetail" name="telephone">
+        </div>      
+        <div class="form-group">
+          <label for="recipient-name" class="col-form-label">Adresse email du fournisseur</label>
+          <input type="text" class="form-control" id="adresseMailFournisseurDetail" name="adresseMail">
+        </div> 
+        <div class="form-group">
+          <label for="recipient-name" class="col-form-label">Numero de compte du fournisseur</label>
+          <input type="text" class="form-control" id="numCompteFournisseurDetail" name="numCompte">
+        </div>       
         </form>
       </div>
       <div class="modal-footer">
@@ -292,7 +341,7 @@
         <div class="row">
 
           <div class="col-lg-3 col-md-6 footer-contact">
-            <h3>Cabinet Vétérinaire</h3>
+            <h3>Medilab</h3>
             <p>
               A108 Adam Street <br>
               New York, NY 535022<br>
@@ -340,13 +389,13 @@
 
       <div class="mr-md-auto text-center text-md-left">
         <div class="copyright">
-          &copy; Copyright <strong><span>Cabinet Vétérinaire</span></strong>. All Rights Reserved
+          &copy; Copyright <strong><span>Medilab</span></strong>. All Rights Reserved
         </div>
         <div class="credits">
           <!-- All the links in the footer should remain intact. -->
           <!-- You can delete the links only if you purchased the pro version. -->
           <!-- Licensing information: https://bootstrapmade.com/license/ -->
-          <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/cabinetvet-free-medical-bootstrap-theme/ -->
+          <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/medilab-free-medical-bootstrap-theme/ -->
           Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
         </div>
       </div>
@@ -373,7 +422,7 @@
   <script src="assets/vendor/counterup/counterup.min.js"></script>
   <script src="assets/vendor/owl.carousel/owl.carousel.min.js"></script>
   <script src="assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
-  <script src="assets/js/animal.js"></script>
+  <script src="assets/js/fournisseur.js"></script>
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
