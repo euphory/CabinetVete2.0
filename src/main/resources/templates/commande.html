@@ -108,31 +108,31 @@
       <div class="container">
 
         <div class="d-flex justify-content-between align-items-center">
-          <h2>Liste des Animaux</h2>
+          <h2>Liste des Commandes</h2>
           <ol>
             <li><a href="/index">Home</a></li>
-            <li>Animaux</li>
+            <li>Commandes</li>
           </ol>
         </div>
           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal" id="addButton">+</button>
           <table class="table">
               <thead>
                 <tr>
-                   <th>Surnom de l'animal</th>
-                   <th>Date de naissance présumée</th>
-                   <th>Poid en grammes</th>
+                   <th>Référence de la commande</th>
+                   <th>Date de la commande</th>
+                   <th>prix total de la commande</th>
 
               </thead>
               <tbody>
-                  <tr th:each="animal:${animaux}">
-                      <td th:text="${animal.surnom}"></td>
-                      <td th:text="${#dates.format(animal.dateNaissance, 'dd-MM-yyyy')}"></td>
-                      <td th:text="${animal.poid}"></td>
+                  <tr th:each="commande:${commandes}">
+                      <td th:text="${commande.reference}"></td>
+                      <td th:text="${#dates.format(commande.dateCommande, 'dd-MM-yyyy')}"></td>
+                      <td th:text="${commande.total}"></td>
                       <td>
                           <div class="btn-group"> 
-                              <a th:href="@{/animaux/findById/(id=${animal.idAnimal})}" class=" btn btn-primary" id="editButton">éditer</a>
-                              <a th:href="@{/animaux/findById/(id=${animal.idAnimal})}" class=" btn btn-success" id="detailsButton">détails</a>
-                              <a th:href="@{/animaux/delete/(id=${animal.idAnimal})}" class=" btn btn-danger" id="deleteButton">supprimer</a>
+                              <a th:href="@{/commandes/findById/(id=${commande.idCommande})}" class=" btn btn-primary" id="editButton">éditer</a>
+                              <a th:href="@{/commandes/findById/(id=${commande.idCommande})}" class=" btn btn-success" id="detailsButton">détails</a>
+                              <a th:href="@{/commandes/delete/(id=${commande.idCommande})}" class=" btn btn-danger" id="deleteButton">supprimer</a>
                           </div>
                       </td>
                   </tr>
@@ -155,25 +155,25 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Ajouter un animal</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Ajouter un commande</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
     </div>
     <div class="modal-body">
-        <form th:action="@{/animaux/addNew}" method="post">             
+        <form th:action="@{/commandes/addNew}" method="post">             
 
         <div class="form-group">
-           <label for="recipient-name" class="col-form-label">Surnom</label>
-           <input type="text" class="form-control" id="recipient-name"name="surnom">
+           <label for="recipient-name" class="col-form-label">Reference de la commande</label>
+           <input type="text" class="form-control" id="recipient-name"name="reference">
         </div>          
         <div class="form-group">
-           <label for="recipient-name" class="col-form-label">Date de naissance présumée</label>
-           <input type="date" class="form-control" id="recipient-name"name="dateNaissance">
+           <label for="recipient-name" class="col-form-label">Date de la commande</label>
+           <input type="date" class="form-control" id="recipient-name"name="dateCommande">
         </div>
         <div class="form-group">
-           <label for="recipient-name" class="col-form-label">poid en grammes</label>
-           <input type="text" class="form-control" id="recipient-name"name="poid">
+           <label for="recipient-name" class="col-form-label">Total de la commande</label>
+           <input type="text" class="form-control" id="recipient-name"name="total">
         </div>   
         <div class="form-group">
         <button type="submit" class="btn btn-primary">Ajouter</button>
@@ -194,28 +194,28 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modifier une adoption</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Modifier une Commande</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <form th:action="@{/animaux/update}" method="put">  
+        <form th:action="@{/commandes/update}" method="put">  
         <div class="form-group">
-          <label for="recipient-name" class="col-form-label">Numero d'identifiant d'un animal</label>
-          <input type="text" class="form-control" id="idAnimalEdit"name="idAnimal" readonly>
+          <label for="recipient-name" class="col-form-label">Numero d'identifiant d'un commande</label>
+          <input type="text" class="form-control" id="idCommandeEdit"name="idCommande" readonly>
         </div> 
         <div class="form-group">
-          <label for="recipient-name" class="col-form-label">Surnom</label>
-          <input type="text" class="form-control" id="surnomAnimalEdit"name="surnom">
+          <label for="recipient-name" class="col-form-label">Référence</label>
+          <input type="text" class="form-control" id="referenceCommandeEdit"name="reference">
         </div>          
         <div class="form-group">
-          <label for="recipient-name" class="col-form-label">Date de naissance présumée</label>
-          <input type="date" class="form-control" id="dateNaissanceAnimalEdit"name="dateNaissance">
+          <label for="recipient-name" class="col-form-label">Date de la commande</label>
+          <input type="date" class="form-control" id="dateCommandeEdit"name="dateCommande">
         </div>            
         <div class="form-group">
-          <label for="recipient-name" class="col-form-label">poid en gramme</label>
-          <input type="text" class="form-control" id="poidAnimalEdit"name="poid">
+          <label for="recipient-name" class="col-form-label">Total de la commande</label>
+          <input type="text" class="form-control" id="totalCommandeEdit"name="total">
         </div>        
           <div class="form-group">
         <button type="submit" class="btn btn-primary">Modifier</button>
@@ -230,11 +230,11 @@
 </div>
 <!-- bouton detail pour les lignes-->
 <div class="modal fade" id="detailsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <form th:action="@{/animaux/update}" method="put">  
+    <form th:action="@{/commandes/update}" method="put">  
     <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Details d'un animal</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Details d'un commande</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -242,20 +242,20 @@
       <div class="modal-body">
 
         <div class="form-group">
-          <label for="recipient-name" class="col-form-label">Numero d'identifiant d'une animal</label>
-          <input type="text" class="form-control" id="idAnimalDetail"name="idAnimal" readonly>
+          <label for="recipient-name" class="col-form-label">Numero d'identifiant de la commande</label>
+          <input type="text" class="form-control" id="idCommandeDetail"name="idCommande" readonly>
         </div> 
         <div class="form-group">
-          <label for="recipient-name" class="col-form-label">Surnom</label>
-          <input type="text" class="form-control" id="surnomAnimalDetail"name="surnom">
+          <label for="recipient-name" class="col-form-label">Référence</label>
+          <input type="text" class="form-control" id="referenceCommandeDetail"name="reference">
         </div>          
         <div class="form-group">
-          <label for="recipient-name" class="col-form-label">Date de Naissance présumé</label>
-          <input type="date" class="form-control" id="prenomAnimalDetail"name="dateNaissance">
+          <label for="recipient-name" class="col-form-label">Date de la commande</label>
+          <input type="date" class="form-control" id="dateCommandeDetail"name="dateCommande">
         </div>            
         <div class="form-group">
-          <label for="recipient-name" class="col-form-label">poid de l'animal en grammes</label>
-          <input type="text" class="form-control" id="poidAnimalDetail"name="poid">
+          <label for="recipient-name" class="col-form-label">Total de la commande</label>
+          <input type="text" class="form-control" id="totalCommandeDetail"name="total">
         </div>        
         </form>
       </div>
@@ -376,7 +376,7 @@
   <script src="assets/vendor/counterup/counterup.min.js"></script>
   <script src="assets/vendor/owl.carousel/owl.carousel.min.js"></script>
   <script src="assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
-  <script src="assets/js/animal.js"></script>
+  <script src="assets/js/commande.js"></script>
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>

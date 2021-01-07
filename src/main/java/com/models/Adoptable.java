@@ -65,7 +65,7 @@ public class Adoptable implements Serializable{
     public Date getDateAbandon() {
         return dateAbandon;
     }
-    @DateTimeFormat(pattern="yyyy-mm-dd")
+    @DateTimeFormat(pattern="dd-mm-yyyy")
     public void setDateAbandon(Date dateAbandon) {
         this.dateAbandon = dateAbandon;
     }

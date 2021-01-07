@@ -14,6 +14,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
@@ -23,12 +26,13 @@ import javax.persistence.ManyToOne;
 public class Antecedent implements Serializable{ 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private Long idAntecedents;
-    private String age;
+    private Long idAntecedent;
+    @Temporal(TemporalType.DATE)
+    private Date age;
     @Column(length=70)
-    private String antecedent;
+    private String antece;
     @Column(length=140)
-    private String Description;
+    private String description;
     
 /**
 -- -----------------------------------------------------------------------------
@@ -44,47 +48,48 @@ public class Antecedent implements Serializable{
 -- - Constructor                                                             ---
 -- -----------------------------------------------------------------------------
 */
-    public Antecedent(Long idAntecedents, String age, String antecedent, String Description, Animal animal) {
-        this.idAntecedents = idAntecedents;
-        this.age = age;
-        this.antecedent = antecedent;
-        this.Description = Description;
-        this.animal = animal;
-    }
 
     public Antecedent() {
     }
 
-    public Long getIdAntecedents() {
-        return idAntecedents;
+    public Antecedent(Long idAntecedent, Date age, String antece, String description, Animal animal) {
+        this.idAntecedent = idAntecedent;
+        this.age = age;
+        this.antece = antece;
+        this.description = description;
+        this.animal = animal;
     }
 
-    public void setIdAntecedents(Long idAntecedents) {
-        this.idAntecedents = idAntecedents;
+    public Long getIdAntecedent() {
+        return idAntecedent;
     }
 
-    public String getAge() {
+    public void setIdAntecedent(Long idAntecedent) {
+        this.idAntecedent = idAntecedent;
+    }
+    @DateTimeFormat(pattern="dd-mm-yyyy")
+    public Date getAge() {
         return age;
     }
-
-    public void setAge(String age) {
+    @DateTimeFormat(pattern="yyyy-mm-dd")
+    public void setAge(Date age) {
         this.age = age;
     }
 
-    public String getAntecedent() {
-        return antecedent;
+    public String getAntece() {
+        return antece;
     }
 
-    public void setAntecedent(String antecedent) {
-        this.antecedent = antecedent;
+    public void setAntece(String antece) {
+        this.antece = antece;
     }
 
     public String getDescription() {
-        return Description;
+        return description;
     }
 
-    public void setDescription(String Description) {
-        this.Description = Description;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Animal getAnimal() {
@@ -94,7 +99,6 @@ public class Antecedent implements Serializable{
     public void setAnimal(Animal animal) {
         this.animal = animal;
     }
-    
 
     
 

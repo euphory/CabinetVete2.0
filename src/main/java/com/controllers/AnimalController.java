@@ -5,7 +5,9 @@
  */
 package com.controllers;
 
+import com.models.Adoptable;
 import com.models.Animal;
+import com.models.Antecedent;
 import com.models.Espece;
 import com.services.AdoptableService;
 import com.services.AnimalService;
@@ -41,10 +43,16 @@ public class AnimalController {
     //retourne les animaux
     @GetMapping("/animaux")
     public String getAnimaux(Model model){
-        
+  /**      
         List<Espece> especeList = especeService.getEspeces();
         model.addAttribute("especes", especeList);
         
+        List<Adoptable> adoptableList = adoptableService.getAdoptables();
+        model.addAttribute("adoptable", adoptableList);
+        
+        List<Antecedent> antecedentList = antecedentService.getAntecedents();
+        model.addAttribute("antecedent", antecedentList);
+      */  
         List<Animal> animalList = animalService.getAnimaux();
         model.addAttribute("animaux", animalList);
         

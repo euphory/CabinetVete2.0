@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
 	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"/>
-<html lang="fr">
+<html lang="en">
 
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Inner Page - Medilab Bootstrap Template</title>
+  <title>Cabinet Vétérinaire</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -45,9 +45,9 @@
   <div id="topbar" class="d-none d-lg-flex align-items-center fixed-top">
     <div class="container d-flex">
       <div class="contact-info mr-auto">
-        <i class="icofont-envelope"></i> <a href="mailto:contact@example.com">contact@example.com</a>
-        <i class="icofont-phone"></i> +1 5589 55488 55
-        <i class="icofont-google-map"></i> A108 Adam Street, NY
+        <i class="icofont-envelope"></i> <a href="mailto:contact@example.com">CabinetVeterinaire@gmail.com</a>
+        <i class="icofont-phone"></i> +2 542 14 20 14
+        <i class="icofont-google-map"></i> Avenue Paul Dejaer 2, 1060 Saint-Gilles
       </div>
       <div class="social-links">
         <a href="#" class="twitter"><i class="icofont-twitter"></i></a>
@@ -63,13 +63,13 @@
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
 
-      <h1 class="logo mr-auto"><a href="index.html">Medilab</a></h1>
+      <h1 class="logo mr-auto"><a href="/index">Medilab</a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo mr-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
       <nav class="nav-menu d-none d-lg-block">
         <ul>
-          <li class="active"><a href="index.html">Home</a></li>
+          <li class="active"><a href="/index">Home</a></li>
           <li><a href="#about">About</a></li>
           <li><a href="#services">Services</a></li>
           <li><a href="#departments">Departments</a></li>
@@ -108,30 +108,33 @@
       <div class="container">
 
         <div class="d-flex justify-content-between align-items-center">
-          <h2>Liste Des Consultations</h2>
+          <h2>Liste des Antecedents</h2>
           <ol>
-            <li><a href="index.html">Home</a></li>
-            <li>Consultations</li>
+            <li><a href="/index">Home</a></li>
+            <li>Antecedents</li>
           </ol>
         </div>
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal" >+</button>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal" id="addButton">+</button>
           <table class="table">
               <thead>
                 <tr>
-                   <th>Date</th>
-                   <th>Heure de la consultation</th>
-                   <th>fin de consultation</th>
-                   <th>Motif</th>
-                   <th>tarif Groupe</th>
-                </tr>
+                    <th>Date de l'antecedent</th>
+                   <th>Antecedent de l'animal</th>  
+                   <th>Description de ses antecedents</th>
+
               </thead>
               <tbody>
-                  <tr th:each="consultation:${consultations}">
-                      <td th:text="${consultation.date}"></td>
-                      <td th:text="${consultation.heureDebut}"></td>
-                      <td th:text="${consultation.heureFin}"></td>
-                      <td th:text="${consultation.motif}"></td>
-                      <td th:text="${consultation.tarifGroup}"></td>
+                  <tr th:each="antecedent:${antecedents}">
+                      <td th:text="${#dates.format(antecedent.age, 'dd-MM-yyyy')}"></td>
+                      <td th:text="${antecedent.antece}"></td>
+                      <td th:text="${antecedent.description}"></td>
+                      <td>
+                          <div class="btn-group"> 
+                              <a th:href="@{/antecedents/findById/(id=${antecedent.idAntecedent})}" class=" btn btn-primary" id="editButton">éditer</a>
+                              <a th:href="@{/antecedents/findById/(id=${antecedent.idAntecedent})}" class=" btn btn-success" id="detailsButton">détails</a>
+                              <a th:href="@{/antecedents/delete/(id=${antecedent.idAntecedent})}" class=" btn btn-danger" id="deleteButton">supprimer</a>
+                          </div>
+                      </td>
                   </tr>
               </tbody>
               
@@ -147,43 +150,137 @@
         </p>
       </div>
     </section>
-    <!-- bouton ajouter-->
+        <!-- bouton ajouter-->
 <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Ajouter un antecedent</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form th:action="@{/antecedents/addNew}" method="post">             
+
+        <div class="form-group">
+           <label for="recipient-name" class="col-form-label">Date de l'antecedent</label>
+           <input type="date" class="form-control" id="recipient-name"name="age">
+        </div>          
+        <div class="form-group">
+           <label for="recipient-name" class="col-form-label">Antecedent de l'animal</label>
+           <input type="text" class="form-control" id="recipient-name"name="antece">
+        </div>
+        <div class="form-group">
+           <label for="recipient-name" class="col-form-label">Description de ses antecedents</label>
+           <textarea type="text" class="form-control" id="recipient-name"name="description"></textarea>
+        </div>   
+        <div class="form-group">
+        <button type="submit" class="btn btn-primary">Ajouter</button>
+        </div>
+            
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+        </div>          
+
+        </form>
+    </div>
+    </div>
+  </div>
+</div>
+        <!-- bouton modifier pour les lignes-->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modifier une adoption</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <form th:action="@{/consultations/addNew}">
+        <form th:action="@{/antecedents/update}" method="put">  
+        <div class="form-group">
+          <label for="recipient-name" class="col-form-label">Numero d'identifiant d'un antecedent</label>
+          <input type="text" class="form-control" id="idAntecedentEdit"name="idAntecedent" readonly>
+        </div> 
+        <div class="form-group">
+          <label for="recipient-name" class="col-form-label">Date de l'antecedent</label>
+          <input type="date" class="form-control" id="ageAntecedentEdit"name="age">
+        </div>          
+        <div class="form-group">
+          <label for="recipient-name" class="col-form-label">Antecedent de l'animal</label>
+          <input type="text" class="form-control" id="anteceAntecedentEdit"name="antece">
+        </div>            
+        <div class="form-group">
+          <label for="recipient-name" class="col-form-label">Description de ses antecedents</label>
+          <textarea type="text" class="form-control" id="descriptionAntecedentEdit"name="description"></textarea>
+        </div>        
           <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Date</label>
-            <input type="text" class="form-control" id="recipient-name" name="date">
-          </div>          <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Heure du debut de la consultation</label>
-            <input type="text" class="form-control" id="recipient-name"name="heureDebut">
-          </div>          <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Fin de la consultation</label>
-            <input type="text" class="form-control" id="recipient-name"name="heureFin">
-          </div>
-                    <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Motif</label>
-            <input type="text" class="form-control" id="recipient-name" name="motif">
-          </div>
-                    <div class="form-group">
-            <label for="recipient-name" class="col-form-label">tarif de Groupe</label>
-            <input type="text" class="form-control" id="recipient-name" name="tarifGroupe">
-          </div>
-          <div class="form-group">
-        <button type="submit" class="btn btn-primary">Ajouter</button>
+        <button type="submit" class="btn btn-primary">Modifier</button>
           </div>
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- bouton detail pour les lignes-->
+<div class="modal fade" id="detailsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <form th:action="@{/antecedents/update}" method="put">  
+    <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Details d'un antecedent</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <div class="form-group">
+          <label for="recipient-name" class="col-form-label">Numero d'identifiant d'un antecedent</label>
+          <input type="text" class="form-control" id="idAntecedentDetail"name="idAntecedent" readonly>
+        </div> 
+        <div class="form-group">
+          <label for="recipient-name" class="col-form-label">Date de l'antecedent</label>
+          <input type="date" class="form-control" id="ageAntecedentDetail"name="age">
+        </div>          
+        <div class="form-group">
+          <label for="recipient-name" class="col-form-label">Antecedent de l'animal</label>
+          <input type="text" class="form-control" id="anteceAntecedentDetail"name="antece">
+        </div>            
+        <div class="form-group">
+          <label for="recipient-name" class="col-form-label">Description de ses antecedents</label>
+          <textarea type="text" class="form-control" id="descriptionAntecedentDetail"name="description"></textarea>
+        </div>        
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- bouton supprimer pour les lignes-->  
+ <div class="modal" id="deleteModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Confirmer la suppression</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Etes-vous sûr de vouloir supprimer cette ligne ?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">non</button>
+        <a class="btn btn-primary" id="confirmDeleteButton" href="">supprimer</a>
       </div>
     </div>
   </div>
@@ -279,6 +376,7 @@
   <script src="assets/vendor/counterup/counterup.min.js"></script>
   <script src="assets/vendor/owl.carousel/owl.carousel.min.js"></script>
   <script src="assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+  <script src="assets/js/antecedent.js"></script>
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>

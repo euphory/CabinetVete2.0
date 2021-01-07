@@ -19,22 +19,22 @@ import org.springframework.stereotype.Service;
 @Service
 public class EspeceService {
         @Autowired
-    private EspeceRepository adoptionRepository;
+    private EspeceRepository especeRepository;
     //retourne une liste d'Especes
     public List<Espece> getEspeces(){
-        return adoptionRepository.findAll();
+        return especeRepository.findAll();
     }
     
-    public void save(Espece adoption){
-        adoptionRepository.save(adoption);
+    public void save(Espece espece){
+        especeRepository.save(espece);
     }
     
     //Get by Id
     public Optional<Espece> findById(Long id){
-        return adoptionRepository.findById(id);
+        return especeRepository.findById(id);
     }
     
     public void delete(Long id){
-        adoptionRepository.deleteById(id);
+        especeRepository.deleteById(id);
     }
 }

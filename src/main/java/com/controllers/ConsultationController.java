@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.controllers.consultations;
+package com.controllers;
 
 import com.models.Consultation;
 import com.services.ConsultationService;

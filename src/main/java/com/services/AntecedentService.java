@@ -19,23 +19,23 @@ import org.springframework.stereotype.Service;
 @Service
 public class AntecedentService {
         @Autowired
-    private AntecedentRepository adoptionRepository;
+    private AntecedentRepository antecedentRepository;
     //retourne une liste d'Antecedents
     public List<Antecedent> getAntecedents(){
-        return adoptionRepository.findAll();
+        return antecedentRepository.findAll();
     }
     
-    public void save(Antecedent adoption){
-        adoptionRepository.save(adoption);
+    public void save(Antecedent antecedent){
+        antecedentRepository.save(antecedent);
     }
     
     //Get by Id
     public Optional<Antecedent> findById(Long id){
-        return adoptionRepository.findById(id);
+        return antecedentRepository.findById(id);
     }
     
     public void delete(Long id){
-        adoptionRepository.deleteById(id);
+        antecedentRepository.deleteById(id);
     }
 }
 

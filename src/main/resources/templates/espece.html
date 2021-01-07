@@ -63,7 +63,7 @@
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
 
-      <h1 class="logo mr-auto"><a href="/index">Medilab</a></h1>
+      <h1 class="logo mr-auto"><a href="index.html">Cabinet Vétérinaire</a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo mr-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
@@ -108,31 +108,29 @@
       <div class="container">
 
         <div class="d-flex justify-content-between align-items-center">
-          <h2>Liste des Animaux</h2>
+          <h2>Liste des Especes</h2>
           <ol>
             <li><a href="/index">Home</a></li>
-            <li>Animaux</li>
+            <li>Especes</li>
           </ol>
         </div>
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal" id="addButton">+</button>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal" id="addButton">+</button>
           <table class="table">
               <thead>
                 <tr>
-                   <th>Surnom de l'animal</th>
-                   <th>Date de naissance présumée</th>
-                   <th>Poid en grammes</th>
-
+                   <th>Identifiant de l'espèce</th>
+                   <th>Nom de l'espèce</th>
+                </tr>
               </thead>
               <tbody>
-                  <tr th:each="animal:${animaux}">
-                      <td th:text="${animal.surnom}"></td>
-                      <td th:text="${#dates.format(animal.dateNaissance, 'dd-MM-yyyy')}"></td>
-                      <td th:text="${animal.poid}"></td>
+                  <tr th:each="espece:${especes}">
+                      <td th:text="${espece.idEspece}"></td>
+                      <td th:text="${espece.nom}"></td>                
                       <td>
                           <div class="btn-group"> 
-                              <a th:href="@{/animaux/findById/(id=${animal.idAnimal})}" class=" btn btn-primary" id="editButton">éditer</a>
-                              <a th:href="@{/animaux/findById/(id=${animal.idAnimal})}" class=" btn btn-success" id="detailsButton">détails</a>
-                              <a th:href="@{/animaux/delete/(id=${animal.idAnimal})}" class=" btn btn-danger" id="deleteButton">supprimer</a>
+                              <a th:href="@{/especes/findById/(id=${espece.idEspece})}" class=" btn btn-primary" id="editButton">éditer</a>
+                              <a th:href="@{/especes/findById/(id=${espece.idEspece})}" class=" btn btn-success" id="detailButton">détails</a>
+                              <a th:href="@{/especes/delete/(id=${espece.idEspece})}" class=" btn btn-danger" id="deleteButton">supprimer</a>
                           </div>
                       </td>
                   </tr>
@@ -150,122 +148,96 @@
         </p>
       </div>
     </section>
-        <!-- bouton ajouter-->
+    <!-- bouton ajouter-->
 <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Ajouter un animal</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Ajouter une espece</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
     </div>
     <div class="modal-body">
-        <form th:action="@{/animaux/addNew}" method="post">             
-
-        <div class="form-group">
-           <label for="recipient-name" class="col-form-label">Surnom</label>
-           <input type="text" class="form-control" id="recipient-name"name="surnom">
-        </div>          
-        <div class="form-group">
-           <label for="recipient-name" class="col-form-label">Date de naissance présumée</label>
-           <input type="date" class="form-control" id="recipient-name"name="dateNaissance">
-        </div>
-        <div class="form-group">
-           <label for="recipient-name" class="col-form-label">poid en grammes</label>
-           <input type="text" class="form-control" id="recipient-name"name="poid">
-        </div>   
-        <div class="form-group">
+        <form th:action="@{/especes/addNew}" method="post">                  
+            <div class="form-group">
+            <label for="recipient-name" class="col-form-label">nom de l'Espece</label>
+            <input type="text" class="form-control" id="recipient-name"name="nom">
+          </div>
+          <div class="form-group">
         <button type="submit" class="btn btn-primary">Ajouter</button>
-        </div>
-            
+          </div>
+        </form>
+    </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
-        </div>          
-
-        </form>
-    </div>
     </div>
   </div>
 </div>
-        <!-- bouton modifier pour les lignes-->
+        <!-- bouton moddifier pour les lignes-->
 <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modifier une adoption</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Modifier une espece</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <form th:action="@{/animaux/update}" method="put">  
-        <div class="form-group">
-          <label for="recipient-name" class="col-form-label">Numero d'identifiant d'un animal</label>
-          <input type="text" class="form-control" id="idAnimalEdit"name="idAnimal" readonly>
-        </div> 
-        <div class="form-group">
-          <label for="recipient-name" class="col-form-label">Surnom</label>
-          <input type="text" class="form-control" id="surnomAnimalEdit"name="surnom">
-        </div>          
-        <div class="form-group">
-          <label for="recipient-name" class="col-form-label">Date de naissance présumée</label>
-          <input type="date" class="form-control" id="dateNaissanceAnimalEdit"name="dateNaissance">
-        </div>            
-        <div class="form-group">
-          <label for="recipient-name" class="col-form-label">poid en gramme</label>
-          <input type="text" class="form-control" id="poidAnimalEdit"name="poid">
-        </div>        
+          <form th:action="@{/especes/update}" method="put">  
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">id</label>
+            <input type="text" class="form-control" id="idEspeceEdit"name="idEspece" readonly>
+          </div>        
+            <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Frai d'espece</label>
+            <input type="text" class="form-control" id="nomEspeceEdit"name="nom">
+          </div>
           <div class="form-group">
         <button type="submit" class="btn btn-primary">Modifier</button>
           </div>
-        </form>
-      </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
+        </form>
+      </div>
+
     </div>
   </div>
 </div>
-<!-- bouton detail pour les lignes-->
-<div class="modal fade" id="detailsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <form th:action="@{/animaux/update}" method="put">  
-    <div class="modal-dialog" role="document">
+        <!-- bouton detail pour les lignes-->
+        <div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Details d'un animal</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Details d'une espece</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-
-        <div class="form-group">
-          <label for="recipient-name" class="col-form-label">Numero d'identifiant d'une animal</label>
-          <input type="text" class="form-control" id="idAnimalDetail"name="idAnimal" readonly>
-        </div> 
-        <div class="form-group">
-          <label for="recipient-name" class="col-form-label">Surnom</label>
-          <input type="text" class="form-control" id="surnomAnimalDetail"name="surnom">
-        </div>          
-        <div class="form-group">
-          <label for="recipient-name" class="col-form-label">Date de Naissance présumé</label>
-          <input type="date" class="form-control" id="prenomAnimalDetail"name="dateNaissance">
-        </div>            
-        <div class="form-group">
-          <label for="recipient-name" class="col-form-label">poid de l'animal en grammes</label>
-          <input type="text" class="form-control" id="poidAnimalDetail"name="poid">
-        </div>        
+          <form th:action="@{/especes/update}" method="put">  
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">id</label>
+            <input type="text" class="form-control" id="idEspeceDetail"name="idEspece" readonly>
+          </div>         
+            <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Frai d'espece</label>
+            <input type="text" class="form-control" id="nomEspeceDetail"name="nom">
+          </div>
         </form>
-      </div>
+          
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
+      </div>
+
     </div>
   </div>
 </div>
-<!-- bouton supprimer pour les lignes-->  
+          <!-- bouton supprimer pour les lignes-->  
  <div class="modal" id="deleteModal" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -376,7 +348,7 @@
   <script src="assets/vendor/counterup/counterup.min.js"></script>
   <script src="assets/vendor/owl.carousel/owl.carousel.min.js"></script>
   <script src="assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
-  <script src="assets/js/animal.js"></script>
+  <script src="assets/js/espece.js"></script>
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
