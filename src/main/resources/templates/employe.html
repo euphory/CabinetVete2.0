@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
 	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"/>
-<html lang="en">
-
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Cabinet Vétérinaire</title>
+  <title>Cabinet vétérinaire Bootstrap Template - Index</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -32,7 +30,7 @@
   <link href="assets/css/style.css" rel="stylesheet">
 
   <!-- =======================================================
-  * Template Name: Medilab - v2.1.0
+  * Template Name: Cabinet vétérinaire - v2.1.0
   * Template URL: https://bootstrapmade.com/medilab-free-medical-bootstrap-theme/
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
@@ -45,8 +43,8 @@
   <div id="topbar" class="d-none d-lg-flex align-items-center fixed-top">
     <div class="container d-flex">
       <div class="contact-info mr-auto">
-        <i class="icofont-envelope"></i> <a href="mailto:contact@example.com">CabinetVeterinaire@gmail.com</a>
-        <i class="icofont-phone"></i> +2 542 14 20 14
+        <i class="icofont-envelope"></i> <a href="mailto:contact@example.com">contact@example.com</a>
+        <i class="icofont-phone"></i> +2 542 14 20
         <i class="icofont-google-map"></i> Avenue Paul Dejaer 2, 1060 Saint-Gilles
       </div>
       <div class="social-links">
@@ -54,7 +52,7 @@
         <a href="#" class="facebook"><i class="icofont-facebook"></i></a>
         <a href="#" class="instagram"><i class="icofont-instagram"></i></a>
         <a href="#" class="skype"><i class="icofont-skype"></i></a>
-        <a href="#" class="linkedin"><i class="icofont-linkedin"></i></i></a>
+        <a href="#" class="linkedin"><i class="icofont-linkedin"></i></a>
       </div>
     </div>
   </div>
@@ -63,32 +61,27 @@
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
 
-      <h1 class="logo mr-auto"><a href="/index">Medilab</a></h1>
+      <h1 class="logo mr-auto"><a href="index">Cabinet vétérinaire</a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo mr-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
       <nav class="nav-menu d-none d-lg-block">
         <ul>
           <li class="active"><a href="/index">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#departments">Departments</a></li>
-          <li><a href="#doctors">Doctors</a></li>
-          <li class="drop-down"><a href="">Drop Down</a>
+          <li class="drop-down"><a href="/adoptions">Mes adoptions</a>
             <ul>
-              <li><a href="#">Drop Down 1</a></li>
-              <li class="drop-down"><a href="#">Deep Drop Down</a>
-                <ul>
-                  <li><a href="#">Deep Drop Down 1</a></li>
-                  <li><a href="#">Deep Drop Down 2</a></li>
-                  <li><a href="#">Deep Drop Down 3</a></li>
-                  <li><a href="#">Deep Drop Down 4</a></li>
-                  <li><a href="#">Deep Drop Down 5</a></li>
-                </ul>
-              </li>
-              <li><a href="#">Drop Down 2</a></li>
-              <li><a href="#">Drop Down 3</a></li>
-              <li><a href="#">Drop Down 4</a></li>
+              <li><a href="/personnes">Mes Données</a></li>
+              <li><a href="/formulaires">Formulaire</a></li>
+            </ul>
+          </li>
+          <li><a href="/services">Services</a></li>
+          <li><a href="/personnes">Mon compte</a></li>
+          <li><a href="/consultations">Consultations</a></li>          
+          <li><a href="/employes">Employé</a></li>
+          <li class="drop-down"><a href="/animaux">Animaux</a>
+            <ul>
+              <li><a href="/adoptables">Les Adoptables</a></li>
+              <li class="drop-down"><a href="">Deep Drop Down</a>
             </ul>
           </li>
           <li><a href="#contact">Contact</a></li>
@@ -96,7 +89,7 @@
         </ul>
       </nav><!-- .nav-menu -->
 
-      <a href="#appointment" class="appointment-btn scrollto">Make an Appointment</a>
+      <a href="#appointment" class="appointment-btn scrollto">Prendre un rendez-vous</a>
 
     </div>
   </header><!-- End Header -->
@@ -108,10 +101,10 @@
       <div class="container">
 
         <div class="d-flex justify-content-between align-items-center">
-          <h2>Liste des fournisseurs</h2>
+          <h2>Liste des employes</h2>
           <ol>
             <li><a href="/index">Home</a></li>
-            <li>Fournisseur</li>
+            <li>Employe</li>
           </ol>
         </div>
           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal" id="addButton">+</button>
@@ -127,18 +120,18 @@
 
               </thead>
               <tbody>
-                  <tr th:each="fournisseur:${fournisseurs}">
-                      <td th:text="${fournisseur.nom}"></td>                      
-                      <td th:text="${fournisseur.adresse}"></td>
-                      <td th:text="${fournisseur.numTVA}"></td>
-                      <td th:text="${fournisseur.adresseMail}"></td>
-                      <td th:text="${fournisseur.telephone}"></td>
-                      <td th:text="${fournisseur.numCompte}"></td>
+                  <tr th:each="employe:${employes}">
+                      <td th:text="${employe.nom}"></td>                      
+                      <td th:text="${employe.adresse}"></td>
+                      <td th:text="${employe.numTVA}"></td>
+                      <td th:text="${employe.adresseMail}"></td>
+                      <td th:text="${employe.telephone}"></td>
+                      <td th:text="${employe.numCompte}"></td>
                       <td>
                           <div class="btn-group"> 
-                              <a th:href="@{/fournisseurs/findById/(id=${fournisseur.fournisseurId})}" class=" btn btn-primary" id="editButton">éditer</a>
-                              <a th:href="@{/fournisseurs/findById/(id=${fournisseur.fournisseurId})}" class=" btn btn-success" id="detailsButton">détails</a>
-                              <a th:href="@{/fournisseurs/delete/(id=${fournisseur.fournisseurId})}" class=" btn btn-danger" id="deleteButton">supprimer</a>
+                              <a th:href="@{/employes/findById/(id=${employe.employeId})}" class=" btn btn-primary" id="editButton">éditer</a>
+                              <a th:href="@{/employes/findById/(id=${employe.employeId})}" class=" btn btn-success" id="detailsButton">détails</a>
+                              <a th:href="@{/employes/delete/(id=${employe.employeId})}" class=" btn btn-danger" id="deleteButton">supprimer</a>
                           </div>
                       </td>
                   </tr>
@@ -161,13 +154,13 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Ajouter un fournisseur</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Ajouter un employe</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
     </div>
     <div class="modal-body">
-        <form th:action="@{/fournisseurs/addNew}" method="post">             
+        <form th:action="@{/employes/addNew}" method="post">             
            <div class="form-row">
                 <div class="col">
                 <label for="recipient-name" class="col-form-label">Nom</label>
@@ -215,40 +208,40 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modifier un Fournisseur</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Modifier un Employe</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <form th:action="@{/fournisseurs/update}" method="put">  
+        <form th:action="@{/employes/update}" method="put">  
         <div class="form-group">
-          <label for="recipient-name" class="col-form-label">Numero d'identifiant d'un fournisseur</label>
-          <input type="text" class="form-control" id="fournisseurIdEdit" name="fournisseurId" readonly>
+          <label for="recipient-name" class="col-form-label">Numero d'identifiant d'un employe</label>
+          <input type="text" class="form-control" id="employeIdEdit" name="employeId" readonly>
         </div> 
         <div class="form-group">
-          <label for="recipient-name" class="col-form-label">Nom du fournisseur</label>
-          <input type="text" class="form-control" id="nomFournisseurEdit" name="nom">
+          <label for="recipient-name" class="col-form-label">Nom du employe</label>
+          <input type="text" class="form-control" id="nomEmployeEdit" name="nom">
         </div>          
         <div class="form-group">
-          <label for="recipient-name" class="col-form-label">Adresse du fournisseur</label>
-          <textarea type="text" class="form-control" id="adresseFournisseurEdit" name="adresse"></textarea>
+          <label for="recipient-name" class="col-form-label">Adresse du employe</label>
+          <textarea type="text" class="form-control" id="adresseEmployeEdit" name="adresse"></textarea>
         </div>            
         <div class="form-group">
-          <label for="recipient-name" class="col-form-label">Numero de TVA du fournisseur</label>
-          <input type="text" class="form-control" id="numTVAFournisseurEdit" name="numTVA">
+          <label for="recipient-name" class="col-form-label">Numero de TVA du employe</label>
+          <input type="text" class="form-control" id="numTVAEmployeEdit" name="numTVA">
         </div>        
         <div class="form-group">
-          <label for="recipient-name" class="col-form-label">Telephone du fournisseur</label>
-          <input type="text" class="form-control" id="telephoneFournisseurEdit" name="telephone">
+          <label for="recipient-name" class="col-form-label">Telephone du employe</label>
+          <input type="text" class="form-control" id="telephoneEmployeEdit" name="telephone">
         </div>      
         <div class="form-group">
-          <label for="recipient-name" class="col-form-label">Adresse email du fournisseur</label>
-          <input type="text" class="form-control" id="adresseMailFournisseurEdit" name="adresseMail">
+          <label for="recipient-name" class="col-form-label">Adresse email du employe</label>
+          <input type="text" class="form-control" id="adresseMailEmployeEdit" name="adresseMail">
         </div> 
         <div class="form-group">
-          <label for="recipient-name" class="col-form-label">Numero de compte du fournisseur</label>
-          <input type="text" class="form-control" id="numCompteFournisseurEdit" name="numCompte">
+          <label for="recipient-name" class="col-form-label">Numero de compte du employe</label>
+          <input type="text" class="form-control" id="numCompteEmployeEdit" name="numCompte">
         </div>     
           <div class="form-group">
         <button type="submit" class="btn btn-primary">Modifier</button>
@@ -263,11 +256,11 @@
 </div>
 <!-- bouton detail pour les lignes-->
 <div class="modal fade" id="detailsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <form th:action="@{/fournisseurs/update}" method="put">  
+    <form th:action="@{/employes/update}" method="put">  
     <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Details d'un fournisseur</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Details d'un employe</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -276,32 +269,32 @@
 
         <div class="form-group">
         <div class="form-group">
-          <label for="recipient-name" class="col-form-label">Numero d'identifiant d'un fournisseur</label>
-          <input type="text" class="form-control" id="fournisseurIdDetail" name="fournisseurIdDetail" readonly>
+          <label for="recipient-name" class="col-form-label">Numero d'identifiant d'un employe</label>
+          <input type="text" class="form-control" id="employeIdDetail" name="employeIdDetail" readonly>
         </div> 
         <div class="form-group">
-          <label for="recipient-name" class="col-form-label">Nom du fournisseur</label>
-          <input type="text" class="form-control" id="nomFournisseurDetail" name="nom">
+          <label for="recipient-name" class="col-form-label">Nom du employe</label>
+          <input type="text" class="form-control" id="nomEmployeDetail" name="nom">
         </div>          
         <div class="form-group">
-          <label for="recipient-name" class="col-form-label">Adresse du fournisseur</label>
-          <textarea type="text" class="form-control" id="adresseFournisseurDetail" name="adresse"></textarea>
+          <label for="recipient-name" class="col-form-label">Adresse du employe</label>
+          <textarea type="text" class="form-control" id="adresseEmployeDetail" name="adresse"></textarea>
         </div>            
         <div class="form-group">
-          <label for="recipient-name" class="col-form-label">Numero de TVA du fournisseur</label>
-          <input type="text" class="form-control" id="numTVAFournisseurDetail" name="numTVA">
+          <label for="recipient-name" class="col-form-label">Numero de TVA du employe</label>
+          <input type="text" class="form-control" id="numTVAEmployeDetail" name="numTVA">
         </div>        
         <div class="form-group">
-          <label for="recipient-name" class="col-form-label">Telephone du fournisseur</label>
-          <input type="text" class="form-control" id="telephoneFournisseurDetail" name="telephone">
+          <label for="recipient-name" class="col-form-label">Telephone du employe</label>
+          <input type="text" class="form-control" id="telephoneEmployeDetail" name="telephone">
         </div>      
         <div class="form-group">
-          <label for="recipient-name" class="col-form-label">Adresse email du fournisseur</label>
-          <input type="text" class="form-control" id="adresseMailFournisseurDetail" name="adresseMail">
+          <label for="recipient-name" class="col-form-label">Adresse email du employe</label>
+          <input type="text" class="form-control" id="adresseMailEmployeDetail" name="adresseMail">
         </div> 
         <div class="form-group">
-          <label for="recipient-name" class="col-form-label">Numero de compte du fournisseur</label>
-          <input type="text" class="form-control" id="numCompteFournisseurDetail" name="numCompte">
+          <label for="recipient-name" class="col-form-label">Numero de compte du employe</label>
+          <input type="text" class="form-control" id="numCompteEmployeDetail" name="numCompte">
         </div>       
         </form>
       </div>
@@ -422,7 +415,7 @@
   <script src="assets/vendor/counterup/counterup.min.js"></script>
   <script src="assets/vendor/owl.carousel/owl.carousel.min.js"></script>
   <script src="assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
-  <script src="assets/js/fournisseur.js"></script>
+  <script src="assets/js/employe.js"></script>
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
