@@ -5,7 +5,7 @@
  */
 package com.repositories;
 
-import com.models.Service;
+import com.models.ServiceV;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
  * @author PC
  */
 @Repository
-public interface ServiceRepository extends JpaRepository<Service, Long> {
+public interface ServiceRepository extends JpaRepository<ServiceV, Long> {
 
     
 }

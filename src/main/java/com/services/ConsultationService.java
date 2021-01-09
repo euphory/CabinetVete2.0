@@ -8,6 +8,7 @@ package com.services;
 import com.models.Consultation;
 import com.repositories.ConsultationRepository;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,9 +19,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class ConsultationService {
 
-    @Autowired
+        @Autowired
     private ConsultationRepository consultationRepository;
-    //retourne une liste d'animaux
+    //retourne une liste d'Consultations
     public List<Consultation> getConsultations(){
         return consultationRepository.findAll();
     }
@@ -29,6 +30,14 @@ public class ConsultationService {
         consultationRepository.save(consultation);
     }
     
+    //Get by Id
+    public Optional<Consultation> findById(Long id){
+        return consultationRepository.findById(id);
+    }
+    
+    public void delete(Long id){
+        consultationRepository.deleteById(id);
+    }
 
 
 

@@ -15,13 +15,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  *
  * @author PC
  */
 @Entity
-public class Service implements Serializable{
+@Table (name = "Service")
+public class ServiceV implements Serializable{
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long idService;
@@ -45,12 +47,12 @@ public class Service implements Serializable{
  */
 
 
-    public Service(Long idService, String type) {
+    public ServiceV(Long idService, String type) {
         this.idService = idService;
         this.type = type;
     }
 
-    public Service() {
+    public ServiceV() {
     }
 
     public Long getIdService() {

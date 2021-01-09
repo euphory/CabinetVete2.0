@@ -31,7 +31,7 @@ public class PrixVet{
 */  
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "ServiceId",insertable = false, updatable = false, nullable = true)
-    private Service service;
+    private ServiceV service;
 
     @ManyToOne(cascade= CascadeType.PERSIST)
     @JoinColumn(name="prestationId", insertable = false, updatable = false)
@@ -46,7 +46,7 @@ public class PrixVet{
     public PrixVet() {
     }
 
-    public PrixVet(double prixDuService, Service service, Prestation prestation) {
+    public PrixVet(double prixDuService, ServiceV service, Prestation prestation) {
         this.prixDuService = prixDuService;
         this.service = service;
         this.prestation = prestation;
@@ -60,11 +60,11 @@ public class PrixVet{
         this.priVetId = priVetId;
     }
 
-    public Service getService() {
+    public ServiceV getService() {
         return service;
     }
 
-    public void setService(Service service) {
+    public void setService(ServiceV service) {
         this.service = service;
     }
 

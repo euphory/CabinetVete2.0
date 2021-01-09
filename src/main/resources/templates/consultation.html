@@ -32,8 +32,8 @@
   <link href="assets/css/style.css" rel="stylesheet">
 
   <!-- =======================================================
-  * Template Name: Medilab - v2.1.0
-  * Template URL: https://bootstrapmade.com/medilab-free-medical-bootstrap-theme/
+  * Template Name: Cabinet Vétérinaire - v2.1.0
+  * Template URL: https://bootstrapmade.com/cabinetvet-free-medical-bootstrap-theme/
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
@@ -63,7 +63,7 @@
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
 
-      <h1 class="logo mr-auto"><a href="/index">Medilab</a></h1>
+      <h1 class="logo mr-auto"><a href="/index">Cabinet Vétérinaire</a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo mr-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
@@ -81,9 +81,6 @@
                 <ul>
                   <li><a href="#">Deep Drop Down 1</a></li>
                   <li><a href="#">Deep Drop Down 2</a></li>
-                  <li><a href="#">Deep Drop Down 3</a></li>
-                  <li><a href="#">Deep Drop Down 4</a></li>
-                  <li><a href="#">Deep Drop Down 5</a></li>
                 </ul>
               </li>
               <li><a href="#">Drop Down 2</a></li>
@@ -108,37 +105,35 @@
       <div class="container">
 
         <div class="d-flex justify-content-between align-items-center">
-          <h2>Liste des fournisseurs</h2>
+          <h2>Liste des Consultations</h2>
           <ol>
             <li><a href="/index">Home</a></li>
-            <li>Fournisseur</li>
+            <li>Consultations</li>
           </ol>
         </div>
           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal" id="addButton">+</button>
           <table class="table">
               <thead>
                 <tr>
-                   <th>Nom</th>
-                   <th>Adresse</th>
-                   <th>Numero de TVA</th>
-                   <th>Adresse email</th>
-                   <th>Téléphone</th>
-                   <th>Numéro de compte</th>
+                   <th>Date</th>
+                   <th>Heure debut</th>
+                   <th>Heure Fin</th>
+                   <th>Motif</th>
+                   <th>tarif de Groupe</th>
 
               </thead>
               <tbody>
-                  <tr th:each="fournisseur:${fournisseurs}">
-                      <td th:text="${fournisseur.nom}"></td>                      
-                      <td th:text="${fournisseur.adresse}"></td>
-                      <td th:text="${fournisseur.numTVA}"></td>
-                      <td th:text="${fournisseur.adresseMail}"></td>
-                      <td th:text="${fournisseur.telephone}"></td>
-                      <td th:text="${fournisseur.numCompte}"></td>
+                  <tr th:each="consultation:${consultations}">
+                      <td th:text="${#dates.format(consultation.date, 'dd-MM-yyyy')}"></td>
+                      <td th:text="${#dates.format(consultation.heureDebut, 'hh:mm:ss')}"></td>
+                      <td th:text="${#dates.format(consultation.heureFin, 'hh:mm:ss')}"></td>
+                      <td th:text="${consultation.motif}"></td>
+                      <td th:text="${consultation.tarifGroupe}"></td>
                       <td>
                           <div class="btn-group"> 
-                              <a th:href="@{/fournisseurs/findById/(id=${fournisseur.fournisseurId})}" class=" btn btn-primary" id="editButton">éditer</a>
-                              <a th:href="@{/fournisseurs/findById/(id=${fournisseur.fournisseurId})}" class=" btn btn-success" id="detailsButton">détails</a>
-                              <a th:href="@{/fournisseurs/delete/(id=${fournisseur.fournisseurId})}" class=" btn btn-danger" id="deleteButton">supprimer</a>
+                              <a th:href="@{/consultations/findById/(id=${consultation.idConsultation})}" class=" btn btn-primary" id="editButton">éditer</a>
+                              <a th:href="@{/consultations/findById/(id=${consultation.idConsultation})}" class=" btn btn-success" id="detailsButton">détails</a>
+                              <a th:href="@{/consultations/delete/(id=${consultation.idConsultation})}" class=" btn btn-danger" id="deleteButton">supprimer</a>
                           </div>
                       </td>
                   </tr>
@@ -161,50 +156,43 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Ajouter un fournisseur</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Ajouter un consultation</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
     </div>
     <div class="modal-body">
-        <form th:action="@{/fournisseurs/addNew}" method="post">             
-           <div class="form-row">
-                <div class="col">
-                <label for="recipient-name" class="col-form-label">Nom</label>
-                <input type="text" class="form-control" id="recipient-name"   name="nom">
-                </div>
-            <div class="col">
-                <label for="recipient-name" class="col-form-label">numero de TVA</label>
-                <input type="text" class="form-control" id="recipient-name" name="numTVA">
-            </div>
-            </div>
-        <div class="form-row">
-  </div>
-   <div class="form-group">
-   <label for="inputEmail4">Email</label>
-   <input type="email" class="form-control" id="recipient-name" name="adresseMail">
-  </div>
-  <div class="form-group">
-    <label for="inputAddress">Adresse</label>
-    <textarea type="text" class="form-control" id="recipient-name" name="adresse"></textarea>
-  </div>
-            <div class="form-row">
-                <div class="col">
-                    <label for="recipient-name" class="col-form-label">Numéro de téléphone</label>
-                    <input type="text" class="form-control" id="recipient-name"   name="telephone">
-                </div>
-            <div class="col">
-                <label for="recipient-name" class="col-form-label">Numéro de compte</label>
-                <input type="text" class="form-control" id="recipient-name" name="numCompte">
-            </div>
+        <form th:action="@{/consultations/addNew}" method="post">             
+
+        <div class="form-group">
+           <label for="recipient-name" class="col-form-label">Date</label>
+           <input type="date" class="form-control" id="recipient-name"name="date">
+        </div>          
+        <div class="form-group">
+           <label for="recipient-name" class="col-form-label">Heure du debut de la consultation</label>
+           <input type="time" class="form-control" id="recipient-name"name="heureDebut" mini="09:00" max="19:00">
+        </div>
+        <div class="form-group">
+           <label for="recipient-name" class="col-form-label">Heure de fin présumé de la consultation</label>
+           <input type="time" class="form-control" id="recipient-name"name="heureFin" mini="09:00" max="19:00">
         </div>  
-            
-      <div class="modal-footer">
+        <div class="form-group">
+          <label for="recipient-name" class="col-form-label">Motif de la consultation</label>
+          <textarea type="text" class="form-control" id="recipient-name"name="motif"></textarea>
+        </div> 
+        <div class="form-group">
+          <label for="recipient-name" class="col-form-label">Numero d'identifiant d'un consultation</label>
+          <input type="number" step=0.01 class="form-control" id="recipient-name"name="tarifGroupe">
+        </div> 
         <div class="form-group">
         <button type="submit" class="btn btn-primary">Ajouter</button>
         </div>
+            
+      <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
+        </div>          
+
         </form>
     </div>
     </div>
@@ -215,41 +203,37 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modifier un Fournisseur</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Modifier une adoption</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <form th:action="@{/fournisseurs/update}" method="put">  
+        <form th:action="@{/consultations/update}" method="put">  
         <div class="form-group">
-          <label for="recipient-name" class="col-form-label">Numero d'identifiant d'un fournisseur</label>
-          <input type="text" class="form-control" id="fournisseurIdEdit" name="fournisseurId" readonly>
+          <label for="recipient-name" class="col-form-label">Date</label>
+          <input type="text" class="form-control" id="idConsultationEdit"name="idConsultation" readonly>
         </div> 
         <div class="form-group">
-          <label for="recipient-name" class="col-form-label">Nom du fournisseur</label>
-          <input type="text" class="form-control" id="nomFournisseurEdit" name="nom">
+          <label for="recipient-name" class="col-form-label">Date de la consultation</label>
+          <input type="date" class="form-control" id="dateConsultationEdit"name="date">
+        </div>   
+        <div class="form-group">
+          <label for="recipient-name" class="col-form-label">Heure debut de la consultation</label>
+          <input type="time" class="form-control" id="heureDebutConsultationEdit"name="heureDebut" mini="09:00" max="19:00">
         </div>          
         <div class="form-group">
-          <label for="recipient-name" class="col-form-label">Adresse du fournisseur</label>
-          <textarea type="text" class="form-control" id="adresseFournisseurEdit" name="adresse"></textarea>
+          <label for="recipient-name" class="col-form-label">Heure fin de la consultation</label>
+          <input type="time" class="form-control" id="heureFinConsultationEdit"name="heureFin" mini="09:00" max="19:00">
         </div>            
         <div class="form-group">
-          <label for="recipient-name" class="col-form-label">Numero de TVA du fournisseur</label>
-          <input type="text" class="form-control" id="numTVAFournisseurEdit" name="numTVA">
-        </div>        
+          <label for="recipient-name" class="col-form-label">Motif de la consultation</label>
+          <textarea type="text" class="form-control" id="motifConsultationEdit"name="motif"></textarea>
+        </div>
         <div class="form-group">
-          <label for="recipient-name" class="col-form-label">Telephone du fournisseur</label>
-          <input type="text" class="form-control" id="telephoneFournisseurEdit" name="telephone">
-        </div>      
-        <div class="form-group">
-          <label for="recipient-name" class="col-form-label">Adresse email du fournisseur</label>
-          <input type="text" class="form-control" id="adresseMailFournisseurEdit" name="adresseMail">
-        </div> 
-        <div class="form-group">
-          <label for="recipient-name" class="col-form-label">Numero de compte du fournisseur</label>
-          <input type="text" class="form-control" id="numCompteFournisseurEdit" name="numCompte">
-        </div>     
+          <label for="recipient-name" class="col-form-label">Motif de la consultation</label>
+          <input type="number" step=0.01 class="form-control" id="tarifGroupeConsultationEdit"name="tarifGroupe">
+        </div>  
           <div class="form-group">
         <button type="submit" class="btn btn-primary">Modifier</button>
           </div>
@@ -263,11 +247,11 @@
 </div>
 <!-- bouton detail pour les lignes-->
 <div class="modal fade" id="detailsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <form th:action="@{/fournisseurs/update}" method="put">  
+    <form th:action="@{/consultations/update}" method="put">  
     <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Details d'un fournisseur</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Details d'un consultation</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -275,33 +259,28 @@
       <div class="modal-body">
 
         <div class="form-group">
-        <div class="form-group">
-          <label for="recipient-name" class="col-form-label">Numero d'identifiant d'un fournisseur</label>
-          <input type="text" class="form-control" id="fournisseurIdDetail" name="fournisseurIdDetail" readonly>
+          <label for="recipient-name" class="col-form-label">Date</label>
+          <input type="text" class="form-control" id="idConsultationDetail"name="idConsultation" readonly>
         </div> 
         <div class="form-group">
-          <label for="recipient-name" class="col-form-label">Nom du fournisseur</label>
-          <input type="text" class="form-control" id="nomFournisseurDetail" name="nom">
+          <label for="recipient-name" class="col-form-label">Date de la consultation</label>
+          <input type="date" class="form-control" id="dateConsultationDetail"name="date">
+        </div>   
+        <div class="form-group">
+          <label for="recipient-name" class="col-form-label">Heure debut de la consultation</label>
+          <input type="time" class="form-control" id="heureDebutConsultationDetail"name="heureDebut" mini="09:00" max="19:00">
         </div>          
         <div class="form-group">
-          <label for="recipient-name" class="col-form-label">Adresse du fournisseur</label>
-          <textarea type="text" class="form-control" id="adresseFournisseurDetail" name="adresse"></textarea>
+          <label for="recipient-name" class="col-form-label">Heure fin de la consultation</label>
+          <input type="time" class="form-control" id="heureFinConsultationDetail"name="heureFin" mini="09:00" max="19:00">
         </div>            
         <div class="form-group">
-          <label for="recipient-name" class="col-form-label">Numero de TVA du fournisseur</label>
-          <input type="text" class="form-control" id="numTVAFournisseurDetail" name="numTVA">
-        </div>        
+          <label for="recipient-name" class="col-form-label">Motif de la consultation</label>
+          <textarea type="text" class="form-control" id="motifConsultationDetail"name="motif"></textarea>
+        </div>
         <div class="form-group">
-          <label for="recipient-name" class="col-form-label">Telephone du fournisseur</label>
-          <input type="text" class="form-control" id="telephoneFournisseurDetail" name="telephone">
-        </div>      
-        <div class="form-group">
-          <label for="recipient-name" class="col-form-label">Adresse email du fournisseur</label>
-          <input type="text" class="form-control" id="adresseMailFournisseurDetail" name="adresseMail">
-        </div> 
-        <div class="form-group">
-          <label for="recipient-name" class="col-form-label">Numero de compte du fournisseur</label>
-          <input type="text" class="form-control" id="numCompteFournisseurDetail" name="numCompte">
+          <label for="recipient-name" class="col-form-label">Motif de la consultation</label>
+          <input type="number" step=0.01 class="form-control" id="tarifGroupeConsultationDetail"name="tarifGroupe">
         </div>       
         </form>
       </div>
@@ -341,7 +320,7 @@
         <div class="row">
 
           <div class="col-lg-3 col-md-6 footer-contact">
-            <h3>Medilab</h3>
+            <h3>Cabinet Vétérinaire</h3>
             <p>
               A108 Adam Street <br>
               New York, NY 535022<br>
@@ -389,13 +368,13 @@
 
       <div class="mr-md-auto text-center text-md-left">
         <div class="copyright">
-          &copy; Copyright <strong><span>Medilab</span></strong>. All Rights Reserved
+          &copy; Copyright <strong><span>Cabinet Vétérinaire</span></strong>. All Rights Reserved
         </div>
         <div class="credits">
           <!-- All the links in the footer should remain intact. -->
           <!-- You can delete the links only if you purchased the pro version. -->
           <!-- Licensing information: https://bootstrapmade.com/license/ -->
-          <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/medilab-free-medical-bootstrap-theme/ -->
+          <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/cabinetvet-free-medical-bootstrap-theme/ -->
           Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
         </div>
       </div>
@@ -422,7 +401,7 @@
   <script src="assets/vendor/counterup/counterup.min.js"></script>
   <script src="assets/vendor/owl.carousel/owl.carousel.min.js"></script>
   <script src="assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
-  <script src="assets/js/fournisseur.js"></script>
+  <script src="assets/js/consultation.js"></script>
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>

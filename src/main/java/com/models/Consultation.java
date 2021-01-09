@@ -6,7 +6,7 @@
 package com.models;
 
 import java.io.Serializable;
-import java.util.Calendar;
+import java.util.Date;
 import java.util.Date;
 import java.util.Set;
 import javax.persistence.Column;
@@ -33,10 +33,10 @@ public class Consultation implements Serializable{
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long idConsultation;
     @Temporal(TemporalType.DATE)
-    private Calendar date;
-    @Temporal(TemporalType.TIMESTAMP)
+    private Date date;
+    @Temporal(TemporalType.TIME)
     private Date heureDebut;
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.TIME)
     private Date heureFin;
     @Column(length=70)
     private String motif;
@@ -72,7 +72,7 @@ public class Consultation implements Serializable{
 -- -----------------------------------------------------------------------------
 */
     
-    public Consultation(Long idConsultation, Calendar date, Date heureDebut, Date heureFin, String Motif, double tarifGroupe, Employe veterinaire, Employe secretaireMedical, FactureConsult factureConsult, Set<Animal> animaux, Personne personne) {
+    public Consultation(Long idConsultation, Date date, Date heureDebut, Date heureFin, String Motif, double tarifGroupe, Employe veterinaire, Employe secretaireMedical, FactureConsult factureConsult, Set<Animal> animaux, Personne personne) {
         this.idConsultation = idConsultation;
         this.date = date;
         this.heureDebut = heureDebut;
@@ -96,27 +96,27 @@ public class Consultation implements Serializable{
     public void setIdConsultation(Long idConsultation) {
         this.idConsultation = idConsultation;
     }
-
-    public Calendar getDate() {
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    public Date getDate() {
         return date;
     }
-
-    public void setDate(Calendar date) {
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    public void setDate(Date date) {
         this.date = date;
     }
-
+    @DateTimeFormat(pattern="hh:mm a")
     public Date getHeureDebut() {
         return heureDebut;
     }
-
+    @DateTimeFormat(pattern="hh:mm a")
     public void setHeureDebut(Date heureDebut) {
         this.heureDebut = heureDebut;
     }
-
+    @DateTimeFormat(pattern="hh:mm a")
     public Date getHeureFin() {
         return heureFin;
     }
-
+    @DateTimeFormat(pattern="hh:mm a")
     public void setHeureFin(Date heureFin) {
         this.heureFin = heureFin;
     }
