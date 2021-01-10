@@ -3,7 +3,7 @@ $('document').ready(function(){
         event.preventDefault();
         var href = $(this).attr('href');        
         $.get(href, function(adoptable, status){
-           $('#ddlAnimalAdd').val(adoptable.animal.idAnimal);
+           $('#ddlAnimalAdd').val(adoptable.animal.dateNaissance);
         });
         $('#addModal').modal();
     });

@@ -43,16 +43,16 @@ public class AnimalController {
     //retourne les animaux
     @GetMapping("/animaux")
     public String getAnimaux(Model model){
-  /**      
-        List<Espece> especeList = especeService.getEspeces();
-        model.addAttribute("especes", especeList);
         
         List<Adoptable> adoptableList = adoptableService.getAdoptables();
         model.addAttribute("adoptable", adoptableList);
         
         List<Antecedent> antecedentList = antecedentService.getAntecedents();
-        model.addAttribute("antecedent", antecedentList);
-      */  
+        model.addAttribute("antecedent", antecedentList); 
+        
+        List<Espece> especeList = especeService.getEspeces();
+        model.addAttribute("especes", especeList);
+        
         List<Animal> animalList = animalService.getAnimaux();
         model.addAttribute("animaux", animalList);
         

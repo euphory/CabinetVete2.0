@@ -1,4 +1,12 @@
 $('document').ready(function(){
+    $('.table #addButton').on('click',function(event){
+        event.preventDefault();
+        var href = $(this).attr('href');        
+        $.get(href, function(adoption, status){
+           $('#ddlEspeceAdd').val(animal.espece.idEspece);
+        });
+        $('#addModal').modal();
+    });
     $('table #editButton').on('click',function(event){
         event.preventDefault();
         

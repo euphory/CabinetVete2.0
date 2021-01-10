@@ -61,11 +61,12 @@ public class Adoptable implements Serializable{
     public void setIdAdoptable(Long idAdoptable) {
         this.idAdoptable = idAdoptable;
     }
-    @DateTimeFormat(pattern="yyyy-mm-dd")
+    
+    @DateTimeFormat(pattern="dd-mm-yyyy")
     public Date getDateAbandon() {
         return dateAbandon;
     }
-    @DateTimeFormat(pattern="dd-mm-yyyy")
+    @DateTimeFormat(pattern="yyyy-mm-dd")
     public void setDateAbandon(Date dateAbandon) {
         this.dateAbandon = dateAbandon;
     }

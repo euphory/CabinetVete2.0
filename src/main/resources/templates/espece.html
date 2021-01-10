@@ -8,8 +8,7 @@
 <body>
     <div th:replace="/commun/header :: navbar">
         
-    </div><!-- End Header -->
-
+    </div>
   <main id="main">
 
     <!-- ======= Breadcrumbs Section ======= -->
@@ -27,14 +26,15 @@
           <table class="table">
               <thead>
                 <tr>
-                   <th>Identifiant de l'espèce</th>
-                   <th>Nom de l'espèce</th>
+                   <th>Date de l'espece</th>
+                   <th>Frais d'espece</th>
+                   <th>Modification</th>
                 </tr>
               </thead>
               <tbody>
                   <tr th:each="espece:${especes}">
                       <td th:text="${espece.idEspece}"></td>
-                      <td th:text="${espece.nom}"></td>                
+                      <td th:text="${espece.nom}"></td>
                       <td>
                           <div class="btn-group"> 
                               <a th:href="@{/especes/findById/(id=${espece.idEspece})}" class=" btn btn-primary" id="editButton">éditer</a>
@@ -84,7 +84,7 @@
     </div>
   </div>
 </div>
-        <!-- bouton moddifier pour les lignes-->
+       <!-- bouton moddifier pour les lignes-->
 <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -168,7 +168,7 @@
 </div>
   </main><!-- End #main -->
 
-<div th:replace="/commun/header :: footer">
+ <div th:replace="/commun/header :: footer">
         
     </div>
   <!-- ======= Footer ======= -->
@@ -177,6 +177,7 @@
     </div>
   <script src="assets/js/espece.js"></script>
 
+  <!-- Template Main JS File -->
 
 </body>
 

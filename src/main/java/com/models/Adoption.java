@@ -33,7 +33,6 @@ public class Adoption implements Serializable{
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long idAdoption;
     @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern="dd-MM-yyyy")
     private Date dateAdoption;
     private double frais;
 /**
@@ -69,7 +68,7 @@ public class Adoption implements Serializable{
     public void setIdAdoption(Long idAdoption) {
         this.idAdoption = idAdoption;
     }
-    @DateTimeFormat(pattern="yyyy-mm-dd")
+    @DateTimeFormat(pattern="dd-mm-yyyy")
     public Date getDateAdoption() {
         return dateAdoption;
     }

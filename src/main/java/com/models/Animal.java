@@ -41,7 +41,6 @@ public class Animal implements Serializable{
     @Column(length=70)
     private String surnom;
     @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern="dd-MM-yyyy")
     private Date dateNaissance;
     private double poid;
 
@@ -110,7 +109,7 @@ public class Animal implements Serializable{
     public void setSurnom(String surnom) {
         this.surnom = surnom;
     }
-    @DateTimeFormat(pattern="yyyy-mm-dd")
+    @DateTimeFormat(pattern="dd-mm-yyyy")
     public Date getDateNaissance() {
         return dateNaissance;
     }

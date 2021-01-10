@@ -25,6 +25,7 @@ $('document').ready(function(){
         });
         $('#detailsModal').modal();
     });
+    document.getElementById("aujourdhui").valueAsDate = new Date();
     $('.table #deleteButton').on('click',function(event) {
         event.preventDefault();
         var href=$(this).attr('href');
