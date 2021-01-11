@@ -103,7 +103,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modifier une adoptable</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Modifier un animal adoptable</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -111,15 +111,15 @@
       <div class="modal-body">
           <form th:action="@{/adoptables/update}" method="put">  
           <div class="form-group">
-            <label for="recipient-name" class="col-form-label">id</label>
+            <label for="recipient-name" class="col-form-label">Identification</label>
             <input type="text" class="form-control" id="idAdoptableEdit"name="idAdoptable" readonly>
           </div> 
           <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Date d'adoptable</label>
+            <label for="recipient-name" class="col-form-label">Date de l'abandon</label>
             <input type="date" class="form-control" id="dateAbandoneEdit"name="dateAbandon">
           </div>          
             <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Frai d'adoptable</label>
+            <label for="recipient-name" class="col-form-label">motif de l'abandon</label>
             <textarea type="text" class="form-control" id="motifAbandonEdit"name="motifAbandon"></textarea>
           </div>
           <div class="form-group">
@@ -139,7 +139,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Details d'une adoptable</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Details d'un animal adoptable</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -147,15 +147,15 @@
       <div class="modal-body">
           <form th:action="@{/adoptables/update}" method="put">  
           <div class="form-group">
-            <label for="recipient-name" class="col-form-label">id</label>
+            <label for="recipient-name" class="col-form-label">identification</label>
             <input type="text" class="form-control" id="idAdoptableDetail"name="idAdoptable" readonly>
           </div> 
           <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Date d'adoptable</label>
+            <label for="recipient-name" class="col-form-label">Date de l'abandon</label>
             <input type="date" class="form-control" id="dateAbandonDetail"name="dateAbandon">
           </div>          
             <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Frai d'adoptable</label>            
+            <label for="recipient-name" class="col-form-label">motif de l'abandon</label>            
             <textarea type="text" class="form-control" id="motifAbandonDetail"name="motifAbandon"></textarea>
           </div>
         </form>

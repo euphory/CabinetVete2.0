@@ -8,6 +8,8 @@ package com.controllers;
 import com.models.Employe;
 import com.services.EmployeService;
 import com.services.FormulaireService;
+import com.services.SecretaireMedicalService;
+import com.services.VeterinaireService;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,10 +28,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class EmployeController {
     
-        @Autowired
+    @Autowired
     private EmployeService employeService;
     @Autowired
-    private FormulaireService formulaireService;
+    private VeterinaireService Service;
+    @Autowired
+    private SecretaireMedicalService secretaireMedicalService;
     
     //retourne les employes
     @GetMapping("/employes")
@@ -42,8 +46,8 @@ public class EmployeController {
     }
     
     @PostMapping("/employes/addNew")
-    public String addNew(Employe employe){
-        employeService.save(employe);
+    public String addNew(Employe secretaireMedical){
+        employeService.save(secretaireMedical);
         return "redirect:/employes";
     }
     

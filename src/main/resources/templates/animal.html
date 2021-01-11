@@ -122,18 +122,22 @@
       </div>
       <div class="modal-body">
           <form th:action="@{/adoptions/update}" method="put">  
-          <div class="form-group">
-            <label for="recipient-name" class="col-form-label">id</label>
-            <input type="text" class="form-control" id="idAdoptionEdit"name="idAdoption" readonly>
-          </div> 
-          <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Date d'adoption</label>
-            <input type="date" class="form-control" id="dateAdoptionEdit"name="dateAdoption">
-          </div>          
-            <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Frai d'adoption</label>
-            <input type="text" class="form-control" id="fraisAdoptionEdit"name="frais">
-          </div>
+        <div class="form-group">
+          <label for="recipient-name" class="col-form-label">Numero d'identifiant d'une animal</label>
+          <input type="text" class="form-control" id="idAnimalEdit"name="idAnimal" readonly>
+        </div> 
+        <div class="form-group">
+          <label for="recipient-name" class="col-form-label">Surnom</label>
+          <input type="text" class="form-control" id="surnomAnimalEdit"name="surnom">
+        </div>          
+        <div class="form-group">
+          <label for="recipient-name" class="col-form-label">Date de Naissance présumé</label>
+          <input type="date" class="form-control" id="dateNaissanceAnimalEdit"name="dateNaissance">
+        </div>            
+        <div class="form-group">
+          <label for="recipient-name" class="col-form-label">poid de l'animal en grammes</label>
+          <input type="text" class="form-control" id="poidAnimalEdit"name="poid">
+        </div>  
           <div class="form-group">
         <button type="submit" class="btn btn-primary">Modifier</button>
           </div>
@@ -169,7 +173,7 @@
         </div>          
         <div class="form-group">
           <label for="recipient-name" class="col-form-label">Date de Naissance présumé</label>
-          <input type="date" class="form-control" id="prenomAnimalDetail"name="dateNaissance">
+          <input type="date" class="form-control" id="dateNaissanceAnimalDetail"name="dateNaissance">
         </div>            
         <div class="form-group">
           <label for="recipient-name" class="col-form-label">poid de l'animal en grammes</label>

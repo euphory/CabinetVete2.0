@@ -35,7 +35,7 @@ public abstract class Employe implements Serializable{
     @Column(length=70)
     private String prenom;
     @Column(length=140)
-    private String adress;
+    private String adresse;
     @Column(length=70)
     private String telephone;
     
@@ -45,13 +45,13 @@ public abstract class Employe implements Serializable{
 -- -----------------------------------------------------------------------------
 */
     
-    public Employe(Long idEmploye, String login, String mdp, String nom, String prenom, String adress, String telephone) {
+    public Employe(Long idEmploye, String login, String mdp, String nom, String prenom, String adresse, String telephone) {
         this.idEmploye = idEmploye;
         this.login = login;
         this.mdp = mdp;
         this.nom = nom;
         this.prenom = prenom;
-        this.adress = adress;
+        this.adresse = adresse;
         this.telephone = telephone;
     }
 
@@ -99,11 +99,11 @@ public abstract class Employe implements Serializable{
     }
 
     public String getAdress() {
-        return adress;
+        return adresse;
     }
 
-    public void setAdress(String adress) {
-        this.adress = adress;
+    public void setAdress(String adresse) {
+        this.adresse = adresse;
     }
 
     public String getTelephone() {

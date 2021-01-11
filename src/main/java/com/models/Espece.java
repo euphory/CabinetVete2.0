@@ -33,7 +33,7 @@ public class Espece implements Serializable{
 -- - Associations                                                            ---
 -- -----------------------------------------------------------------------------
  */  
-    @OneToMany(mappedBy="espece", fetch=FetchType.LAZY, cascade={CascadeType.PERSIST})
+    @OneToMany
     private Set<Animal> animaux ;
 /**
 -- -----------------------------------------------------------------------------

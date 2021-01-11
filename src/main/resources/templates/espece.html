@@ -16,7 +16,7 @@
       <div class="container">
 
         <div class="d-flex justify-content-between align-items-center">
-          <h2>Liste des Especes</h2>
+          <h2>Liste des Espèces</h2>
           <ol>
             <li><a href="/index">Home</a></li>
             <li>Especes</li>
@@ -26,8 +26,8 @@
           <table class="table">
               <thead>
                 <tr>
-                   <th>Date de l'espece</th>
-                   <th>Frais d'espece</th>
+                   <th>Date de l'espèce</th>
+                   <th>Frais d'espèce</th>
                    <th>Modification</th>
                 </tr>
               </thead>
@@ -62,7 +62,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Ajouter une espece</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Ajouter une espèce</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -70,11 +70,11 @@
     <div class="modal-body">
         <form th:action="@{/especes/addNew}" method="post">                  
             <div class="form-group">
-            <label for="recipient-name" class="col-form-label">nom de l'Espece</label>
+            <label for="recipient-name" class="col-form-label">Nom de l'espèce</label>
             <input type="text" class="form-control" id="recipient-name"name="nom">
           </div>
           <div class="form-group">
-        <button type="submit" class="btn btn-primary">Ajouter</button>
+        <button type="submit" class="btn btn-success">Ajouter</button>
           </div>
         </form>
     </div>
@@ -89,7 +89,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modifier une espece</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Modifier une espèce</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -97,11 +97,11 @@
       <div class="modal-body">
           <form th:action="@{/especes/update}" method="put">  
           <div class="form-group">
-            <label for="recipient-name" class="col-form-label">id</label>
+            <label for="recipient-name" class="col-form-label">identifiant de l'espèce</label>
             <input type="text" class="form-control" id="idEspeceEdit"name="idEspece" readonly>
           </div>        
             <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Frai d'espece</label>
+            <label for="recipient-name" class="col-form-label">Nom de l'espèce</label>
             <input type="text" class="form-control" id="nomEspeceEdit"name="nom">
           </div>
           <div class="form-group">
@@ -121,7 +121,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Details d'une espece</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Details d'une espèce</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -133,7 +133,7 @@
             <input type="text" class="form-control" id="idEspeceDetail"name="idEspece" readonly>
           </div>         
             <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Frai d'espece</label>
+            <label for="recipient-name" class="col-form-label">Nom d'espèce</label>
             <input type="text" class="form-control" id="nomEspeceDetail"name="nom">
           </div>
         </form>
