@@ -13,22 +13,22 @@ import java.util.Optional;
 public class AnimalService {
 
     @Autowired
-    private AnimalRepository adoptionRepository;
+    private AnimalRepository animalRepository;
     //retourne une liste d'Animaux
     public List<Animal> getAnimaux(){
-        return adoptionRepository.findAll();
+        return animalRepository.findAll();
     }
     
-    public void save(Animal adoption){
-        adoptionRepository.save(adoption);
+    public void save(Animal animal){
+        animalRepository.save(animal);
     }
     
     //Get by Id
     public Optional<Animal> findById(Long id){
-        return adoptionRepository.findById(id);
+        return animalRepository.findById(id);
     }
     
     public void delete(Long id){
-        adoptionRepository.deleteById(id);
+        animalRepository.deleteById(id);
     }
 }

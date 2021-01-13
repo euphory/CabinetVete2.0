@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"/>
+<head th:replace="/commun/header :: commun-header"> 
+</head>
+
+<body>
+    <div th:replace="/commun/header :: navbar">
+        
+    </div>
+
+  <main id="main">
+
+    <!-- ======= Breadcrumbs Section ======= -->
+    <section class="breadcrumbs">
+      <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center">
+          <h2>Liste des Adoptables</h2>
+          <ol>
+            <li><a href="/index">Home</a></li>
+            <li>Adoptables</li>
+          </ol>
+        </div>
+<button type="button" class="btn btn-success" data-toggle="modal" data-target="#addModal" id="addButton">Ajouter</button>
+          <table class="table">
+              <thead>
+                <tr>
+                   <th>Date de l'adoptable</th>
+                   <th>Frais d'adoptable</th>
+                   <th>Modification</th>
+                </tr>
+              </thead>
+              <tbody>
+                  <tr th:each="adoptable:${adoptables}">
+                      <td th:text="${#dates.format(adoptable.dateAbandon,'dd-MM-yyyy')}"></td>
+                      <td th:text="${adoptable.motifAbandon}"></td>
+                      <td>
+                          <div class="btn-group"> 
+                              <a th:href="@{/adoptables/findById/(id=${adoptable.idAdoptable})}" class=" btn btn-primary" id="editButton">éditer</a>
+                              <a th:href="@{/adoptables/findById/(id=${adoptable.idAdoptable})}" class=" btn btn-success" id="detailButton">détails</a>
+                              <a th:href="@{/adoptables/delete/(id=${adoptable.idAdoptable})}" class=" btn btn-danger" id="deleteButton">supprimer</a>
+                          </div>
+                      </td>
+                  </tr>
+              </tbody>
+              
+          </table>
+
+      </div>
+    </section><!-- End Breadcrumbs Section -->
+
+    <section class="inner-page">
+      <div class="container">
+        <p>
+          
+        </p>
+      </div>
+    </section>
+    <!-- bouton ajouter-->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Ajouter une adoptable</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form th:action="@{/adoptables/addNew}" method="post">             
+        <div class='form-group'>
+            <label for="ddlAnimalAdd" class="col-form-label">Animaux:</label>
+            <select class="form-control" id="ddlAdoptableAdd" name="adoptableidAdoptable">
+                <option>-SELECTIONNER-</option>
+                <option th:each="animal: ${animals}"
+                    th:value="${animal.idAnimal}"
+                    th:text="${animal.idAnimal}">
+                </option>
+            </select>   
+        </div>
+            <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Date de l'abandon</label>
+                <input type="date" class="form-control" id="recipient-name"name="dateAbandon">
+            </div>          
+            <div class="form-group">
+            <label for="recipient-name" class="col-form-label">motif de l'abandon</label>
+            <textarea type="text" class="form-control" id="recipient-name"name="motifAbandon"></textarea>
+          </div>
+          <div class="form-group">
+        <button type="submit" class="btn btn-primary">Ajouter</button>
+          </div>
+        </form>
+    </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+        <!-- bouton moddifier pour les lignes-->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modifier un animal adoptable</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <form th:action="@{/adoptables/update}" method="put">  
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Identification</label>
+            <input type="text" class="form-control" id="idAdoptableEdit"name="idAdoptable" readonly>
+          </div> 
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Date de l'abandon</label>
+            <input type="date" class="form-control" id="dateAbandoneEdit"name="dateAbandon">
+          </div>          
+            <div class="form-group">
+            <label for="recipient-name" class="col-form-label">motif de l'abandon</label>
+            <textarea type="text" class="form-control" id="motifAbandonEdit"name="motifAbandon"></textarea>
+          </div>
+          <div class="form-group">
+        <button type="submit" class="btn btn-primary">Modifier</button>
+          </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+        <!-- bouton detail pour les lignes-->
+        <div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Details d'un animal adoptable</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <form th:action="@{/adoptables/update}" method="put">  
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">identification</label>
+            <input type="text" class="form-control" id="idAdoptableDetail"name="idAdoptable" readonly>
+          </div> 
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Date de l'abandon</label>
+            <input type="date" class="form-control" id="dateAbandonDetail"name="dateAbandon">
+          </div>          
+            <div class="form-group">
+            <label for="recipient-name" class="col-form-label">motif de l'abandon</label>            
+            <textarea type="text" class="form-control" id="motifAbandonDetail"name="motifAbandon"></textarea>
+          </div>
+        </form>
+          
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+          <!-- bouton supprimer pour les lignes-->  
+ <div class="modal" id="deleteModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Confirmer la suppression</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Etes-vous sûr de vouloir supprimer cette ligne ?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">non</button>
+        <a class="btn btn-primary" id="confirmDeleteButton" href="">supprimer</a>
+      </div>
+    </div>
+  </div>
+</div>
+  </main><!-- End #main -->
+
+    <div th:replace="/commun/header :: footer">
+        
+    </div>
+  <!-- ======= Footer ======= -->
+    <div th:replace="/commun/header :: body-bottom-script">
+        
+    </div>
+  <script src="assets/js/adoptable.js"></script>
+
+</body>
+
+</html>

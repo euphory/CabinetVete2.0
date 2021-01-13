@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"/>
+
+<head th:replace="/commun/header :: commun-header"> 
+</head>
+
+<body>
+    <div th:replace="/commun/header :: navbar">
+        
+    </div>
+  <main id="main">
+
+    <!-- ======= Breadcrumbs Section ======= -->
+    <section class="breadcrumbs">
+      <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center">
+          <h2>Liste des Espèces</h2>
+          <ol>
+            <li><a href="/index">Home</a></li>
+            <li>Especes</li>
+          </ol>
+        </div>
+<button type="button" class="btn btn-success" data-toggle="modal" data-target="#addModal" id="addButton">Ajouter</button>
+          <table class="table">
+              <thead>
+                <tr>
+                   <th>Date de l'espèce</th>
+                   <th>Frais d'espèce</th>
+                   <th>Modification</th>
+                </tr>
+              </thead>
+              <tbody>
+                  <tr th:each="espece:${especes}">
+                      <td th:text="${espece.idEspece}"></td>
+                      <td th:text="${espece.nom}"></td>
+                      <td>
+                          <div class="btn-group"> 
+                              <a th:href="@{/especes/findById/(id=${espece.idEspece})}" class=" btn btn-primary" id="editButton">éditer</a>
+                              <a th:href="@{/especes/findById/(id=${espece.idEspece})}" class=" btn btn-success" id="detailButton">détails</a>
+                              <a th:href="@{/especes/delete/(id=${espece.idEspece})}" class=" btn btn-danger" id="deleteButton">supprimer</a>
+                          </div>
+                      </td>
+                  </tr>
+              </tbody>
+              
+          </table>
+
+      </div>
+    </section><!-- End Breadcrumbs Section -->
+
+    <section class="inner-page">
+      <div class="container">
+        <p>
+          
+        </p>
+      </div>
+    </section>
+    <!-- bouton ajouter-->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Ajouter une espèce</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form th:action="@{/especes/addNew}" method="post">                  
+            <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Nom de l'espèce</label>
+            <input type="text" class="form-control" id="recipient-name"name="nom">
+          </div>
+          <div class="form-group">
+        <button type="submit" class="btn btn-success">Ajouter</button>
+          </div>
+        </form>
+    </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+       <!-- bouton moddifier pour les lignes-->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modifier une espèce</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <form th:action="@{/especes/update}" method="put">  
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">identifiant de l'espèce</label>
+            <input type="text" class="form-control" id="idEspeceEdit"name="idEspece" readonly>
+          </div>        
+            <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Nom de l'espèce</label>
+            <input type="text" class="form-control" id="nomEspeceEdit"name="nom">
+          </div>
+          <div class="form-group">
+        <button type="submit" class="btn btn-primary">Modifier</button>
+          </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+        <!-- bouton detail pour les lignes-->
+        <div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Details d'une espèce</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <form th:action="@{/especes/update}" method="put">  
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">id</label>
+            <input type="text" class="form-control" id="idEspeceDetail"name="idEspece" readonly>
+          </div>         
+            <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Nom d'espèce</label>
+            <input type="text" class="form-control" id="nomEspeceDetail"name="nom">
+          </div>
+        </form>
+          
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+          <!-- bouton supprimer pour les lignes-->  
+ <div class="modal" id="deleteModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Confirmer la suppression</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Etes-vous sûr de vouloir supprimer cette ligne ?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">non</button>
+        <a class="btn btn-primary" id="confirmDeleteButton" href="">supprimer</a>
+      </div>
+    </div>
+  </div>
+</div>
+  </main><!-- End #main -->
+
+ <div th:replace="/commun/header :: footer">
+        
+    </div>
+  <!-- ======= Footer ======= -->
+    <div th:replace="/commun/header :: body-bottom-script">
+        
+    </div>
+  <script src="assets/js/espece.js"></script>
+
+  <!-- Template Main JS File -->
+
+</body>
+
+</html>

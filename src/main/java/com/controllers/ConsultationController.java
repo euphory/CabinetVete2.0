@@ -7,16 +7,15 @@ package com.controllers;
 
 import com.models.Consultation;
 import com.services.ConsultationService;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 /**
  *
@@ -38,7 +37,17 @@ public class ConsultationController {
     }
     
     @PostMapping("/consultations/addNew")
-    public String addNew(Consultation consultation){
+    public String addNew(Consultation consultation,
+                         @RequestParam String date,
+                         @RequestParam String heureDebutTime,
+                         @RequestParam String heureFinTime){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        try {
+            consultation.setHeureDebut(sdf.parse(date.concat(" ").concat(heureDebutTime)));
+            consultation.setHeureFin(sdf.parse(date.concat(" ").concat(heureFinTime)));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         consultationService.save(consultation);
         return "redirect:/consultations";
     }
