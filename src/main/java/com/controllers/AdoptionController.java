@@ -5,9 +5,13 @@
  */
 package com.controllers;
 
+import com.models.Adoptable;
 import com.models.Adoption;
+import com.models.Animal;
 import com.models.Formulaire;
+import com.services.AdoptableService;
 import com.services.AdoptionService;
+import com.services.AnimalService;
 import com.services.FormulaireService;
 import java.util.List;
 import java.util.Optional;
@@ -31,6 +35,10 @@ public class AdoptionController {
     private AdoptionService adoptionService;
     @Autowired
     private FormulaireService formulaireService;
+    @Autowired
+    private AdoptableService adoptableService;
+    @Autowired
+    private AnimalService animalService;
     
     //retourne les adoptions
     @GetMapping("/adoptions")
@@ -41,6 +49,13 @@ public class AdoptionController {
         
         List<Adoption> adoptionList = adoptionService.getAdoptions();
         model.addAttribute("adoptions", adoptionList);
+        
+        List<Animal> animalList = animalService.getAnimaux();
+        model.addAttribute("animals", animalList);
+        
+        List<Adoptable> adoptableList = adoptableService.getAdoptables();
+        model.addAttribute("adoptables", adoptableList);
+
         return "adoption";
     }
     

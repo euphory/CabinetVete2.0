@@ -30,7 +30,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Entity
 public class Consultation implements Serializable{
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idConsultation;
     @Temporal(TemporalType.DATE)
     private Date date;

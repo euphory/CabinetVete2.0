@@ -21,7 +21,7 @@ public class MedicamentService {
     @Autowired
     private MedicamentRepository medicamentRepository;
     //retourne une liste d'ArticleMedicaux
-    public List<Medicament> getArticleMedicaux(){
+    public List<Medicament> getMedicaments(){
         return medicamentRepository.findAll();
     }
     

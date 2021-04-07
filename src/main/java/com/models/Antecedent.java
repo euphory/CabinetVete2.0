@@ -25,7 +25,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Entity
 public class Antecedent implements Serializable{ 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idAntecedent;
     @Temporal(TemporalType.DATE)
     private Date age;

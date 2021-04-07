@@ -9,10 +9,12 @@ import com.models.Adoptable;
 import com.models.Animal;
 import com.models.Antecedent;
 import com.models.Espece;
+import com.models.Personne;
 import com.services.AdoptableService;
 import com.services.AnimalService;
 import com.services.AntecedentService;
 import com.services.EspeceService;
+import com.services.PersonneService;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +37,8 @@ public class AnimalController {
     private EspeceService especeService;
     @Autowired
     private AntecedentService antecedentService;
+    @Autowired
+    private PersonneService personneService;
     
     //retourne les animaux
     @GetMapping("/animaux")
@@ -52,11 +56,16 @@ public class AnimalController {
         List<Animal> animalList = animalService.getAnimaux();
         model.addAttribute("animaux", animalList);
         
+        List<Personne> personneList = personneService.getPersonnes();
+        model.addAttribute("personne", personneList);
+        
+        
         return "animal";
     }
     
     @PostMapping("/animaux/addNew")
-    public String addNew(Animal animal, @RequestParam Long idEspece){
+    public String addNew(Animal animal, 
+            @RequestParam Long idEspece){
         animal.setEspece(especeService.findById(idEspece).orElse(null));
         animalService.save(animal);
         return "redirect:/animaux";

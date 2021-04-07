@@ -8,6 +8,7 @@ package com.controllers;
 import com.models.Animal;
 import com.models.Prestation;
 import com.services.AnimalService;
+import com.services.ConsultationService;
 import com.services.PrestationService;
 import java.util.List;
 import java.util.Optional;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
@@ -31,6 +33,8 @@ public class PrestationController {
     private PrestationService prestationService;
     @Autowired
     private AnimalService animalService;
+    @Autowired
+    private ConsultationService consultationService;
 
     //retourne les prestations
     @GetMapping("/prestations")
@@ -45,7 +49,9 @@ public class PrestationController {
     }
     
     @PostMapping("/prestations/addNew")
-    public String addNew(Prestation prestation){
+    public String addNew(Prestation prestation,            
+            @RequestParam Long idConsultation){
+        prestation.setConsultation(consultationService.findById(idConsultation).orElse(null));
         prestationService.save(prestation);
         return "redirect:/prestations";
     }

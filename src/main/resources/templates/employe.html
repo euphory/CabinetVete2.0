@@ -24,25 +24,31 @@
           </ol>
         </div>
           <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addModal" id="addButton">Ajouter</button>
-          <table class="table">
+          <table id="table" class="table">
               <thead>
                 <tr>
-                   <th>sécretaire/Veterinaire</th>
-                   <th>Login/th>
+                   <th>Login</th>
                    <th>Mot de passe</th>
                    <th>Nom</th>
                    <th>Prénom</th>
                    <th>Adresse</th>
-                   <th>Telephone</th>
+                   <th>Telephone</th>                   
+                   <th>Numéro véterinaire</th>
+                   <th>Modifications</th>
               </thead>
               <tbody>
-                  <tr th:each="employe:${employes}">                 
+                  <tr th:each="employe:${employes}">  
+                  </td>
                       <td th:text="${employe.login}"></td>
                       <td th:text="${employe.mdp}"></td>
                       <td th:text="${employe.nom}"></td>
                       <td th:text="${employe.prenom}"></td>
                       <td th:text="${employe.adress}"></td>                      
-                      <td th:text="${employe.telephone}"></td>
+                      <td th:text="${employe.telephone}"></td> 
+                      <td></td>
+                  
+
+
                       <td>
                           <div class="btn-group"> 
                               <a th:href="@{/employes/findById/(id=${employe.idEmploye})}" class=" btn btn-primary" id="editButton">éditer</a>
@@ -80,7 +86,7 @@
             <div class="form-row">
             <div class="col">
                 <label for="recipient-name" class="col-form-label">Nom</label>
-                <input type="text" class="form-control" id="recipient-name" name="login">
+                <input type="text" class="form-control" id="recipient-name" name=nom>
             </div>
             <div class="col">
                 <label for="recipient-name" class="col-form-label">prenom</label>
@@ -90,11 +96,11 @@
         <div class="form-row">
                         <div class="col">
                 <label for="recipient-name" class="col-form-label">login</label>
-                <input type="text" class="form-control" id="recipient-name" name="login">
+                <input type="username" class="form-control" id="recipient-name" name="login">
             </div>
             <div class="col">
                 <label for="recipient-name" class="col-form-label">Mot de passe</label>
-                <input type="text" class="form-control" id="recipient-name" name="mdp">
+                <input type="password" class="form-control" id="recipient-name" name="mdp">
             </div>
         </div>            
   <div class="form-group">
@@ -104,7 +110,7 @@
 
      <div>
         <label for="recipient-name" class="col-form-label">Numéro de téléphone</label>
-        <input type="text" class="form-control" id="recipient-name" name="telephone">
+        <input type="tel" class="form-control" id="recipient-name" name="telephone">
      </div>
       <div class="modal-footer">
     <div class="form-group">
@@ -129,39 +135,38 @@
       </div>
       <div class="modal-body">
         <form th:action="@{/employes/update}" method="put">  
-        <div class="form-group">
-          <label for="recipient-name" class="col-form-label">Numero d'identifiant d'un employe</label>
-          <input type="text" class="form-control" id="employeIdEdit" name="employeId" readonly>
-        </div> 
-        <div class="form-group">
-          <label for="recipient-name" class="col-form-label">Nom du employe</label>
-          <input type="text" class="form-control" id="nomEmployeEdit" name="nom">
-        </div>          
-        <div class="form-group">
-          <label for="recipient-name" class="col-form-label">Adresse du employe</label>
-          <textarea type="text" class="form-control" id="adresseEmployeEdit" name="adresse"></textarea>
+         <div class="form-row">
+            <div class="col">
+                <label for="recipient-name" class="col-form-label">Nom</label>
+                <input type="text" class="form-control" id="nomEmployeEdit" name=nom>
+            </div>
+            <div class="col">
+                <label for="recipient-name" class="col-form-label">prenom</label>
+                <input type="text" class="form-control" id="prenomEmployeEdit" name="prenom">
+            </div>
+            </div>
+        <div class="form-row">
+                        <div class="col">
+                <label for="recipient-name" class="col-form-label">login</label>
+                <input type="username" class="form-control" id="loginEmployeEdit" name="login">
+            </div>
+            <div class="col">
+                <label for="recipient-name" class="col-form-label">Mot de passe</label>
+                <input type="text" class="form-control" id="mdpEmployeEdit" name="mdp">
+            </div>
         </div>            
-        <div class="form-group">
-          <label for="recipient-name" class="col-form-label">Numero de TVA du employe</label>
-          <input type="text" class="form-control" id="numTVAEmployeEdit" name="numTVA">
-        </div>        
-        <div class="form-group">
-          <label for="recipient-name" class="col-form-label">Telephone du employe</label>
-          <input type="text" class="form-control" id="telephoneEmployeEdit" name="telephone">
-        </div>      
-        <div class="form-group">
-          <label for="recipient-name" class="col-form-label">Adresse email du employe</label>
-          <input type="text" class="form-control" id="adresseMailEmployeEdit" name="adresseMail">
-        </div> 
-        <div class="form-group">
-          <label for="recipient-name" class="col-form-label">Numero de compte du employe</label>
-          <input type="text" class="form-control" id="numCompteEmployeEdit" name="numCompte">
-        </div>     
-          <div class="form-group">
+  <div class="form-group">
+    <label for="recipient-name">Adresse</label>
+    <textarea type="text" class="form-control" id="adresseEmployeEdit" name="adress"></textarea>
+  </div>
+
+     <div>
+        <label for="recipient-name" class="col-form-label">Numéro de téléphone</label>
+        <input type="tel" class="form-control" id="telephoneEmployeEdit" name="telephone">
+     </div>
+            <div class="form-group">
         <button type="submit" class="btn btn-primary">Modifier</button>
           </div>
-        </form>
-      </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
@@ -192,7 +197,7 @@
         </div>          
         <div class="form-group">
           <label for="recipient-name" class="col-form-label">Adresse du employe</label>
-          <textarea type="text" class="form-control" id="adresseEmployeDetail" name="adresse"></textarea>
+          <textarea type="text" class="form-control" id="adresseEmployeDetail" name="adress"></textarea>
         </div>            
         <div class="form-group">
           <label for="recipient-name" class="col-form-label">Numero de TVA du employe</label>

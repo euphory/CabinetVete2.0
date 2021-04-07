@@ -72,7 +72,6 @@
     </div>
     <div class="modal-body">
         <form th:action="@{/animaux/addNew}" method="post">          
-
         <div class="form-group">
            <label for="recipient-name" class="col-form-label">Surnom</label>
            <input type="text" class="form-control" id="recipient-name"name="surnom">
@@ -95,6 +94,20 @@
                 </option>
             </select>   
         </div>
+        <div>
+            <!--
+        <div class='form-group'>
+            <label for="ddlPersonneAdd" class="col-form-label">Personne:</label>
+            <select class="form-control" id="ddlPersonneAdd" name="idPersonne">
+                <option>-SELECTIONNER-</option>
+                <option th:each="personne:${personnes}"
+                    th:value="${personne.idPersonne}"
+                    th:text="${personne.nom}">
+                </option>
+            </select>   
+        </div>
+            -->
+        </div>
         <div class="form-group">
         <button type="submit" class="btn btn-primary">Ajouter</button>
         </div>
@@ -115,13 +128,13 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modifier une adoption</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Modifier une animal</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-          <form th:action="@{/adoptions/update}" method="put">  
+          <form th:action="@{/animaux/update}" method="put">  
         <div class="form-group">
           <label for="recipient-name" class="col-form-label">Numero d'identifiant d'une animal</label>
           <input type="text" class="form-control" id="idAnimalEdit"name="idAnimal" readonly>
@@ -170,7 +183,7 @@
         <div class="form-group">
           <label for="recipient-name" class="col-form-label">Surnom</label>
           <input type="text" class="form-control" id="surnomAnimalDetail"name="surnom">
-        </div>          
+        </div>             
         <div class="form-group">
           <label for="recipient-name" class="col-form-label">Date de Naissance présumé</label>
           <input type="date" class="form-control" id="dateNaissanceAnimalDetail"name="dateNaissance">

@@ -31,7 +31,7 @@ public class MedicamentController {
     @GetMapping("/medicaments")
     public String getArticleMedicaux(Model model){
           
-    List<Medicament> medicamentList = medicamentService.getArticleMedicaux();
+    List<Medicament> medicamentList = medicamentService.getMedicaments();
     model.addAttribute("medicaments", medicamentList);
     
     return "medicament";

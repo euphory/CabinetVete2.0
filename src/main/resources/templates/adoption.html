@@ -33,8 +33,10 @@
               </thead>
               <tbody>
                   <tr th:each="adoption:${adoptions}">
+
                       <td th:text="${#dates.format(adoption.dateAdoption, 'dd-MM-yyyy')}"></td>
                       <td th:text="${adoption.frais}"></td>
+                      <td th:text="${adoption.animal.poid}"></td>
                       <td>
                           <div class="btn-group"> 
                               <a th:href="@{/adoptions/findById/(id=${adoption.idAdoption})}" class=" btn btn-primary" id="editButton">éditer</a>

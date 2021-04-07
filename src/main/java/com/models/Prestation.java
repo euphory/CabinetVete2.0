@@ -26,7 +26,7 @@ import javax.persistence.OneToMany;
 @JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class)
 public class Prestation{
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long prestationId;
     private int quantiteUtilise;
     

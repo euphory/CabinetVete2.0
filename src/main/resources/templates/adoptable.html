@@ -71,11 +71,11 @@
         <form th:action="@{/adoptables/addNew}" method="post">             
         <div class='form-group'>
             <label for="ddlAnimalAdd" class="col-form-label">Animaux:</label>
-            <select class="form-control" id="ddlAdoptableAdd" name="adoptableidAdoptable">
+            <select class="form-control" id="ddlAdoptableAdd" name="idAnimal">
                 <option>-SELECTIONNER-</option>
                 <option th:each="animal: ${animals}"
                     th:value="${animal.idAnimal}"
-                    th:text="${animal.idAnimal}">
+                    th:text="${animal.surnom}">
                 </option>
             </select>   
         </div>

@@ -30,7 +30,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class)
 public class Adoption implements Serializable{
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idAdoption;
     @Temporal(TemporalType.DATE)
     private Date dateAdoption;

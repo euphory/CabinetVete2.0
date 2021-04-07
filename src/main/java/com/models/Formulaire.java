@@ -31,7 +31,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class)
 public class Formulaire implements Serializable{
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idFormulaire;
     @Temporal(TemporalType.DATE)
     private Date dateFormulaire;

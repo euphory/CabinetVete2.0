@@ -11,6 +11,7 @@ import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Objects;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -36,7 +37,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class)
 public class Animal implements Serializable{
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idAnimal;
     @Column(length=70)
     private String surnom;
@@ -94,13 +95,15 @@ public class Animal implements Serializable{
         this.antecedents = antecedents;
     }
 
+    public void setIdAnimal(Long idAnimal) {
+        this.idAnimal = idAnimal;
+    }
+
     public Long getIdAnimal() {
         return idAnimal;
     }
 
-    public void setIdAnimal(Long idAnimal) {
-        this.idAnimal = idAnimal;
-    }
+
 
     public String getSurnom() {
         return surnom;
@@ -181,6 +184,71 @@ public class Animal implements Serializable{
 
     public void setAntecedents(Set<Antecedent> antecedents) {
         this.antecedents = antecedents;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 97 * hash + Objects.hashCode(this.idAnimal);
+        hash = 97 * hash + Objects.hashCode(this.surnom);
+        hash = 97 * hash + Objects.hashCode(this.dateNaissance);
+        hash = 97 * hash + (int) (Double.doubleToLongBits(this.poid) ^ (Double.doubleToLongBits(this.poid) >>> 32));
+        hash = 97 * hash + Objects.hashCode(this.consultations);
+        hash = 97 * hash + Objects.hashCode(this.espece);
+        hash = 97 * hash + Objects.hashCode(this.personne);
+        hash = 97 * hash + Objects.hashCode(this.adoptable);
+        hash = 97 * hash + Objects.hashCode(this.formulaires);
+        hash = 97 * hash + Objects.hashCode(this.prestations);
+        hash = 97 * hash + Objects.hashCode(this.antecedents);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Animal other = (Animal) obj;
+        if (Double.doubleToLongBits(this.poid) != Double.doubleToLongBits(other.poid)) {
+            return false;
+        }
+        if (!Objects.equals(this.surnom, other.surnom)) {
+            return false;
+        }
+        if (!Objects.equals(this.idAnimal, other.idAnimal)) {
+            return false;
+        }
+        if (!Objects.equals(this.dateNaissance, other.dateNaissance)) {
+            return false;
+        }
+        if (!Objects.equals(this.consultations, other.consultations)) {
+            return false;
+        }
+        if (!Objects.equals(this.espece, other.espece)) {
+            return false;
+        }
+        if (!Objects.equals(this.personne, other.personne)) {
+            return false;
+        }
+        if (!Objects.equals(this.adoptable, other.adoptable)) {
+            return false;
+        }
+        if (!Objects.equals(this.formulaires, other.formulaires)) {
+            return false;
+        }
+        if (!Objects.equals(this.prestations, other.prestations)) {
+            return false;
+        }
+        if (!Objects.equals(this.antecedents, other.antecedents)) {
+            return false;
+        }
+        return true;
     }
 
 

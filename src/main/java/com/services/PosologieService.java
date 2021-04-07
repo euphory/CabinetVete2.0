@@ -5,8 +5,8 @@
  */
 package com.services;
 
-import com.models.Employe;
-import com.repositories.EmployeRepository;
+import com.models.Posologie;
+import com.repositories.PosologieRepository;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,28 +17,26 @@ import org.springframework.stereotype.Service;
  * @author PC
  */
 @Service
-public class EmployeService {
+public class PosologieService {
     
     @Autowired
-    private EmployeRepository employeRepository;    
-    @Autowired
-
-    //retourne une liste d'Employes
-    public List<Employe> getEmployes(){
-        return employeRepository.findAll();
+    private PosologieRepository posologieRepository;
+    //retourne une liste d'Posologies
+    public List<Posologie> getPosologies(){
+        return posologieRepository.findAll();
     }
     
-    public void save(Employe employe){
-        employeRepository.save(employe);
+    public void save(Posologie posologie){
+        posologieRepository.save(posologie);
     }
     
     //Get by Id
-    public Optional<Employe> findById(Long id){
-        return employeRepository.findById(id);
+    public Optional<Posologie> findById(Long id){
+        return posologieRepository.findById(id);
     }
     
     public void delete(Long id){
-        employeRepository.deleteById(id);
+        posologieRepository.deleteById(id);
     }
     
 }

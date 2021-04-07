@@ -25,7 +25,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Entity
 public class Facture implements Serializable{
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idFacture;
     @Temporal(TemporalType.DATE)
     private Date date;

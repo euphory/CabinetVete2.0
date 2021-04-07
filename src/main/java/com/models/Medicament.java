@@ -24,7 +24,7 @@ import javax.persistence.Table;
 
 public class Medicament implements Serializable{
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(length=70)
     private String nom;

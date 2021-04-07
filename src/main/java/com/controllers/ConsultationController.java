@@ -57,8 +57,9 @@ public class ConsultationController {
     public Optional<Consultation> findById(Long id){
         return consultationService.findById(id);
     }
+    
     @RequestMapping(value="/consultations/update", method= {RequestMethod.PUT, RequestMethod.GET})
-    public String update(Consultation consultation){
+    public String update(Consultation consultation) {                          
     consultationService.save(consultation);
     return "redirect:/consultations";
     }

@@ -6,6 +6,8 @@
 package com.controllers;
 
 import com.models.Employe;
+import com.models.SecretaireMedical;
+import com.models.Veterinaire;
 import com.services.EmployeService;
 import com.services.FormulaireService;
 import com.services.SecretaireMedicalService;
@@ -31,7 +33,7 @@ public class EmployeController {
     @Autowired
     private EmployeService employeService;
     @Autowired
-    private VeterinaireService Service;
+    private VeterinaireService veterinaireService;
     @Autowired
     private SecretaireMedicalService secretaireMedicalService;
     
@@ -40,14 +42,18 @@ public class EmployeController {
     public String getEmployes(Model model){
         
         
-        List<Employe> employeList = employeService.getEmployes();
+        List<Employe> employeList = employeService.getEmployes( );   
+        List<Veterinaire> veterinaireList = veterinaireService.getVeterinaires();
+        List<SecretaireMedical> SecretaireMedicalList = secretaireMedicalService.getSecretaireMedicals();
+
+        
         model.addAttribute("employes", employeList);
         return "employe";
     }
     
     @PostMapping("/employes/addNew")
-    public String addNew(Employe secretaireMedical){
-        employeService.save(secretaireMedical);
+    public String addNew(SecretaireMedical secretaire){
+        employeService.save(secretaire);    
         return "redirect:/employes";
     }
     
@@ -58,8 +64,8 @@ public class EmployeController {
     }
     @RequestMapping(value="/employes/update", method= {RequestMethod.PUT, RequestMethod.GET})
     public String update(Employe employe){
-    employeService.save(employe);
-    return "redirect:/employes";
+        employeService.save(employe);
+        return "redirect:/employes";
     }
     
     @RequestMapping(value="/employes/delete", method= {RequestMethod.DELETE, RequestMethod.GET})

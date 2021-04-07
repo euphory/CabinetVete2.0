@@ -27,7 +27,7 @@ import lombok.NoArgsConstructor;
 @Entity
 public class Personne implements Serializable {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idPersonne;
     @Column(length=70)
     private String nom;
@@ -75,6 +75,8 @@ public class Personne implements Serializable {
         this.animaux = animaux;
         this.consultations = consultations;
     }
+
+
 
     public Long getIdPersonne() {
         return idPersonne;

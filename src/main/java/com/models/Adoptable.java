@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,7 +26,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Entity
 public class Adoptable implements Serializable{
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idAdoptable;
     @Temporal(TemporalType.DATE)
     private Date dateAbandon;
@@ -36,9 +37,10 @@ public class Adoptable implements Serializable{
 -- - Associations                                                            ---
 -- -----------------------------------------------------------------------------
 */
-    @OneToOne 
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="idAnimal", nullable=true )
     private Animal animal;
+    
 /**
 -- -----------------------------------------------------------------------------
 -- - Constructor                                                             ---

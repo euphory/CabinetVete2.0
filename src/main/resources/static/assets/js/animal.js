@@ -1,9 +1,10 @@
 $('document').ready(function(){
-    $('.table #addButton').on('click',function(event){
+    $('.table #addModal').on('click',function(event){
         event.preventDefault();
         var href = $(this).attr('href');        
-        $.get(href, function(adoption, status){
+        $.get(href, function(animal, status){
            $('#ddlEspeceAdd').val(animal.espece.idEspece);
+           $('#ddlPersonneAdd').val(animal.personne.idPersonne);
         });
         $('#addModal').modal();
     });

@@ -23,7 +23,7 @@ import javax.persistence.OneToMany;
 @Entity
 public class ArticleMedical implements Serializable{
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long articleMedicalId;
     private int reference;
     @Column(length=70)
