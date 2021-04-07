@@ -80,31 +80,31 @@
            <div class="form-row">
                 <div class="col">
                 <label for="recipient-name" class="col-form-label">Nom</label>
-                <input type="text" class="form-control" id="recipient-name"   name="nom">
+                <input type="text" required class="form-control" id="recipient-name" name="nom">
                 </div>
             <div class="col">
                 <label for="recipient-name" class="col-form-label">Prénom</label>
-                <input type="text" class="form-control" id="recipient-name" name="prenom">
+                <input type="text" required class="form-control" id="recipient-name" name="prenom">
             </div>
             </div>
         <div class="form-row">
   </div>
    <div class="form-group">
    <label for="inputEmail4">Email</label>
-   <input type="email" class="form-control" id="recipient-name" name="adresseMail">
+   <input type="email" required class="form-control" id="recipient-name" name="adresseMail">
   </div>
   <div class="form-group">
     <label for="inputAddress">Adresse</label>
-    <textarea type="text" class="form-control" id="recipient-name" name="adresse"></textarea>
+    <textarea type="text" required class="form-control" id="recipient-name" name="adresse"></textarea>
   </div>
             <div class="form-row">
                 <div class="col">
                     <label for="recipient-name" class="col-form-label">Numéro de téléphone</label>
-                    <input type="text" class="form-control" id="recipient-name"   name="telephone" pattern="[0-9]">
+                    <input type="tel" required class="form-control" id="recipient-name"   name="telephone" >
                 </div>
             <div class="col">
                 <label for="recipient-name" class="col-form-label">Numéro de l'assurance</label>
-                <input type="text" class="form-control" id="recipient-name" name="numAssurance" pattern="[0-9]">
+                <input type="text" required class="form-control" id="recipient-name" name="numAssurance" pattern="[0-9]{6}">
             </div>
         </div>  
             
@@ -124,7 +124,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modifier un Personne</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Modifier </h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -133,31 +133,31 @@
         <form th:action="@{/personnes/update}" method="put">  
         <div class="form-group">
           <label for="recipient-name" class="col-form-label">Numero d'identifiant d'un personne</label>
-          <input type="text" class="form-control" id="idPersonneEdit" name="idPersonne" readonly>
+          <input type="text" required class="form-control" id="idPersonneEdit" name="idPersonne" readonly>
         </div> 
         <div class="form-group">
-          <label for="recipient-name" class="col-form-label">Nom du personne</label>
-          <input type="text" class="form-control" id="nomPersonneEdit" name="nom">
+          <label for="recipient-name" class="col-form-label">Nom </label>
+          <input type="text" required class="form-control" id="nomPersonneEdit" name="nom">
         </div>          
         <div class="form-group">
-          <label for="recipient-name" class="col-form-label">Prenom du personne</label>
-          <input type="text" class="form-control" id="prenomPersonneEdit" name="nom">
+          <label for="recipient-name" class="col-form-label">Prenom </label>
+          <input type="text" required class="form-control" id="prenomPersonneEdit" name="prenom">
         </div>          
         <div class="form-group">
-          <label for="recipient-name" class="col-form-label">Adresse du personne</label>
-          <textarea type="text" class="form-control" id="adressePersonneEdit" name="adresse"></textarea>
+          <label for="recipient-name" class="col-form-label">Adresse</label>
+          <textarea type="text" required class="form-control" id="adressePersonneEdit" name="adresse"></textarea>
         </div>            
         <div class="form-group">
-          <label for="recipient-name" class="col-form-label">Numero de TVA du personne</label>
-          <input type="text" class="form-control" id="adresseMailPersonneEdit" name="adresseMail">
+          <label for="recipient-name" class="col-form-label">Adresse Email </label>
+          <input type="email" required class="form-control" id="adresseMailPersonneEdit" name="adresseMail">
         </div>        
         <div class="form-group">
           <label for="recipient-name" class="col-form-label">Telephone du personne</label>
-          <input type="text" class="form-control" id="telephonePersonneEdit" name="telephone" pattern="[0-9]">
+          <input type="tel" required class="form-control" id="telephonePersonneEdit" name="telephone" >
         </div>      
         <div class="form-group">
-          <label for="recipient-name" class="col-form-label">Numero de compte du personne</label>
-          <input type="text" class="form-control" id="numAssurancePersonneEdit" name="numAssurance" pattern="[0-9]">
+          <label for="recipient-name" class="col-form-label">Numero de l'assurance</label>
+          <input type="text" required class="form-control" id="numAssurancePersonneEdit" name="numAssurance" pattern="[0-9]{6}">
         </div>     
           <div class="form-group">
         <button type="submit" class="btn btn-primary">Modifier</button>
@@ -176,7 +176,7 @@
     <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Details d'un personne</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Details d'une personne</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -185,31 +185,31 @@
 
   -
         <div class="form-group">
-          <label for="recipient-name" class="col-form-label">Numero d'identifiant d'un personne</label>
+          <label for="recipient-name" class="col-form-label">Numero d'identifiant</label>
           <input type="text" class="form-control" id="idPersonneDetail" name="idPersonne" readonly>
         </div> 
         <div class="form-group">
-          <label for="recipient-name" class="col-form-label">Nom du personne</label>
+          <label for="recipient-name" class="col-form-label">Nom </label>
           <input type="text" class="form-control" id="nomPersonneDetail" name="nom">
         </div>          
         <div class="form-group">
-          <label for="recipient-name" class="col-form-label">Prenom du personne</label>
-          <input type="text" class="form-control" id="prenomPersonneDetail" name="nom">
+          <label for="recipient-name" class="col-form-label">Prenom </label>
+          <input type="text" class="form-control" id="prenomPersonneDetail" name="prenom">
         </div>          
         <div class="form-group">
-          <label for="recipient-name" class="col-form-label">Adresse du personne</label>
+          <label for="recipient-name" class="col-form-label">Adresse</label>
           <textarea type="text" class="form-control" id="adressePersonneDetail" name="adresse"></textarea>
         </div>            
         <div class="form-group">
-          <label for="recipient-name" class="col-form-label">Numero de TVA du personne</label>
+          <label for="recipient-name" class="col-form-label">Adresse email</label>
           <input type="text" class="form-control" id="adresseMailPersonneDetail" name="adresseMail">
         </div>        
         <div class="form-group">
-          <label for="recipient-name" class="col-form-label">Telephone du personne</label>
+          <label for="recipient-name" class="col-form-label">Telephone </label>
           <input type="text" class="form-control" id="telephonePersonneDetail" name="telephone">
         </div>      
         <div class="form-group">
-          <label for="recipient-name" class="col-form-label">Numero de compte du personne</label>
+          <label for="recipient-name" class="col-form-label">Numero de l'assurance</label>
           <input type="text" class="form-control" id="numAssurancePersonneDetail" name="numAssurance">
         </div> 
       <div class="modal-footer">
