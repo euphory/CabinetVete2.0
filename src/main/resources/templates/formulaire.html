@@ -8,7 +8,8 @@
 <body>
     <div th:replace="/commun/header :: navbar">
         
-    </div>
+    </div><!-- End Header -->
+
   <main id="main">
 
     <!-- ======= Breadcrumbs Section ======= -->
@@ -16,32 +17,30 @@
       <div class="container">
 
         <div class="d-flex justify-content-between align-items-center">
-          <h2>Liste des Adoptions</h2>
+          <h2>Liste des Formulaires</h2>
           <ol>
             <li><a href="/index">Home</a></li>
-            <li>Adoptions</li>
+            <li>formulaires</li>
           </ol>
         </div>
-<button type="button" class="btn btn-success" data-toggle="modal" data-target="#addModal" id="addButton">Ajouter</button>
+<button type="button" class="btn btn-success" data-toggle="modal" data-target="#addModal" >Ajouter</button>
           <table class="table">
               <thead>
                 <tr>
-                   <th>Date de l'adoption</th>
-                   <th>Frais d'adoption</th>
+                   <th>Date d'émission du formulaire</th>
+                   <th>Motif de l'Adoption</th>
                    <th>Modification</th>
                 </tr>
               </thead>
               <tbody>
-                  <tr th:each="adoption:${adoptions}">
-
-                      <td th:text="${#dates.format(adoption.dateAdoption, 'dd-MM-yyyy')}"></td>
-                      <td th:text="${adoption.frais}"></td>
-                      <td th:text="${adoption.animal.poid}"></td>
+                  <tr th:each="formulaire:${formulaires}">
+                      <td th:text="${#dates.format(formulaire.dateFormulaire, 'dd-MM-yyyy')}"/></td>
+                      <td th:text="${formulaire.raison}"></td>
                       <td>
                           <div class="btn-group"> 
-                              <a th:href="@{/adoptions/findById/(id=${adoption.idAdoption})}" class=" btn btn-primary" id="editButton">éditer</a>
-                              <a th:href="@{/adoptions/findById/(id=${adoption.idAdoption})}" class=" btn btn-success" id="detailButton">détails</a>
-                              <a th:href="@{/adoptions/delete/(id=${adoption.idAdoption})}" class=" btn btn-danger" id="deleteButton">supprimer</a>
+                              <a th:href="@{/formulaires/findById/(id=${formulaire.idFormulaire})}" class=" btn btn-primary" id="editButton">éditer</a>
+                              <a th:href="@{/formulaires/findById/(id=${formulaire.idFormulaire})}" class=" btn btn-success" id="detailsButton">détails</a>
+                              <a th:href="@{/formulaires/delete/(id=${formulaire.idFormulaire})}" class=" btn btn-danger" id="deleteButton">supprimer</a>
                           </div>
                       </td>
                   </tr>
@@ -61,46 +60,37 @@
     </section>
     <!-- bouton ajouter-->
 <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+    <form th:action="@{/formulaires/addNew}" method="post">   
+    <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Ajouter une adoption</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Ajouter un formulaire</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-    </div>
-    <div class="modal-body">
-        <form th:action="@{/adoptions/addNew}" method="post">             
-        <div class='form-group'>
-            <label for="ddlFormulaireAdd" class="col-form-label">Formulaires:</label>
-            <select class="form-control" id="ddlAdoptionAdd" name="adoptionidAdoption">
-                <option>-SELECTIONNER-</option>
-                <option th:each="formulaire: ${formulaires}"
-                    th:value="${formulaire.idFormulaire}"
-                    th:text="${formulaire.idFormulaire}">
-                </option>
-            </select>   
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="recipient-name" class="col-form-label">Date d'emission du formulaire</label>
+          <input type="date" class="form-control" id="recipient-name"name="dateFormulaire">
+        </div>          
+         <div class="form-group">
+          <label for="recipient-name" class="col-form-label">Motivation de l'adoption</label>
+          <textarea type="text" class="form-control" id="recipient-name"name="raison"></textarea>
         </div>
-            <div class="form-group">
-                <label for="recipient-name" class="col-form-label">Date d'adoption</label>
-                <input type="date" class="form-control" id="recipient-name"name="dateAdoption">
-            </div>          
-            <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Frais d'adoption</label>
-            <input type="number" placeholder="1.0" step="0.01" class="form-control" id="recipient-name"name="frais">
-          </div>
           <div class="form-group">
         <button type="submit" class="btn btn-primary">Ajouter</button>
           </div>
-        </form>
-    </div>
-      <div class="modal-footer">
+        <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
+        </form>
+      </div>
+
     </div>
   </div>
 </div>
-        <!-- bouton moddifier pour les lignes-->
+        <!-- bouton modifier pour les lignes-->
 <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -111,58 +101,66 @@
         </button>
       </div>
       <div class="modal-body">
-          <form th:action="@{/adoptions/update}" method="put">  
+          <form th:action="@{/formulaires/update}" method="put">  
           <div class="form-group">
-            <label for="recipient-name" class="col-form-label">id</label>
-            <input type="text" class="form-control" id="idAdoptionEdit"name="idAdoption" readonly>
+            <label for="recipient-name" class="col-form-label">Numero du formulaire</label>
+            <input type="text" class="form-control" id="idFormulaireEdit"name="idFormulaire" readonly>
           </div> 
           <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Date d'adoption</label>
-            <input type="date" class="form-control" id="dateAdoptionEdit"name="dateAdoption">
+            <label for="recipient-name" class="col-form-label">Date d'émission du formulaire</label>
+            <input type="date" class="form-control" id="dateFormulaireEdit"name="dateFormulaire">
           </div>          
             <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Frai d'adoption</label>
-            <input type="text" class="form-control" id="fraisAdoptionEdit"name="frais">
+            <label for="recipient-name" class="col-form-label">Motivation de l'Adoption</label>
+            <textarea type="text" class="form-control" id="raisonFormulaireEdit"name="raison"></textarea>
           </div>
           <div class="form-group">
         <button type="submit" class="btn btn-primary">Modifier</button>
           </div>
+        </form>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
-        </form>
       </div>
 
     </div>
   </div>
 </div>
-        <!-- bouton detail pour les lignes-->
-        <div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+<!-- bouton detail pour les lignes-->
+<div class="modal fade" id="detailsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <form th:action="@{/formulaires/update}" method="put">  
+    <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Details d'une adoption</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Details d'un formulaire</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-          <form th:action="@{/adoptions/update}" method="put">  
-          <div class="form-group">
-            <label for="recipient-name" class="col-form-label">id</label>
-            <input type="text" class="form-control" id="idAdoptionDetail"name="idAdoption" readonly>
-          </div> 
-          <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Date d'adoption</label>
-            <input type="date" class="form-control" id="dateAdoptionDetail"name="dateAdoption">
-          </div>          
-            <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Frai d'adoption</label>
+
+        <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Numero du formulaire</label>
+            <input type="text" class="form-control" id="idFormulaireDetail"name="idFormulaire" readonly>
+        </div>
+        <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Date d'émission du formulaire</label>
+            <input type="date" class="form-control" id="dateFormulaireDetail"name="dateFormulaire">
+        </div>          
+        <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Motivation de l'adoption</label>
+            <textarea type="text" class="form-control" id="raisonFormulaireDetail"name="raison"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Date de l'adoption</label>
+            <input type="text" class="form-control" id="dateAdoptionDetail"name="dateAdoption">
+        </div>
+        <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Frais de l'adoption</label>
             <input type="text" class="form-control" id="fraisAdoptionDetail"name="frais">
-          </div>
+        </div>
         </form>
-          
-      <div class="modal-footer">
+          <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
       </div>
@@ -170,7 +168,7 @@
     </div>
   </div>
 </div>
-          <!-- bouton supprimer pour les lignes-->  
+<!-- bouton supprimer pour les lignes-->  
  <div class="modal" id="deleteModal" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -191,17 +189,15 @@
   </div>
 </div>
   </main><!-- End #main -->
-
- <div th:replace="/commun/header :: footer">
+<div th:replace="/commun/header :: footer">
         
     </div>
   <!-- ======= Footer ======= -->
     <div th:replace="/commun/header :: body-bottom-script">
         
     </div>
-  <script src="assets/js/adoption.js"></script>
+  <script src="assets/js/formulaire.js"></script>
 
-  <!-- Template Main JS File -->
 
 </body>
 

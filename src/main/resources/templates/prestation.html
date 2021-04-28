@@ -8,7 +8,8 @@
 <body>
     <div th:replace="/commun/header :: navbar">
         
-    </div>
+    </div><!-- End Header -->
+
   <main id="main">
 
     <!-- ======= Breadcrumbs Section ======= -->
@@ -16,32 +17,29 @@
       <div class="container">
 
         <div class="d-flex justify-content-between align-items-center">
-          <h2>Liste des Adoptions</h2>
+          <h2>Liste des quantitée utilisée </h2>
           <ol>
             <li><a href="/index">Home</a></li>
-            <li>Adoptions</li>
+            <li>Quantitée utilisée</li>
           </ol>
         </div>
 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addModal" id="addButton">Ajouter</button>
           <table class="table">
               <thead>
                 <tr>
-                   <th>Date de l'adoption</th>
-                   <th>Frais d'adoption</th>
-                   <th>Modification</th>
+                   <th>Identifiant de la quantite utilisée</th>
+                   <th>Quantite utilisée lors de la Prestation</th>
                 </tr>
               </thead>
               <tbody>
-                  <tr th:each="adoption:${adoptions}">
-
-                      <td th:text="${#dates.format(adoption.dateAdoption, 'dd-MM-yyyy')}"></td>
-                      <td th:text="${adoption.frais}"></td>
-                      <td th:text="${adoption.animal.poid}"></td>
+                  <tr th:each="prestation:${prestations}">
+                      <td th:text="${prestation.prestationId}"></td>
+                      <td th:text="${prestation.quantiteUtilise}"></td>                
                       <td>
                           <div class="btn-group"> 
-                              <a th:href="@{/adoptions/findById/(id=${adoption.idAdoption})}" class=" btn btn-primary" id="editButton">éditer</a>
-                              <a th:href="@{/adoptions/findById/(id=${adoption.idAdoption})}" class=" btn btn-success" id="detailButton">détails</a>
-                              <a th:href="@{/adoptions/delete/(id=${adoption.idAdoption})}" class=" btn btn-danger" id="deleteButton">supprimer</a>
+                              <a th:href="@{/prestations/findById/(id=${prestation.prestationId})}" class=" btn btn-primary" id="editButton">éditer</a>
+                              <a th:href="@{/prestations/findById/(id=${prestation.prestationId})}" class=" btn btn-success" id="detailButton">détails</a>
+                              <a th:href="@{/prestations/delete/(id=${prestation.prestationId})}" class=" btn btn-danger" id="deleteButton">supprimer</a>
                           </div>
                       </td>
                   </tr>
@@ -64,30 +62,27 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Ajouter une adoption</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Ajouter une prestation</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
     </div>
     <div class="modal-body">
-        <form th:action="@{/adoptions/addNew}" method="post">             
-        <div class='form-group'>
-            <label for="ddlFormulaireAdd" class="col-form-label">Formulaires:</label>
-            <select class="form-control" id="ddlAdoptionAdd" name="adoptionidAdoption">
-                <option>-SELECTIONNER-</option>
-                <option th:each="formulaire: ${formulaires}"
-                    th:value="${formulaire.idFormulaire}"
-                    th:text="${formulaire.idFormulaire}">
+        <form th:action="@{/prestations/addNew}" method="post"> 
+            <div>
+            <div class='form-group'>
+            <label for="ddlConsultationAdd" class="col-form-label">Consultation:</label>
+            <select class="form-control" id="ddlConsultationAdd" name="idConsultation">
+                <option th:each="consultation:${consultations}"
+                    th:value="${consultation.idConsultation}"
+                    th:text ="#{${consultation.idConsultation}}">
                 </option>
             </select>   
         </div>
+            </div>
             <div class="form-group">
-                <label for="recipient-name" class="col-form-label">Date d'adoption</label>
-                <input type="date" class="form-control" id="recipient-name"name="dateAdoption">
-            </div>          
-            <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Frais d'adoption</label>
-            <input type="number" placeholder="1.0" step="0.01" class="form-control" id="recipient-name"name="frais">
+            <label for="recipient-name" class="col-form-label">Quantite utilisée lors de la Prestation</label>
+            <input type="number" class="form-control" id="recipient-name"name="quantiteUtilise">
           </div>
           <div class="form-group">
         <button type="submit" class="btn btn-primary">Ajouter</button>
@@ -105,24 +100,20 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modifier une adoption</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Modifier une prestation</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-          <form th:action="@{/adoptions/update}" method="put">  
+          <form th:action="@{/prestations/update}" method="put">  
           <div class="form-group">
-            <label for="recipient-name" class="col-form-label">id</label>
-            <input type="text" class="form-control" id="idAdoptionEdit"name="idAdoption" readonly>
-          </div> 
-          <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Date d'adoption</label>
-            <input type="date" class="form-control" id="dateAdoptionEdit"name="dateAdoption">
-          </div>          
+            <label for="recipient-name" class="col-form-label">Identifiant de la quantite utilisée</label>
+            <input type="text" class="form-control" id="idPrestationEdit"name="prestationId" readonly>
+          </div>        
             <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Frai d'adoption</label>
-            <input type="text" class="form-control" id="fraisAdoptionEdit"name="frais">
+            <label for="recipient-name" class="col-form-label">Quantite utilisée lors de la Prestation</label>
+            <input type="text" class="form-control" id="quantiteUtilisePrestationEdit"name="quantiteUtilise">
           </div>
           <div class="form-group">
         <button type="submit" class="btn btn-primary">Modifier</button>
@@ -141,24 +132,20 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Details d'une adoption</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Details d'une prestation</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-          <form th:action="@{/adoptions/update}" method="put">  
+          <form th:action="@{/prestations/update}" method="put">  
           <div class="form-group">
-            <label for="recipient-name" class="col-form-label">id</label>
-            <input type="text" class="form-control" id="idAdoptionDetail"name="idAdoption" readonly>
-          </div> 
-          <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Date d'adoption</label>
-            <input type="date" class="form-control" id="dateAdoptionDetail"name="dateAdoption">
-          </div>          
+            <label for="recipient-name" class="col-form-label">Identifiant de la quantite utilisée</label>
+            <input type="text" class="form-control" id="idPrestationDetail"name="prestationId" readonly>
+          </div>         
             <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Frai d'adoption</label>
-            <input type="text" class="form-control" id="fraisAdoptionDetail"name="frais">
+            <label for="recipient-name" class="col-form-label">Quantite utilisée lors de la Prestation</label>
+            <input type="text" class="form-control" id="quantiteUtilisePrestationDetail"name="quantiteUtilise">
           </div>
         </form>
           
@@ -192,16 +179,14 @@
 </div>
   </main><!-- End #main -->
 
- <div th:replace="/commun/header :: footer">
+   <div th:replace="/commun/header :: footer">
         
     </div>
   <!-- ======= Footer ======= -->
     <div th:replace="/commun/header :: body-bottom-script">
         
     </div>
-  <script src="assets/js/adoption.js"></script>
-
-  <!-- Template Main JS File -->
+  <script src="assets/js/prestation.js"></script>
 
 </body>
 

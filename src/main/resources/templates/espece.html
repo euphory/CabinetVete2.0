@@ -16,32 +16,30 @@
       <div class="container">
 
         <div class="d-flex justify-content-between align-items-center">
-          <h2>Liste des Adoptions</h2>
+          <h2>Liste des Espèces</h2>
           <ol>
             <li><a href="/index">Home</a></li>
-            <li>Adoptions</li>
+            <li>Especes</li>
           </ol>
         </div>
 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addModal" id="addButton">Ajouter</button>
           <table class="table">
               <thead>
                 <tr>
-                   <th>Date de l'adoption</th>
-                   <th>Frais d'adoption</th>
+                   <th>Date de l'espèce</th>
+                   <th>Frais d'espèce</th>
                    <th>Modification</th>
                 </tr>
               </thead>
               <tbody>
-                  <tr th:each="adoption:${adoptions}">
-
-                      <td th:text="${#dates.format(adoption.dateAdoption, 'dd-MM-yyyy')}"></td>
-                      <td th:text="${adoption.frais}"></td>
-                      <td th:text="${adoption.animal.poid}"></td>
+                  <tr th:each="espece:${especes}">
+                      <td th:text="${espece.idEspece}"></td>
+                      <td th:text="${espece.nom}"></td>
                       <td>
                           <div class="btn-group"> 
-                              <a th:href="@{/adoptions/findById/(id=${adoption.idAdoption})}" class=" btn btn-primary" id="editButton">éditer</a>
-                              <a th:href="@{/adoptions/findById/(id=${adoption.idAdoption})}" class=" btn btn-success" id="detailButton">détails</a>
-                              <a th:href="@{/adoptions/delete/(id=${adoption.idAdoption})}" class=" btn btn-danger" id="deleteButton">supprimer</a>
+                              <a th:href="@{/especes/findById/(id=${espece.idEspece})}" class=" btn btn-primary" id="editButton">éditer</a>
+                              <a th:href="@{/especes/findById/(id=${espece.idEspece})}" class=" btn btn-success" id="detailButton">détails</a>
+                              <a th:href="@{/especes/delete/(id=${espece.idEspece})}" class=" btn btn-danger" id="deleteButton">supprimer</a>
                           </div>
                       </td>
                   </tr>
@@ -64,33 +62,19 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Ajouter une adoption</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Ajouter une espèce</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
     </div>
     <div class="modal-body">
-        <form th:action="@{/adoptions/addNew}" method="post">             
-        <div class='form-group'>
-            <label for="ddlFormulaireAdd" class="col-form-label">Formulaires:</label>
-            <select class="form-control" id="ddlAdoptionAdd" name="adoptionidAdoption">
-                <option>-SELECTIONNER-</option>
-                <option th:each="formulaire: ${formulaires}"
-                    th:value="${formulaire.idFormulaire}"
-                    th:text="${formulaire.idFormulaire}">
-                </option>
-            </select>   
-        </div>
+        <form th:action="@{/especes/addNew}" method="post">                  
             <div class="form-group">
-                <label for="recipient-name" class="col-form-label">Date d'adoption</label>
-                <input type="date" class="form-control" id="recipient-name"name="dateAdoption">
-            </div>          
-            <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Frais d'adoption</label>
-            <input type="number" placeholder="1.0" step="0.01" class="form-control" id="recipient-name"name="frais">
+            <label for="recipient-name" class="col-form-label">Nom de l'espèce</label>
+            <input type="text" class="form-control" id="recipient-name"name="nom">
           </div>
           <div class="form-group">
-        <button type="submit" class="btn btn-primary">Ajouter</button>
+        <button type="submit" class="btn btn-success">Ajouter</button>
           </div>
         </form>
     </div>
@@ -100,29 +84,25 @@
     </div>
   </div>
 </div>
-        <!-- bouton moddifier pour les lignes-->
+       <!-- bouton moddifier pour les lignes-->
 <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modifier une adoption</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Modifier une espèce</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-          <form th:action="@{/adoptions/update}" method="put">  
+          <form th:action="@{/especes/update}" method="put">  
           <div class="form-group">
-            <label for="recipient-name" class="col-form-label">id</label>
-            <input type="text" class="form-control" id="idAdoptionEdit"name="idAdoption" readonly>
-          </div> 
-          <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Date d'adoption</label>
-            <input type="date" class="form-control" id="dateAdoptionEdit"name="dateAdoption">
-          </div>          
+            <label for="recipient-name" class="col-form-label">identifiant de l'espèce</label>
+            <input type="text" class="form-control" id="idEspeceEdit"name="idEspece" readonly>
+          </div>        
             <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Frai d'adoption</label>
-            <input type="text" class="form-control" id="fraisAdoptionEdit"name="frais">
+            <label for="recipient-name" class="col-form-label">Nom de l'espèce</label>
+            <input type="text" class="form-control" id="nomEspeceEdit"name="nom">
           </div>
           <div class="form-group">
         <button type="submit" class="btn btn-primary">Modifier</button>
@@ -141,24 +121,20 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Details d'une adoption</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Details d'une espèce</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-          <form th:action="@{/adoptions/update}" method="put">  
+          <form th:action="@{/especes/update}" method="put">  
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">id</label>
-            <input type="text" class="form-control" id="idAdoptionDetail"name="idAdoption" readonly>
-          </div> 
-          <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Date d'adoption</label>
-            <input type="date" class="form-control" id="dateAdoptionDetail"name="dateAdoption">
-          </div>          
+            <input type="text" class="form-control" id="idEspeceDetail"name="idEspece" readonly>
+          </div>         
             <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Frai d'adoption</label>
-            <input type="text" class="form-control" id="fraisAdoptionDetail"name="frais">
+            <label for="recipient-name" class="col-form-label">Nom d'espèce</label>
+            <input type="text" class="form-control" id="nomEspeceDetail"name="nom">
           </div>
         </form>
           
@@ -199,7 +175,7 @@
     <div th:replace="/commun/header :: body-bottom-script">
         
     </div>
-  <script src="assets/js/adoption.js"></script>
+  <script src="assets/js/espece.js"></script>
 
   <!-- Template Main JS File -->
 

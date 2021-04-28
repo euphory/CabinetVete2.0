@@ -6,9 +6,9 @@
 package com.models;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -36,8 +36,7 @@ public class Prestation{
 -- -----------------------------------------------------------------------------
 */
     @OneToMany(mappedBy="articleMedical")
-    @JsonIgnore
-    private List<FAP> fap ;
+    private Set<FAP> fap = new HashSet<>();
  
     @ManyToOne
     @JoinColumn( name="idAnimal", nullable=false)
@@ -48,12 +47,10 @@ public class Prestation{
     private Consultation consultation;
     
     @OneToMany(mappedBy="prestation", fetch=FetchType.LAZY)
-    @JsonIgnore
-    private List<Prescription> prescriptions;   
+    private Set<Prescription> prescriptions;   
 
     @OneToMany(mappedBy = "service")
-    @JsonIgnore
-    private List<PrixVet> prixVet;
+    private Set<PrixVet> prixVet= new HashSet<>();
 /**
     -- -----------------------------------------------------------------------------
     -- - Constructor                                                             ---
@@ -69,24 +66,24 @@ public class Prestation{
         this.prestationId = prestationId;
     }
 
-    public List<FAP> getFap() {
+    public Set<FAP> getFap() {
         return fap;
     }
 
-    public void setFap(List<FAP> fap) {
+    public void setFap(Set<FAP> fap) {
         this.fap = fap;
     }
 
-    public List<Prescription> getPrescriptions() {
+    public Set<Prescription> getPrescriptions() {
         return prescriptions;
     }
 
 
-    public void setPrescriptions(List<Prescription> prescriptions) {
+    public void setPrescriptions(Set<Prescription> prescriptions) {
         this.prescriptions = prescriptions;
     }
 
-    public Prestation(long prestationId, int quantiteUtilise, Animal animal, Consultation consultation, List<Prescription> prescriptions) {
+    public Prestation(long prestationId, int quantiteUtilise, Animal animal, Consultation consultation, Set<Prescription> prescriptions) {
         this.prestationId = prestationId;
         this.quantiteUtilise = quantiteUtilise;
         this.animal = animal;
@@ -125,11 +122,11 @@ public class Prestation{
 
  
 
-    public List<PrixVet> getPrixVet() {
+    public Set<PrixVet> getPrixVet() {
         return prixVet;
     }
 
-    public void setPrixVet(List<PrixVet> prixVet) {
+    public void setPrixVet(Set<PrixVet> prixVet) {
         this.prixVet = prixVet;
     }
     

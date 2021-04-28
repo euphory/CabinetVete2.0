@@ -22,7 +22,6 @@ public class AnimalService {
     public void save(Animal animal){
         animalRepository.save(animal);
     }
- 
     
     //Get by Id
     public Optional<Animal> findById(Long id){

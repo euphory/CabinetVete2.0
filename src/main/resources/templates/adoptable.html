@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
 	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"/>
-
 <head th:replace="/commun/header :: commun-header"> 
 </head>
 
@@ -9,6 +8,7 @@
     <div th:replace="/commun/header :: navbar">
         
     </div>
+
   <main id="main">
 
     <!-- ======= Breadcrumbs Section ======= -->
@@ -16,32 +16,30 @@
       <div class="container">
 
         <div class="d-flex justify-content-between align-items-center">
-          <h2>Liste des Adoptions</h2>
+          <h2>Liste des Adoptables</h2>
           <ol>
             <li><a href="/index">Home</a></li>
-            <li>Adoptions</li>
+            <li>Adoptables</li>
           </ol>
         </div>
 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addModal" id="addButton">Ajouter</button>
           <table class="table">
               <thead>
                 <tr>
-                   <th>Date de l'adoption</th>
-                   <th>Frais d'adoption</th>
+                   <th>Date de l'adoptable</th>
+                   <th>Frais d'adoptable</th>
                    <th>Modification</th>
                 </tr>
               </thead>
               <tbody>
-                  <tr th:each="adoption:${adoptions}">
-
-                      <td th:text="${#dates.format(adoption.dateAdoption, 'dd-MM-yyyy')}"></td>
-                      <td th:text="${adoption.frais}"></td>
-                      <td th:text="${adoption.animal.poid}"></td>
+                  <tr th:each="adoptable:${adoptables}">
+                      <td th:text="${#dates.format(adoptable.dateAbandon,'dd-MM-yyyy')}"></td>
+                      <td th:text="${adoptable.motifAbandon}"></td>
                       <td>
                           <div class="btn-group"> 
-                              <a th:href="@{/adoptions/findById/(id=${adoption.idAdoption})}" class=" btn btn-primary" id="editButton">éditer</a>
-                              <a th:href="@{/adoptions/findById/(id=${adoption.idAdoption})}" class=" btn btn-success" id="detailButton">détails</a>
-                              <a th:href="@{/adoptions/delete/(id=${adoption.idAdoption})}" class=" btn btn-danger" id="deleteButton">supprimer</a>
+                              <a th:href="@{/adoptables/findById/(id=${adoptable.idAdoptable})}" class=" btn btn-primary" id="editButton">éditer</a>
+                              <a th:href="@{/adoptables/findById/(id=${adoptable.idAdoptable})}" class=" btn btn-success" id="detailButton">détails</a>
+                              <a th:href="@{/adoptables/delete/(id=${adoptable.idAdoptable})}" class=" btn btn-danger" id="deleteButton">supprimer</a>
                           </div>
                       </td>
                   </tr>
@@ -64,30 +62,30 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Ajouter une adoption</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Ajouter une adoptable</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
     </div>
     <div class="modal-body">
-        <form th:action="@{/adoptions/addNew}" method="post">             
+        <form th:action="@{/adoptables/addNew}" method="post">             
         <div class='form-group'>
-            <label for="ddlFormulaireAdd" class="col-form-label">Formulaires:</label>
-            <select class="form-control" id="ddlAdoptionAdd" name="adoptionidAdoption">
+            <label for="ddlAnimalAdd" class="col-form-label">Animaux:</label>
+            <select class="form-control" id="ddlAdoptableAdd" name="idAnimal">
                 <option>-SELECTIONNER-</option>
-                <option th:each="formulaire: ${formulaires}"
-                    th:value="${formulaire.idFormulaire}"
-                    th:text="${formulaire.idFormulaire}">
+                <option th:each="animal: ${animals}"
+                    th:value="${animal.idAnimal}"
+                    th:text="${animal.surnom}">
                 </option>
             </select>   
         </div>
             <div class="form-group">
-                <label for="recipient-name" class="col-form-label">Date d'adoption</label>
-                <input type="date" class="form-control" id="recipient-name"name="dateAdoption">
+                <label for="recipient-name" class="col-form-label">Date de l'abandon</label>
+                <input type="date" class="form-control" id="recipient-name"name="dateAbandon">
             </div>          
             <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Frais d'adoption</label>
-            <input type="number" placeholder="1.0" step="0.01" class="form-control" id="recipient-name"name="frais">
+            <label for="recipient-name" class="col-form-label">motif de l'abandon</label>
+            <textarea type="text" class="form-control" id="recipient-name"name="motifAbandon"></textarea>
           </div>
           <div class="form-group">
         <button type="submit" class="btn btn-primary">Ajouter</button>
@@ -105,24 +103,24 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modifier une adoption</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Modifier un animal adoptable</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-          <form th:action="@{/adoptions/update}" method="put">  
+          <form th:action="@{/adoptables/update}" method="put">  
           <div class="form-group">
-            <label for="recipient-name" class="col-form-label">id</label>
-            <input type="text" class="form-control" id="idAdoptionEdit"name="idAdoption" readonly>
+            <label for="recipient-name" class="col-form-label">Identification</label>
+            <input type="text" class="form-control" id="idAdoptableEdit"name="idAdoptable" readonly>
           </div> 
           <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Date d'adoption</label>
-            <input type="date" class="form-control" id="dateAdoptionEdit"name="dateAdoption">
+            <label for="recipient-name" class="col-form-label">Date de l'abandon</label>
+            <input type="date" class="form-control" id="dateAbandoneEdit"name="dateAbandon">
           </div>          
             <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Frai d'adoption</label>
-            <input type="text" class="form-control" id="fraisAdoptionEdit"name="frais">
+            <label for="recipient-name" class="col-form-label">motif de l'abandon</label>
+            <textarea type="text" class="form-control" id="motifAbandonEdit"name="motifAbandon"></textarea>
           </div>
           <div class="form-group">
         <button type="submit" class="btn btn-primary">Modifier</button>
@@ -141,24 +139,24 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Details d'une adoption</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Details d'un animal adoptable</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-          <form th:action="@{/adoptions/update}" method="put">  
+          <form th:action="@{/adoptables/update}" method="put">  
           <div class="form-group">
-            <label for="recipient-name" class="col-form-label">id</label>
-            <input type="text" class="form-control" id="idAdoptionDetail"name="idAdoption" readonly>
+            <label for="recipient-name" class="col-form-label">identification</label>
+            <input type="text" class="form-control" id="idAdoptableDetail"name="idAdoptable" readonly>
           </div> 
           <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Date d'adoption</label>
-            <input type="date" class="form-control" id="dateAdoptionDetail"name="dateAdoption">
+            <label for="recipient-name" class="col-form-label">Date de l'abandon</label>
+            <input type="date" class="form-control" id="dateAbandonDetail"name="dateAbandon">
           </div>          
             <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Frai d'adoption</label>
-            <input type="text" class="form-control" id="fraisAdoptionDetail"name="frais">
+            <label for="recipient-name" class="col-form-label">motif de l'abandon</label>            
+            <textarea type="text" class="form-control" id="motifAbandonDetail"name="motifAbandon"></textarea>
           </div>
         </form>
           
@@ -192,16 +190,14 @@
 </div>
   </main><!-- End #main -->
 
- <div th:replace="/commun/header :: footer">
+    <div th:replace="/commun/header :: footer">
         
     </div>
   <!-- ======= Footer ======= -->
     <div th:replace="/commun/header :: body-bottom-script">
         
     </div>
-  <script src="assets/js/adoption.js"></script>
-
-  <!-- Template Main JS File -->
+  <script src="assets/js/adoptable.js"></script>
 
 </body>
 

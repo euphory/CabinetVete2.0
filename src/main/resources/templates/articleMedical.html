@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"/>
+
+<head th:replace="/commun/header :: commun-header"> 
+</head>
+
+<body>
+    <div th:replace="/commun/header :: navbar">
+        
+    </div><!-- End Header -->
+
+  <main id="main">
+
+    <!-- ======= Breadcrumbs Section ======= -->
+    <section class="breadcrumbs">
+      <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center">
+          <h2>Liste des ArticleMedicaux</h2>
+          <ol>
+            <li><a href="/index">Home</a></li>
+            <li>ArticleMedicaux</li>
+          </ol>
+        </div>
+          <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addModal" id="addButton">Ajouter</button>
+          <table id="table" class="table">
+              <thead>
+                <tr>
+                   <th>Référence de l'article</th>
+                   <th>Nom de l'article</th>  
+                   <th>Quantité dans le stock</th>
+
+              </thead>
+              <tbody>
+                  <tr th:each="articleMedical:${articleMedicaux}">
+                      <td th:text="${articleMedical.reference}"></td>
+                      <td th:text="${articleMedical.nom}"></td>
+                      <td th:text="${articleMedical.quantite}"></td>
+                      <td>
+                          <div class="btn-group"> 
+                              <a th:href="@{/articleMedicaux/findById/(id=${articleMedical.articleMedicalId})}" class=" btn btn-primary" id="editButton">éditer</a>
+                              <a th:href="@{/articleMedicaux/findById/(id=${articleMedical.articleMedicalId})}" class=" btn btn-success" id="detailsButton">détails</a>
+                              <a th:href="@{/articleMedicaux/delete/(id=${articleMedical.articleMedicalId})}" class=" btn btn-danger" id="deleteButton">supprimer</a>
+                          </div>
+                      </td>
+                  </tr>
+              </tbody>
+              
+          </table>
+
+      </div>
+    </section><!-- End Breadcrumbs Section -->
+
+    <section class="inner-page">
+      <div class="container">
+        <p>
+          
+        </p>
+      </div>
+    </section>
+        <!-- bouton ajouter-->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Ajouter un articleMedical</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form th:action="@{/articleMedicaux/addNew}" method="post">             
+         
+        <div class="form-group">
+           <label for="recipient-name" class="col-form-label">Référence de l'Article</label>
+           <input type="number" class="form-control" id="recipient-name"name="reference">
+        </div>
+        <div class="form-group">
+           <label for="recipient-name" class="col-form-label">Nom de l'articl</label>
+           <input type="text" class="form-control" id="recipient-name"name="nom">
+        </div>
+        <div class="form-group">
+           <label for="recipient-name" class="col-form-label">Qantité dans le stock</label>
+           <input type="number" class="form-control" id="recipient-name"name="quantite">
+        </div>
+        <div class="form-group">
+        <button type="submit" class="btn btn-primary">Ajouter</button>
+        </div>
+            
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+        </div>          
+
+        </form>
+    </div>
+    </div>
+  </div>
+</div>
+        <!-- bouton modifier pour les lignes-->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modifier un Article Médical</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form th:action="@{/articleMedicaux/update}" method="put">  
+        <div class="form-group">
+          <label for="recipient-name" class="col-form-label">Numero d'identifiant d'un articleMedical</label>
+          <input type="text" class="form-control" id="articleMedicalIdEdit"name="articleMedicalId" readonly>
+        </div> 
+        <div class="form-group">
+          <label for="recipient-name" class="col-form-label">Référence de l'article</label>
+          <input type="number" class="form-control" id="referenceArticleMedicalEdit"name="reference">
+        </div>          
+        <div class="form-group">
+          <label for="recipient-name" class="col-form-label">Nom de l'article </label>
+          <input type="text" class="form-control" id="nomArticleMedicalEdit"name="nom">
+        </div>            
+        <div class="form-group">
+          <label for="recipient-name" class="col-form-label">Quantité dans le stock</label>
+          <input type="number" class="form-control" id="quantiteArticleMedicalEdit"name="quantite">
+        </div>        
+          <div class="form-group">
+        <button type="submit" class="btn btn-primary">Modifier</button>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- bouton detail pour les lignes-->
+<div class="modal fade" id="detailsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <form th:action="@{/articleMedicaux/update}" method="put">  
+    <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Details d'un articleMedical</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <div class="form-group">
+          <label for="recipient-name" class="col-form-label">Numero d'identifiant d'un article Medical</label>
+          <input type="text" class="form-control" id="articleMedicalIdDetail"name="articleMedicalId" readonly>
+        </div> 
+        <div class="form-group">
+          <label for="recipient-name" class="col-form-label">Référence de l'article</label>
+          <input type="number" class="form-control" id="referenceArticleMedicalDetail"name="reference">
+        </div>          
+        <div class="form-group">
+          <label for="recipient-name" class="col-form-label">ArticleMedical de l'animal</label>
+          <input type="text" class="form-control" id="nomArticleMedicalDetail"name="nom">
+        </div>          
+         <div class="form-group">
+          <label for="recipient-name" class="col-form-label">Quantité dans le stock</label>
+          <input type="number" class="form-control" id="quantiteArticleMedicalDetail"name="quantite">
+        </div>                
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- bouton supprimer pour les lignes-->  
+ <div class="modal" id="deleteModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Confirmer la suppression</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Etes-vous sûr de vouloir supprimer cette ligne ?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">non</button>
+        <a class="btn btn-primary" id="confirmDeleteButton" href="">supprimer</a>
+      </div>
+    </div>
+  </div>
+</div>
+  </main><!-- End #main -->
+
+ <div th:replace="/commun/header :: footer">
+        
+    </div>
+  <!-- ======= Footer ======= -->
+    <div th:replace="/commun/header :: body-bottom-script">
+        
+    </div>
+  <script src="assets/js/articleMedical.js"></script>
+
+</body>
+
+</html>

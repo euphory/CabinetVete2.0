@@ -40,8 +40,8 @@ public class FactureConsult implements Serializable{
 -- -----------------------------------------------------------------------------
 */
     @OneToOne 
-    @JoinColumn( name="id", nullable= true )
-    private Consultation id;
+    @JoinColumn( name="idConsultation", nullable= true )
+    private Consultation idConsultation;
     
 /**
 -- -----------------------------------------------------------------------------
@@ -53,13 +53,13 @@ public class FactureConsult implements Serializable{
     public FactureConsult() {
     }
 
-    public FactureConsult(Long idFactureConsult, Date date, String modeReglement, Date dateReglement, double total, Consultation id) {
+    public FactureConsult(Long idFactureConsult, Date date, String modeReglement, Date dateReglement, double total, Consultation idConsultation) {
         this.idFactureConsult = idFactureConsult;
         this.date = date;
         this.modeReglement = modeReglement;
         this.dateReglement = dateReglement;
         this.total = total;
-        this.id = id;
+        this.idConsultation = idConsultation;
     }
 
     public Long getIdFactureConsult() {
@@ -103,11 +103,11 @@ public class FactureConsult implements Serializable{
     }
 
     public Consultation getIdConsultation() {
-        return id;
+        return idConsultation;
     }
 
-    public void setIdConsultation(Consultation id) {
-        this.id = id;
+    public void setIdConsultation(Consultation idConsultation) {
+        this.idConsultation = idConsultation;
     }
 
     @Override
@@ -118,7 +118,7 @@ public class FactureConsult implements Serializable{
         hash = 37 * hash + Objects.hashCode(this.modeReglement);
         hash = 37 * hash + Objects.hashCode(this.dateReglement);
         hash = 37 * hash + (int) (Double.doubleToLongBits(this.total) ^ (Double.doubleToLongBits(this.total) >>> 32));
-        hash = 37 * hash + Objects.hashCode(this.id);
+        hash = 37 * hash + Objects.hashCode(this.idConsultation);
         return hash;
     }
 
@@ -149,7 +149,7 @@ public class FactureConsult implements Serializable{
         if (!Objects.equals(this.dateReglement, other.dateReglement)) {
             return false;
         }
-        if (!Objects.equals(this.id, other.id)) {
+        if (!Objects.equals(this.idConsultation, other.idConsultation)) {
             return false;
         }
         return true;

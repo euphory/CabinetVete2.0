@@ -5,7 +5,6 @@
  */
 package com.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.CascadeType;
@@ -25,7 +24,7 @@ import javax.persistence.OneToMany;
 public class Espece implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long idEspece;
     @Column(length=70)
     private String nom;
     
@@ -34,16 +33,15 @@ public class Espece implements Serializable{
 -- - Associations                                                            ---
 -- -----------------------------------------------------------------------------
  */  
-    @OneToMany( mappedBy = "espece", cascade = CascadeType.PERSIST)
-    @JsonIgnore
+    @OneToMany(cascade = CascadeType.PERSIST)
     private Set<Animal> animaux ;
 /**
 -- -----------------------------------------------------------------------------
 -- - Constructor                                                             ---
 -- -----------------------------------------------------------------------------
 */
-    public Espece(Long id, String nom, Set<Animal> animaux) {
-        this.id = id;
+    public Espece(Long idEspece, String nom, Set<Animal> animaux) {
+        this.idEspece = idEspece;
         this.nom = nom;
         this.animaux = animaux;
     }
@@ -51,12 +49,12 @@ public class Espece implements Serializable{
     public Espece() {
     }
 
-    public Long getId() {
-        return id;
+    public Long getIdEspece() {
+        return idEspece;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdEspece(Long idEspece) {
+        this.idEspece = idEspece;
     }
 
     public String getNom() {

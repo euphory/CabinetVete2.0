@@ -8,40 +8,41 @@
 <body>
     <div th:replace="/commun/header :: navbar">
         
-    </div>
+    </div><!-- End Header -->
+
   <main id="main">
 
     <!-- ======= Breadcrumbs Section ======= -->
-    <section class="breadcrumbs">
+     <section class="breadcrumbs">
       <div class="container">
 
         <div class="d-flex justify-content-between align-items-center">
-          <h2>Liste des Adoptions</h2>
+          <h2>Liste des Posologies</h2>
           <ol>
             <li><a href="/index">Home</a></li>
-            <li>Adoptions</li>
+            <li>Posologies</li>
           </ol>
         </div>
 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addModal" id="addButton">Ajouter</button>
           <table class="table">
               <thead>
                 <tr>
-                   <th>Date de l'adoption</th>
-                   <th>Frais d'adoption</th>
+                   <th>Identifiant Posologie</th>
+                   <th>Dosage</th>
+                   <th>Usage</th>                   
                    <th>Modification</th>
                 </tr>
               </thead>
               <tbody>
-                  <tr th:each="adoption:${adoptions}">
-
-                      <td th:text="${#dates.format(adoption.dateAdoption, 'dd-MM-yyyy')}"></td>
-                      <td th:text="${adoption.frais}"></td>
-                      <td th:text="${adoption.animal.poid}"></td>
+                  <tr th:each="posologie:${posologies}">
+                      <td th:text="${posologie.idPosologie}"></td>
+                      <td th:text="${posologie.dosage}"></td>
+                      <td th:text="${posologie.usage}"></td>
                       <td>
                           <div class="btn-group"> 
-                              <a th:href="@{/adoptions/findById/(id=${adoption.idAdoption})}" class=" btn btn-primary" id="editButton">éditer</a>
-                              <a th:href="@{/adoptions/findById/(id=${adoption.idAdoption})}" class=" btn btn-success" id="detailButton">détails</a>
-                              <a th:href="@{/adoptions/delete/(id=${adoption.idAdoption})}" class=" btn btn-danger" id="deleteButton">supprimer</a>
+                              <a th:href="@{/posologies/findById/(id=${posologie.idPosologie})}" class=" btn btn-primary" id="editButton">éditer</a>
+                              <a th:href="@{/posologies/findById/(id=${posologie.idPosologie})}" class=" btn btn-success" id="detailButton">détails</a>
+                              <a th:href="@{/posologies/delete/(id=${posologie.idPosologie})}" class=" btn btn-danger" id="deleteButton">supprimer</a>
                           </div>
                       </td>
                   </tr>
@@ -51,43 +52,49 @@
 
       </div>
     </section><!-- End Breadcrumbs Section -->
-
-    <section class="inner-page">
-      <div class="container">
-        <p>
-          
-        </p>
-      </div>
-    </section>
-    <!-- bouton ajouter-->
 <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Ajouter une adoption</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Ajouter une posologie</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
     </div>
     <div class="modal-body">
-        <form th:action="@{/adoptions/addNew}" method="post">             
+        <form th:action="@{/posologies/addNew}" method="post">
+        <div>
         <div class='form-group'>
-            <label for="ddlFormulaireAdd" class="col-form-label">Formulaires:</label>
-            <select class="form-control" id="ddlAdoptionAdd" name="adoptionidAdoption">
+            <label for="ddlPrescriptionAdd" class="col-form-label">Prescription:</label>
+            <select class="form-control" id="ddlPrescriptionAdd" name="prescriptionId">
                 <option>-SELECTIONNER-</option>
-                <option th:each="formulaire: ${formulaires}"
-                    th:value="${formulaire.idFormulaire}"
-                    th:text="${formulaire.idFormulaire}">
+                <option th:each="prescription:${prescriptions}"
+                    th:value="${prescription.id}"
+                    th:text="${prescription.id}">   
                 </option>
             </select>   
         </div>
+        </div>
+            <div>
+            <div class='form-group'>
+            <label for="ddlMedicamentAdd" class="col-form-label">Medicament:</label>
+            <select class="form-control" id="ddlMedicamentAdd" name="medicamentId">
+                <option>-SELECTIONNER-</option>
+                <option th:each="medicament: ${medicaments}"
+                    th:value="#{${medicament.id}}"
+                    th:text="${medicament.nom}">   
+                </option>
+            </select>   
+        </div>
+            </div>
+            
             <div class="form-group">
-                <label for="recipient-name" class="col-form-label">Date d'adoption</label>
-                <input type="date" class="form-control" id="recipient-name"name="dateAdoption">
+                <label for="recipient-name" class="col-form-label">Dosage</label>
+                <input type="text" class="form-control" id="recipient-name"name="dosage">
             </div>          
             <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Frais d'adoption</label>
-            <input type="number" placeholder="1.0" step="0.01" class="form-control" id="recipient-name"name="frais">
+            <label for="recipient-name" class="col-form-label">usage</label>
+            <textarea type="text" class="form-control" id="recipient-name"name="usage"></textarea>
           </div>
           <div class="form-group">
         <button type="submit" class="btn btn-primary">Ajouter</button>
@@ -105,25 +112,30 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modifier une adoption</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Modifier une posologie</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-          <form th:action="@{/adoptions/update}" method="put">  
+          <form th:action="@{/posologies/update}" method="put">  
           <div class="form-group">
-            <label for="recipient-name" class="col-form-label">id</label>
-            <input type="text" class="form-control" id="idAdoptionEdit"name="idAdoption" readonly>
-          </div> 
-          <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Date d'adoption</label>
-            <input type="date" class="form-control" id="dateAdoptionEdit"name="dateAdoption">
+            <label for="recipient-name" class="col-form-label">dosage du medicament</label>
+            <input type="date" class="form-control" id="dosageMedicEdit"name="dosageMedic">
           </div>          
             <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Frai d'adoption</label>
-            <input type="text" class="form-control" id="fraisAdoptionEdit"name="frais">
+            <label for="recipient-name" class="col-form-label">usage du medicament</label>
+            <input type="text" class="form-control" id="usageMedicEdit"name="usageMedic">
+          </div> 
+              <label for="recipient-name" class="col-form-label">Dosage</label>
+                <input type="text" class="form-control" id="dosage"name="dosage">
+            </div>          
+            <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Frais d'posologie</label>
+            <textarea type="text"  class="form-control" id="usage"name="usage"></textarea>
           </div>
+          <div class="form-group">
+               
           <div class="form-group">
         <button type="submit" class="btn btn-primary">Modifier</button>
           </div>
@@ -141,24 +153,27 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Details d'une adoption</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Details d'une posologie</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-          <form th:action="@{/adoptions/update}" method="put">  
+          <form th:action="@{/posologies/update}" method="put">  
           <div class="form-group">
-            <label for="recipient-name" class="col-form-label">id</label>
-            <input type="text" class="form-control" id="idAdoptionDetail"name="idAdoption" readonly>
-          </div> 
-          <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Date d'adoption</label>
-            <input type="date" class="form-control" id="dateAdoptionDetail"name="dateAdoption">
+            <label for="recipient-name" class="col-form-label">dosage du medicament</label>
+            <input type="date" class="form-control" id="dosageMedicEdit"name="dosageMedic">
           </div>          
             <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Frai d'adoption</label>
-            <input type="text" class="form-control" id="fraisAdoptionDetail"name="frais">
+            <label for="recipient-name" class="col-form-label">usage du medicament</label>
+            <input type="text" class="form-control" id="usageMedicEdit"name="usageMedic">
+          </div> 
+              <label for="recipient-name" class="col-form-label">Dosage</label>
+                <input type="text" class="form-control" id="dosage"name="dosage">
+            </div>          
+            <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Frais d'posologie</label>
+            <textarea type="text"  class="form-control" id="usage"name="usage"></textarea>
           </div>
         </form>
           
@@ -192,17 +207,13 @@
 </div>
   </main><!-- End #main -->
 
- <div th:replace="/commun/header :: footer">
+<div th:replace="/commun/header :: footer">
         
     </div>
   <!-- ======= Footer ======= -->
     <div th:replace="/commun/header :: body-bottom-script">
         
     </div>
-  <script src="assets/js/adoption.js"></script>
-
-  <!-- Template Main JS File -->
-
 </body>
 
 </html>

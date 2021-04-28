@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"/>
+
+<head th:replace="/commun/header :: commun-header"> 
+</head>
+
+<body>
+    <div th:replace="/commun/header :: navbar">
+        
+    </div><!-- End Header -->
+
+  <main id="main">
+
+    <!-- ======= Breadcrumbs Section ======= -->
+    <section class="breadcrumbs">
+      <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center">
+          <h2>Liste des employes</h2>
+          <ol>
+            <li><a href="/index">Home</a></li>
+            <li>Employe</li>
+          </ol>
+        </div>
+          <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addModal" id="addButton">Ajouter</button>
+          <table id="table" class="table">
+              <thead>
+                <tr>
+                   <th>Login</th>
+                   <th>Mot de passe</th>
+                   <th>Nom</th>
+                   <th>Prénom</th>
+                   <th>Adresse</th>
+                   <th>Telephone</th>                   
+                   <th>Numéro véterinaire</th>
+                   <th>Modifications</th>
+              </thead>
+              <tbody>
+                  <tr th:each="employe:${employes}">  
+                  </td>
+                      <td th:text="${employe.login}"></td>
+                      <td th:text="${employe.mdp}"></td>
+                      <td th:text="${employe.nom}"></td>
+                      <td th:text="${employe.prenom}"></td>
+                      <td th:text="${employe.adress}"></td>                      
+                      <td th:text="${employe.telephone}"></td> 
+                      <td></td>
+                  
+
+
+                      <td>
+                          <div class="btn-group"> 
+                              <a th:href="@{/employes/findById/(id=${employe.idEmploye})}" class=" btn btn-primary" id="editButton">éditer</a>
+                              <a th:href="@{/employes/findById/(id=${employe.idEmploye})}" class=" btn btn-success" id="detailsButton">détails</a>
+                              <a th:href="@{/employes/delete/(id=${employe.idEmploye})}" class=" btn btn-danger" id="deleteButton">supprimer</a>
+                          </div>
+                      </td>
+                  </tr>
+              </tbody>
+              
+          </table>
+
+      </div>
+    </section><!-- End Breadcrumbs Section -->
+
+    <section class="inner-page">
+      <div class="container">
+        <p>
+          
+        </p>
+      </div>
+    </section>
+        <!-- bouton ajouter-->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Ajouter un employe</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form th:action="@{/employes/addNew}" method="post">             
+            <div class="form-row">
+            <div class="col">
+                <label for="recipient-name" class="col-form-label">Nom</label>
+                <input type="text" class="form-control" id="recipient-name" name=nom>
+            </div>
+            <div class="col">
+                <label for="recipient-name" class="col-form-label">prenom</label>
+                <input type="text" class="form-control" id="recipient-name" name="prenom">
+            </div>
+            </div>
+        <div class="form-row">
+                        <div class="col">
+                <label for="recipient-name" class="col-form-label">login</label>
+                <input type="username" class="form-control" id="recipient-name" name="login">
+            </div>
+            <div class="col">
+                <label for="recipient-name" class="col-form-label">Mot de passe</label>
+                <input type="password" class="form-control" id="recipient-name" name="mdp">
+            </div>
+        </div>            
+  <div class="form-group">
+    <label for="recipient-name">Adresse</label>
+    <textarea type="text" class="form-control" id="recipient-name" name="adresse"></textarea>
+  </div>
+
+     <div>
+        <label for="recipient-name" class="col-form-label">Numéro de téléphone</label>
+        <input type="tel" class="form-control" id="recipient-name" name="telephone">
+     </div>
+      <div class="modal-footer">
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Ajouter</button>
+        </div>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    </div>
+</form>
+    </div>
+    </div>
+  </div>
+</div>
+        <!-- bouton modifier pour les lignes-->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modifier un Employe</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form th:action="@{/employes/update}" method="put">  
+         <div class="form-row">
+            <div class="col">
+                <label for="recipient-name" class="col-form-label">Nom</label>
+                <input type="text" class="form-control" id="nomEmployeEdit" name=nom>
+            </div>
+            <div class="col">
+                <label for="recipient-name" class="col-form-label">prenom</label>
+                <input type="text" class="form-control" id="prenomEmployeEdit" name="prenom">
+            </div>
+            </div>
+        <div class="form-row">
+                        <div class="col">
+                <label for="recipient-name" class="col-form-label">login</label>
+                <input type="username" class="form-control" id="loginEmployeEdit" name="login">
+            </div>
+            <div class="col">
+                <label for="recipient-name" class="col-form-label">Mot de passe</label>
+                <input type="text" class="form-control" id="mdpEmployeEdit" name="mdp">
+            </div>
+        </div>            
+  <div class="form-group">
+    <label for="recipient-name">Adresse</label>
+    <textarea type="text" class="form-control" id="adresseEmployeEdit" name="adress"></textarea>
+  </div>
+
+     <div>
+        <label for="recipient-name" class="col-form-label">Numéro de téléphone</label>
+        <input type="tel" class="form-control" id="telephoneEmployeEdit" name="telephone">
+     </div>
+            <div class="form-group">
+        <button type="submit" class="btn btn-primary">Modifier</button>
+          </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- bouton detail pour les lignes-->
+<div class="modal fade" id="detailsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <form th:action="@{/employes/update}" method="put">  
+    <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Details d'un employe</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <div class="form-group">
+        <div class="form-group">
+          <label for="recipient-name" class="col-form-label">Numero d'identifiant d'un employe</label>
+          <input type="text" class="form-control" id="employeIdDetail" name="employeIdDetail" readonly>
+        </div> 
+        <div class="form-group">
+          <label for="recipient-name" class="col-form-label">Nom du employe</label>
+          <input type="text" class="form-control" id="nomEmployeDetail" name="nom">
+        </div>          
+        <div class="form-group">
+          <label for="recipient-name" class="col-form-label">Adresse du employe</label>
+          <textarea type="text" class="form-control" id="adresseEmployeDetail" name="adress"></textarea>
+        </div>            
+        <div class="form-group">
+          <label for="recipient-name" class="col-form-label">Numero de TVA du employe</label>
+          <input type="text" class="form-control" id="numTVAEmployeDetail" name="numTVA">
+        </div>        
+        <div class="form-group">
+          <label for="recipient-name" class="col-form-label">Telephone du employe</label>
+          <input type="text" class="form-control" id="telephoneEmployeDetail" name="telephone">
+        </div>      
+        <div class="form-group">
+          <label for="recipient-name" class="col-form-label">Adresse email du employe</label>
+          <input type="text" class="form-control" id="adresseMailEmployeDetail" name="adresseMail">
+        </div> 
+        <div class="form-group">
+          <label for="recipient-name" class="col-form-label">Numero de compte du employe</label>
+          <input type="text" class="form-control" id="numCompteEmployeDetail" name="numCompte">
+        </div>       
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- bouton supprimer pour les lignes-->  
+ <div class="modal" id="deleteModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Confirmer la suppression</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Etes-vous sûr de vouloir supprimer cette ligne ?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">non</button>
+        <a class="btn btn-primary" id="confirmDeleteButton" href="">supprimer</a>
+      </div>
+    </div>
+  </div>
+</div>
+  </main><!-- End #main -->
+
+<div th:replace="/commun/header :: footer">
+        
+    </div>
+  <!-- ======= Footer ======= -->
+    <div th:replace="/commun/header :: body-bottom-script">
+        
+    </div>
+  <script src="assets/js/employe.js"></script>
+
+</body>
+
+</html>

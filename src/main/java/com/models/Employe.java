@@ -5,24 +5,16 @@
  */
 package com.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.models.security.Authority;
-import com.models.security.UserRole;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
-import javax.persistence.CascadeType;
+import java.io.Serializable;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.OneToMany;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 /**
  *
@@ -30,12 +22,12 @@ import org.springframework.security.core.userdetails.UserDetails;
  */
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public abstract class Employe implements UserDetails{
+public abstract class Employe implements Serializable{
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private Long id;
+    private Long idEmploye;
     @Column(length=70)
-    private String username;
+    private String login;
     @Column(length=70)
     private String mdp;
     @Column(length=70)
@@ -46,11 +38,6 @@ public abstract class Employe implements UserDetails{
     private String adresse;
     @Column(length=70)
     private String telephone;
-    private boolean enabled=true;
-    
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JsonIgnore
-    private Set<UserRole> userRoles = new HashSet<>();
     
 /**
 -- -----------------------------------------------------------------------------
@@ -58,9 +45,9 @@ public abstract class Employe implements UserDetails{
 -- -----------------------------------------------------------------------------
 */
     
-    public Employe(Long id, String username, String mdp, String nom, String prenom, String adresse, String telephone) {
-        this.id = id;
-        this.username = username;
+    public Employe(Long idEmploye, String login, String mdp, String nom, String prenom, String adresse, String telephone) {
+        this.idEmploye = idEmploye;
+        this.login = login;
         this.mdp = mdp;
         this.nom = nom;
         this.prenom = prenom;
@@ -71,20 +58,20 @@ public abstract class Employe implements UserDetails{
     public Employe() {
     }
 
-    public Long getId() {
-        return id;
+    public Long getIdEmploye() {
+        return idEmploye;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdEmploye(Long idEmploye) {
+        this.idEmploye = idEmploye;
     }
 
     public String getLogin() {
-        return username;
+        return login;
     }
 
-    public void setLogin(String username) {
-        this.username = username;
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     public String getMdp() {
@@ -126,37 +113,10 @@ public abstract class Employe implements UserDetails{
     public void setTelephone(String telephone) {
         this.telephone = telephone;
     }
+
+
     
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        Set<GrantedAuthority> authorities = new HashSet();
-        userRoles.forEach(ur -> authorities.add(new Authority(ur.getRole().getName())));
-        return authorities;
-
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-       return enabled;
-    }
-
   
+
+
 }
-
-    
-  

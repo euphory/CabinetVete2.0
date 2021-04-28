@@ -26,7 +26,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Facture implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long idFacture;
     @Temporal(TemporalType.DATE)
     private Date date;
     private String modeReglement;
@@ -48,8 +48,8 @@ public class Facture implements Serializable{
 -- - Constructor                                                             ---
 -- -----------------------------------------------------------------------------
 */  
-    public Facture(Long id, Date date, String modeReglement, Date dateReglement, double total, double totalTTC, Commande commande) {
-        this.id = id;
+    public Facture(Long idFacture, Date date, String modeReglement, Date dateReglement, double total, double totalTTC, Commande commande) {
+        this.idFacture = idFacture;
         this.date = date;
         this.modeReglement = modeReglement;
         this.dateReglement = dateReglement;
@@ -62,11 +62,11 @@ public class Facture implements Serializable{
     }
 
     public Long getIdFacture() {
-        return id;
+        return idFacture;
     }
 
-    public void setIdFacture(Long id) {
-        this.id = id;
+    public void setIdFacture(Long idFacture) {
+        this.idFacture = idFacture;
     }
     @DateTimeFormat(pattern="yyyy-mm-dd")
     public Date getDate() {
@@ -120,7 +120,7 @@ public class Facture implements Serializable{
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 97 * hash + Objects.hashCode(this.id);
+        hash = 97 * hash + Objects.hashCode(this.idFacture);
         hash = 97 * hash + Objects.hashCode(this.date);
         hash = 97 * hash + Objects.hashCode(this.modeReglement);
         hash = 97 * hash + Objects.hashCode(this.dateReglement);
@@ -151,7 +151,7 @@ public class Facture implements Serializable{
         if (!Objects.equals(this.modeReglement, other.modeReglement)) {
             return false;
         }
-        if (!Objects.equals(this.id, other.id)) {
+        if (!Objects.equals(this.idFacture, other.idFacture)) {
             return false;
         }
         if (!Objects.equals(this.date, other.date)) {
