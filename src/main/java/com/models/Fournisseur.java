@@ -6,14 +6,12 @@
 package com.models;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 /**
@@ -25,7 +23,7 @@ import javax.persistence.OneToMany;
 public class Fournisseur implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long fournisseurId;
+    private Long id;
     @Column(length=70)
     private String nom;
     @Column(length=140)
@@ -43,13 +41,13 @@ public class Fournisseur implements Serializable{
 -- -----------------------------------------------------------------------------
 */
     @OneToMany(mappedBy="prestation")
-    private Set<FAP> fap = new HashSet<>();
+    private List<FAP> fap;
     
     @OneToMany(mappedBy="articleMedical")
-    private Set<Prix> prix = new HashSet<>();
+    private List<Prix> prix;
     
     @OneToMany(mappedBy = "fournisseur")
-    Set<Commande> commandes;
+    private List<Commande> commandes;
 /**
 -- -----------------------------------------------------------------------------
 -- - Constructor                                                             ---
@@ -58,8 +56,8 @@ public class Fournisseur implements Serializable{
     public Fournisseur() {
     }
 
-    public Fournisseur(Long fournisseurId, String nom, String adresse, int numTVA, String telephone, String adresseMail, String numCompte, Set<Commande> commandes) {
-        this.fournisseurId = fournisseurId;
+    public Fournisseur(Long id, String nom, String adresse, int numTVA, String telephone, String adresseMail, String numCompte, List<Commande> commandes) {
+        this.id = id;
         this.nom = nom;
         this.adresse = adresse;
         this.numTVA = numTVA;
@@ -69,12 +67,12 @@ public class Fournisseur implements Serializable{
         this.commandes = commandes;
     }
 
-    public Long getFournisseurId() {
-        return fournisseurId;
+    public Long getId() {
+        return id;
     }
 
-    public void setFournisseurId(Long fournisseurId) {
-        this.fournisseurId = fournisseurId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNom() {
@@ -125,27 +123,27 @@ public class Fournisseur implements Serializable{
         this.numCompte = numCompte;
     }
 
-    public Set<FAP> getFap() {
+    public List<FAP> getFap() {
         return fap;
     }
 
-    public void setFap(Set<FAP> fap) {
+    public void setFap(List<FAP> fap) {
         this.fap = fap;
     }
 
-    public Set<Prix> getPrix() {
+    public List<Prix> getPrix() {
         return prix;
     }
 
-    public void setPrix(Set<Prix> prix) {
+    public void setPrix(List<Prix> prix) {
         this.prix = prix;
     }
 
-    public Set<Commande> getCommandes() {
+    public List<Commande> getCommandes() {
         return commandes;
     }
 
-    public void setCommandes(Set<Commande> commandes) {
+    public void setCommandes(List<Commande> commandes) {
         this.commandes = commandes;
     }
 

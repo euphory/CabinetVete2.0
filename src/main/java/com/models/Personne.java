@@ -5,10 +5,11 @@
  */
 package com.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
-import java.util.Set;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -28,11 +29,15 @@ import lombok.NoArgsConstructor;
 public class Personne implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idPersonne;
+    private Long id;
     @Column(length=70)
     private String nom;
     @Column(length=70)
     private String prenom;
+    
+    private String login;
+    
+    private String mdp;
     @Column(length=140)
     private String adresse;
     @Column(length=70)
@@ -47,13 +52,16 @@ public class Personne implements Serializable {
 -- -----------------------------------------------------------------------------
  */    
     @OneToMany(mappedBy="personne", fetch=FetchType.LAZY)
-    private Set<Formulaire> formulaires;
+    @JsonIgnore
+    private List<Formulaire> formulaires;
   
     @OneToMany(mappedBy="personne", fetch=FetchType.LAZY)
-    private Set<Animal> animaux;
+    @JsonIgnore
+    private List<Animal> animaux;
     
     @OneToMany(mappedBy="personne", fetch = FetchType.LAZY)
-    private Set<Consultation> consultations;
+    @JsonIgnore
+    private List<Consultation> consultations;
     
 /**
 -- -----------------------------------------------------------------------------
@@ -63,8 +71,8 @@ public class Personne implements Serializable {
     public Personne() {
     }
 
-    public Personne(Long idPersonne, String nom, String prenom, String adresse, String adresseMail, String numAssurance, String telephone, Set<Formulaire> formulaires, Set<Animal> animaux, Set<Consultation> consultations) {
-        this.idPersonne = idPersonne;
+    public Personne(Long id, String nom, String prenom, String adresse, String adresseMail, String numAssurance, String telephone, List<Formulaire> formulaires, List<Animal> animaux, List<Consultation> consultations) {
+        this.id = id;
         this.nom = nom;
         this.prenom = prenom;
         this.adresse = adresse;
@@ -79,7 +87,7 @@ public class Personne implements Serializable {
 
 
     public Long getIdPersonne() {
-        return idPersonne;
+        return id;
     }
 
     public String getNom() {
@@ -106,20 +114,20 @@ public class Personne implements Serializable {
         return telephone;
     }
 
-    public Set<Formulaire> getFormulaires() {
+    public List<Formulaire> getFormulaires() {
         return formulaires;
     }
 
-    public Set<Animal> getAnimaux() {
+    public List<Animal> getAnimaux() {
         return animaux;
     }
 
-    public Set<Consultation> getConsultations() {
+    public List<Consultation> getConsultations() {
         return consultations;
     }
 
-    public void setIdPersonne(Long idPersonne) {
-        this.idPersonne = idPersonne;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public void setNom(String nom) {
@@ -146,15 +154,15 @@ public class Personne implements Serializable {
         this.telephone = telephone;
     }
 
-    public void setFormulaires(Set<Formulaire> formulaires) {
+    public void setFormulaires(List<Formulaire> formulaires) {
         this.formulaires = formulaires;
     }
 
-    public void setAnimaux(Set<Animal> animaux) {
+    public void setAnimaux(List<Animal> animaux) {
         this.animaux = animaux;
     }
 
-    public void setConsultations(Set<Consultation> consultations) {
+    public void setConsultations(List<Consultation> consultations) {
         this.consultations = consultations;
     }
     

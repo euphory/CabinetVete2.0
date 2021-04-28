@@ -13,7 +13,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -26,7 +26,7 @@ import javax.persistence.Table;
 public class ServiceV implements Serializable{
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private Long idService;
+    private Long id;
     @Column(length=70)
     private String type;
     
@@ -47,20 +47,20 @@ public class ServiceV implements Serializable{
  */
 
 
-    public ServiceV(Long idService, String type) {
-        this.idService = idService;
+    public ServiceV(Long id, String type) {
+        this.id = id;
         this.type = type;
     }
 
     public ServiceV() {
     }
 
-    public Long getIdService() {
-        return idService;
+    public Long getid() {
+        return id;
     }
 
-    public void setIdService(Long idService) {
-        this.idService = idService;
+    public void setid(Long id) {
+        this.id = id;
     }
 
     public String getType() {

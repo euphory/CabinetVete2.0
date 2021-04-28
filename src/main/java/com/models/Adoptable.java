@@ -27,7 +27,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Adoptable implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idAdoptable;
+    private Long id;
     @Temporal(TemporalType.DATE)
     private Date dateAbandon;
     @Column(length=70)
@@ -38,7 +38,6 @@ public class Adoptable implements Serializable{
 -- -----------------------------------------------------------------------------
 */
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="idAnimal", nullable=true )
     private Animal animal;
     
 /**
@@ -46,8 +45,8 @@ public class Adoptable implements Serializable{
 -- - Constructor                                                             ---
 -- -----------------------------------------------------------------------------
 */
-    public Adoptable(Long idAdoptable, Date dateAbandon, String motifAbandon, Animal animal) {
-        this.idAdoptable = idAdoptable;
+    public Adoptable(Long id, Date dateAbandon, String motifAbandon, Animal animal) {
+        this.id = id;
         this.dateAbandon = dateAbandon;
         this.motifAbandon = motifAbandon;
         this.animal = animal;
@@ -56,12 +55,12 @@ public class Adoptable implements Serializable{
     public Adoptable() {
     }
 
-    public Long getIdAdoptable() {
-        return idAdoptable;
+    public Long getId() {
+        return id;
     }
 
-    public void setIdAdoptable(Long idAdoptable) {
-        this.idAdoptable = idAdoptable;
+    public void setId(Long id) {
+        this.id = id;
     }
     
     @DateTimeFormat(pattern="dd-mm-yyyy")

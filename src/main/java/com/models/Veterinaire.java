@@ -5,43 +5,55 @@
  */
 package com.models;
 
-import java.io.Serializable;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.models.security.Authority;
+import com.models.security.UserRole;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 /**
  *
  * @author PC
  */
 @Entity
-public class Veterinaire extends Employe implements Serializable{
+public abstract class Veterinaire extends Employe {
     
     private Long numVet; 
+    
     
 /**
 -- -----------------------------------------------------------------------------
 -- - Association                                                          ---
 -- -----------------------------------------------------------------------------
-*/   
+*/  
 
     
     @OneToMany(mappedBy="veterinaire", fetch=FetchType.LAZY)
-    private Set<Commande> commandesVet; 
+    @JsonIgnore
+    private List<Commande> commandesVet; 
     
     @OneToMany(mappedBy="veterinaire", fetch=FetchType.LAZY)
-    private Set<Consultation> consultations;
+    @JsonIgnore
+    private List<Consultation> consultations;
     
     @OneToMany(mappedBy="veterinaire", fetch=FetchType.LAZY)
-    private Set<Formulaire> formulaire; 
+    @JsonIgnore
+    private List<Formulaire> formulaire; 
  
 /**
 -- -----------------------------------------------------------------------------
 -- - Constructor                                                             ---
 -- -----------------------------------------------------------------------------
  */
-    public Veterinaire(Long numVet, Set<Commande> commandesVet, Set<Consultation> consultations, Set<Formulaire> formulaire, Long idEmploye, String login, String mdp, String nom, String prenom, String adress, String telephone) {
+    public Veterinaire(Long numVet, List<Commande> commandesVet, List<Consultation> consultations, List<Formulaire> formulaire, Long idEmploye, String login, String mdp, String nom, String prenom, String adress, String telephone) {
         super(idEmploye, login, mdp, nom, prenom, adress, telephone);
         this.numVet = numVet;
         this.commandesVet = commandesVet;
@@ -49,7 +61,7 @@ public class Veterinaire extends Employe implements Serializable{
         this.formulaire = formulaire;
     }
 
-    public Veterinaire(Long numVet, Set<Commande> commandesVet, Set<Consultation> consultations, Set<Formulaire> formulaire) {
+    public Veterinaire(Long numVet, List<Commande> commandesVet, List<Consultation> consultations, List<Formulaire> formulaire) {
         this.numVet = numVet;
         this.commandesVet = commandesVet;
         this.consultations = consultations;
@@ -67,30 +79,29 @@ public class Veterinaire extends Employe implements Serializable{
         this.numVet = numVet;
     }
 
-    public Set<Commande> getCommandesVet() {
+    public List<Commande> getCommandesVet() {
         return commandesVet;
     }
 
-    public void setCommandesVet(Set<Commande> commandesVet) {
+    public void setCommandesVet(List<Commande> commandesVet) {
         this.commandesVet = commandesVet;
     }
 
-    public Set<Consultation> getConsultations() {
+    public List<Consultation> getConsultations() {
         return consultations;
     }
 
-    public void setConsultations(Set<Consultation> consultations) {
+    public void setConsultations(List<Consultation> consultations) {
         this.consultations = consultations;
     }
 
-    public Set<Formulaire> getFormulaire() {
+    public List<Formulaire> getFormulaire() {
         return formulaire;
     }
 
-    public void setFormulaire(Set<Formulaire> formulaire) {
+    public void setFormulaire(List<Formulaire> formulaire) {
         this.formulaire = formulaire;
     }
 
- 
-    
+
 }

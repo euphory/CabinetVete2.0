@@ -31,7 +31,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Adoption implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idAdoption;
+    private Long id;
     @Temporal(TemporalType.DATE)
     private Date dateAdoption;
     private double frais;
@@ -50,8 +50,8 @@ public class Adoption implements Serializable{
 */
 
 
-    public Adoption(Long idAdoption, Date dateAdoption, double frais, Formulaire formulaire) {
-        this.idAdoption = idAdoption;
+    public Adoption(Long id, Date dateAdoption, double frais, Formulaire formulaire) {
+        this.id = id;
         this.dateAdoption = dateAdoption;
         this.frais = frais;
         this.formulaire = formulaire;
@@ -61,12 +61,12 @@ public class Adoption implements Serializable{
     }
     
 
-    public Long getIdAdoption() {
-        return idAdoption;
+    public Long getId() {
+        return id;
     }
 
-    public void setIdAdoption(Long idAdoption) {
-        this.idAdoption = idAdoption;
+    public void setId(Long id) {
+        this.id = id;
     }
     @DateTimeFormat(pattern="dd-mm-yyyy")
     public Date getDateAdoption() {
