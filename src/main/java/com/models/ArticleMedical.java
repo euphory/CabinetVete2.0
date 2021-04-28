@@ -5,15 +5,14 @@
  */
 package com.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 /**
@@ -36,13 +35,16 @@ public class ArticleMedical implements Serializable{
 */
         
     @OneToMany(mappedBy="fournisseur")
-    private Set<FAP> fap = new HashSet<>();
+    @JsonIgnore
+    private List<FAP> fap;
     
     @OneToMany(mappedBy = "fournisseur")
-    private Set<Prix> prix = new HashSet<>();
+    @JsonIgnore
+    private List<Prix> prix;
     
     @OneToMany(mappedBy = "commande")
-    private Set<LigneCommande> ligneCommande = new HashSet<>();
+    @JsonIgnore
+    private List<LigneCommande> ligneCommande;
 
 
 /**
@@ -59,15 +61,15 @@ public class ArticleMedical implements Serializable{
         this.quantite = quantite;
     }
 
-    public Set<LigneCommande> getLigneCommande() {
+    public List<LigneCommande> getLigneCommande() {
         return ligneCommande;
     }
 
-    public void setLigneCommande(Set<LigneCommande> ligneCommande) {
+    public void setLigneCommande(List<LigneCommande> ligneCommande) {
         this.ligneCommande = ligneCommande;
     }
 
-    public void setFap(Set<FAP> fap) {
+    public void setFap(List<FAP> fap) {
         this.fap = fap;
     }
 
@@ -100,11 +102,11 @@ public class ArticleMedical implements Serializable{
 
 
 
-    public Set<Prix> getPrix() {
+    public List<Prix> getPrix() {
         return prix;
     }
 
-    public void setPrix(Set<Prix> prix) {
+    public void setPrix(List<Prix> prix) {
         this.prix = prix;
     }
 
@@ -117,7 +119,7 @@ public class ArticleMedical implements Serializable{
         this.articleMedicalId = articleMedicalId;
     }
 
-    public Set<FAP> getFap() {
+    public List<FAP> getFap() {
         return fap;
     }
 

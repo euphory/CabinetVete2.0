@@ -5,10 +5,10 @@
  */
 package com.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Calendar;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -49,7 +49,8 @@ public class Commande implements Serializable{
     private Fournisseur fournisseur;
 
     @OneToMany(mappedBy="articleMedical")
-    private Set<LigneCommande> ligneCommandes = new HashSet<>();
+    @JsonIgnore
+    private List<LigneCommande> ligneCommandes;
     
     @OneToOne
     @JoinColumn(name="idFacture", nullable = true)
@@ -129,11 +130,11 @@ public class Commande implements Serializable{
         this.fournisseur = fournisseur;
     }
 
-    public Set<LigneCommande> getLigneCommandes() {
+    public List<LigneCommande> getLigneCommandes() {
         return ligneCommandes;
     }
 
-    public void setLigneCommandes(Set<LigneCommande> ligneCommandes) {
+    public void setLigneCommandes(List<LigneCommande> ligneCommandes) {
         this.ligneCommandes = ligneCommandes;
     }
 

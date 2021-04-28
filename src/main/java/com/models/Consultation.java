@@ -5,10 +5,11 @@
  */
 package com.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -31,7 +32,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Consultation implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idConsultation;
+    private Long id;
     @Temporal(TemporalType.DATE)
     private Date date;
     @Temporal(TemporalType.TIME)
@@ -48,22 +49,21 @@ public class Consultation implements Serializable{
 -- -----------------------------------------------------------------------------
 */
     @ManyToOne
-    @JoinColumn(name="idEmployeVeterinaire")
+    @JoinColumn(name="employeVeterinaire_id")
     private Employe veterinaire;
     
     @ManyToOne
-    @JoinColumn(name="idEmployeSecretaireMedical")
+    @JoinColumn(name="employeSecretaireMedical_id")
     private Employe secretaireMedical;
         
     @OneToOne
-    @JoinColumn( name="factureConsult")
     private FactureConsult factureConsult;
         
     @ManyToMany(fetch=FetchType.LAZY)
-    private Set<Animal> animaux;
+    private List<Animal> animaux;
     
     @ManyToOne
-    @JoinColumn(name="idPersonne")
+    @JoinColumn(name="personne_id")
     private Personne personne;
 
 /**
@@ -72,8 +72,8 @@ public class Consultation implements Serializable{
 -- -----------------------------------------------------------------------------
 */
     
-    public Consultation(Long idConsultation, Date date, Date heureDebut, Date heureFin, String Motif, double tarifGroupe, Employe veterinaire, Employe secretaireMedical, FactureConsult factureConsult, Set<Animal> animaux, Personne personne) {
-        this.idConsultation = idConsultation;
+    public Consultation(Long id, Date date, Date heureDebut, Date heureFin, String Motif, double tarifGroupe, Employe veterinaire, Employe secretaireMedical, FactureConsult factureConsult, List<Animal> animaux, Personne personne) {
+        this.id = id;
         this.date = date;
         this.heureDebut = heureDebut;
         this.heureFin = heureFin;
@@ -89,12 +89,12 @@ public class Consultation implements Serializable{
     public Consultation() {
     }
 
-    public Long getIdConsultation() {
-        return idConsultation;
+    public Long getId() {
+        return id;
     }
 
-    public void setIdConsultation(Long idConsultation) {
-        this.idConsultation = idConsultation;
+    public void setId(Long id) {
+        this.id = id;
     }
     @DateTimeFormat(pattern="yyyy-MM-dd")
     public Date getDate() {
@@ -161,11 +161,11 @@ public class Consultation implements Serializable{
         this.factureConsult = factureConsult;
     }
 
-    public Set<Animal> getAnimaux() {
+    public List<Animal> getAnimaux() {
         return animaux;
     }
 
-    public void setAnimaux(Set<Animal> animaux) {
+    public void setAnimaux(List<Animal> animaux) {
         this.animaux = animaux;
     }
 

@@ -26,7 +26,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Antecedent implements Serializable{ 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idAntecedent;
+    private Long id;
     @Temporal(TemporalType.DATE)
     private Date age;
     @Column(length=70)
@@ -40,7 +40,7 @@ public class Antecedent implements Serializable{
 -- -----------------------------------------------------------------------------
 */
     @ManyToOne
-    @JoinColumn( name="idAnimal", nullable= true)
+    @JoinColumn( name="animal_id", nullable= true)
     private Animal animal;
     
 /**
@@ -52,20 +52,20 @@ public class Antecedent implements Serializable{
     public Antecedent() {
     }
 
-    public Antecedent(Long idAntecedent, Date age, String antece, String description, Animal animal) {
-        this.idAntecedent = idAntecedent;
+    public Antecedent(Long id, Date age, String antece, String description, Animal animal) {
+        this.id = id;
         this.age = age;
         this.antece = antece;
         this.description = description;
         this.animal = animal;
     }
 
-    public Long getIdAntecedent() {
-        return idAntecedent;
+    public Long getId() {
+        return id;
     }
 
-    public void setIdAntecedent(Long idAntecedent) {
-        this.idAntecedent = idAntecedent;
+    public void setId(Long id) {
+        this.id = id;
     }
     @DateTimeFormat(pattern="dd-mm-yyyy")
     public Date getAge() {

@@ -6,13 +6,12 @@
 package com.models;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import java.io.Serializable;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
-import java.util.Set;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,6 +20,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -38,7 +38,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Animal implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idAnimal;
+    private Long id;
     @Column(length=70)
     private String surnom;
     @Temporal(TemporalType.DATE)
@@ -51,27 +51,30 @@ public class Animal implements Serializable{
 -- -----------------------------------------------------------------------------   
  */
     @ManyToMany(mappedBy = "animaux")
-    private Set<Consultation> consultations;
+    private List<Consultation> consultations;
    
     @ManyToOne
-    @JoinColumn(name="idEspece")
+    @JoinColumn(name="espece_id")
     private Espece espece;
     
     @ManyToOne
-    @JoinColumn(name="idPersonne")
+    @JoinColumn(name="personne_id")
     private Personne personne;
         
-    @OneToOne(mappedBy="animal")  
+    @OneToOne
     private Adoptable adoptable ;
         
     @OneToMany(mappedBy="animal", fetch=FetchType.LAZY)
-    private Set<Formulaire> formulaires; 
+    @JsonIgnore
+    private List<Formulaire> formulaires; 
     
     @OneToMany(mappedBy="animal", fetch=FetchType.LAZY)
-    private Set<Prestation> prestations;
+    @JsonIgnore
+    private List<Prestation> prestations;
     
     @OneToMany(mappedBy="animal", fetch=FetchType.LAZY,cascade={CascadeType.REMOVE})
-    private Set<Antecedent> antecedents;
+    @JsonIgnore
+    private List<Antecedent> antecedents;
     
 /**
 -- -----------------------------------------------------------------------------
@@ -81,8 +84,8 @@ public class Animal implements Serializable{
     public Animal() {
     }
 
-    public Animal(Long idAnimal, String surnom, Date dateNaissance, double poid, Set<Consultation> consultations, Espece espece, Personne personne, Adoptable adoptable, Set<Formulaire> formulaires, Set<Prestation> prestations, Set<Antecedent> antecedents) {
-        this.idAnimal = idAnimal;
+    public Animal(Long id, String surnom, Date dateNaissance, double poid, List<Consultation> consultations, Espece espece, Personne personne, Adoptable adoptable, List<Formulaire> formulaires, List<Prestation> prestations, List<Antecedent> antecedents) {
+        this.id = id;
         this.surnom = surnom;
         this.dateNaissance = dateNaissance;
         this.poid = poid;
@@ -94,13 +97,14 @@ public class Animal implements Serializable{
         this.prestations = prestations;
         this.antecedents = antecedents;
     }
+    
 
-    public void setIdAnimal(Long idAnimal) {
-        this.idAnimal = idAnimal;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public Long getIdAnimal() {
-        return idAnimal;
+    public Long getId() {
+        return id;
     }
 
 
@@ -130,11 +134,11 @@ public class Animal implements Serializable{
         this.poid = poid;
     }
 
-    public Set<Consultation> getConsultations() {
+    public List<Consultation> getConsultations() {
         return consultations;
     }
 
-    public void setConsultations(Set<Consultation> consultations) {
+    public void setConsultations(List<Consultation> consultations) {
         this.consultations = consultations;
     }
 
@@ -162,34 +166,34 @@ public class Animal implements Serializable{
         this.adoptable = adoptable;
     }
 
-    public Set<Formulaire> getFormulaires() {
+    public List<Formulaire> getFormulaires() {
         return formulaires;
     }
 
-    public void setFormulaires(Set<Formulaire> formulaires) {
+    public void setFormulaires(List<Formulaire> formulaires) {
         this.formulaires = formulaires;
     }
 
-    public Set<Prestation> getPrestations() {
+    public List<Prestation> getPrestations() {
         return prestations;
     }
 
-    public void setPrestations(Set<Prestation> prestations) {
+    public void setPrestations(List<Prestation> prestations) {
         this.prestations = prestations;
     }
 
-    public Set<Antecedent> getAntecedents() {
+    public List<Antecedent> getAntecedents() {
         return antecedents;
     }
 
-    public void setAntecedents(Set<Antecedent> antecedents) {
+    public void setAntecedents(List<Antecedent> antecedents) {
         this.antecedents = antecedents;
     }
 
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 97 * hash + Objects.hashCode(this.idAnimal);
+        hash = 97 * hash + Objects.hashCode(this.id);
         hash = 97 * hash + Objects.hashCode(this.surnom);
         hash = 97 * hash + Objects.hashCode(this.dateNaissance);
         hash = 97 * hash + (int) (Double.doubleToLongBits(this.poid) ^ (Double.doubleToLongBits(this.poid) >>> 32));
@@ -221,7 +225,7 @@ public class Animal implements Serializable{
         if (!Objects.equals(this.surnom, other.surnom)) {
             return false;
         }
-        if (!Objects.equals(this.idAnimal, other.idAnimal)) {
+        if (!Objects.equals(this.id, other.id)) {
             return false;
         }
         if (!Objects.equals(this.dateNaissance, other.dateNaissance)) {

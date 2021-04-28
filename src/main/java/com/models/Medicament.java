@@ -5,16 +5,15 @@
  */
 package com.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 /**
  *
@@ -40,7 +39,8 @@ public class Medicament implements Serializable{
 */
     
     @OneToMany(mappedBy="prescription")
-    private Set<Posologie> posologies = new HashSet<>();
+    @JsonIgnore
+    private List<Posologie> posologies ;
     
 /**
 -- -----------------------------------------------------------------------------
@@ -90,11 +90,11 @@ public class Medicament implements Serializable{
         this.usageMedic = usageMedic;
     }
 
-    public Set<Posologie> getPosologies() {
+    public List<Posologie> getPosologies() {
         return posologies;
     }
 
-    public void setPosologies(Set<Posologie> posologies) {
+    public void setPosologies(List<Posologie> posologies) {
         this.posologies = posologies;
     }
 
