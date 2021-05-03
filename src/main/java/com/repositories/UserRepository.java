@@ -5,15 +5,15 @@
  */
 package com.repositories;
 
-import com.models.Employe;
+import com.models.User;
 import org.springframework.data.repository.CrudRepository;
 
 /**
  *
  * @author PC
  */
-public interface UserRepository extends CrudRepository<Employe, Long>{
-    Employe findByUsername(String username);
+public interface UserRepository extends CrudRepository<User, Long>{
+    User findByUsername(String username);
     
     
 }

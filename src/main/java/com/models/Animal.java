@@ -59,7 +59,7 @@ public class Animal implements Serializable{
     
     @ManyToOne
     @JoinColumn(name="personne_id")
-    private Personne personne;
+    private User personne;
         
     @OneToOne
     private Adoptable adoptable ;
@@ -84,7 +84,7 @@ public class Animal implements Serializable{
     public Animal() {
     }
 
-    public Animal(Long id, String surnom, Date dateNaissance, double poid, List<Consultation> consultations, Espece espece, Personne personne, Adoptable adoptable, List<Formulaire> formulaires, List<Prestation> prestations, List<Antecedent> antecedents) {
+    public Animal(Long id, String surnom, Date dateNaissance, double poid, List<Consultation> consultations, Espece espece, User personne, Adoptable adoptable, List<Formulaire> formulaires, List<Prestation> prestations, List<Antecedent> antecedents) {
         this.id = id;
         this.surnom = surnom;
         this.dateNaissance = dateNaissance;
@@ -150,11 +150,11 @@ public class Animal implements Serializable{
         this.espece = espece;
     }
 
-    public Personne getPersonne() {
+    public User getPersonne() {
         return personne;
     }
 
-    public void setPersonne(Personne personne) {
+    public void setPersonne(User personne) {
         this.personne = personne;
     }
 

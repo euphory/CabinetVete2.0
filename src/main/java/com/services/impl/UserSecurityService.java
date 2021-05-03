@@ -1,6 +1,6 @@
 package com.services.impl;
 
-import com.models.Employe;
+import com.models.User;
 import com.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,13 +18,13 @@ public class UserSecurityService implements UserDetailsService{
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		Employe user = userRepository.findByUsername(username);
+		User user = userRepository.findByUsername(username);
 		
 		if(null == user) {
 			throw new UsernameNotFoundException("Username not found");
 		}
 		
-		return (UserDetails) user;
+		return user;
 	}
 
 }

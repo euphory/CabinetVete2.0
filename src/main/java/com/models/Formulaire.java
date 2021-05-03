@@ -45,7 +45,7 @@ public class Formulaire implements Serializable{
 */ 
     @ManyToOne
     @JoinColumn(name="idPersonne")
-    private Personne personne;
+    private User personne;
 
     @OneToOne
     @JoinColumn( name="idAdoption", nullable=true)
@@ -65,7 +65,7 @@ public class Formulaire implements Serializable{
 -- -----------------------------------------------------------------------------
 */
 
-    public Formulaire(Long id, Date dateFormulaire, String raison, Personne personne, Adoption adoption, Animal animal, Employe veterinaire) {
+    public Formulaire(Long id, Date dateFormulaire, String raison, User personne, Adoption adoption, Animal animal, Employe veterinaire) {
         this.id = id;
         this.dateFormulaire = dateFormulaire;
         this.raison = raison;
@@ -103,11 +103,11 @@ public class Formulaire implements Serializable{
         this.raison = raison;
     }
 
-    public Personne getPersonne() {
+    public User getPersonne() {
         return personne;
     }
 
-    public void setPersonne(Personne personne) {
+    public void setPersonne(User personne) {
         this.personne = personne;
     }
 

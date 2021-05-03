@@ -8,6 +8,7 @@ package com.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.models.security.Authority;
 import com.models.security.UserRole;
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -30,7 +31,7 @@ import org.springframework.security.core.userdetails.UserDetails;
  */
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public abstract class Employe implements UserDetails{
+public abstract class Employe implements Serializable{
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
@@ -46,11 +47,7 @@ public abstract class Employe implements UserDetails{
     private String adresse;
     @Column(length=70)
     private String telephone;
-    private boolean enabled=true;
-    
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JsonIgnore
-    private Set<UserRole> userRoles = new HashSet<>();
+
     
 /**
 -- -----------------------------------------------------------------------------
@@ -127,33 +124,6 @@ public abstract class Employe implements UserDetails{
         this.telephone = telephone;
     }
     
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        Set<GrantedAuthority> authorities = new HashSet();
-        userRoles.forEach(ur -> authorities.add(new Authority(ur.getRole().getName())));
-        return authorities;
-
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-       return enabled;
-    }
 
   
 }

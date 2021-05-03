@@ -64,7 +64,7 @@ public class Consultation implements Serializable{
     
     @ManyToOne
     @JoinColumn(name="personne_id")
-    private Personne personne;
+    private User personne;
 
 /**
 -- -----------------------------------------------------------------------------
@@ -72,7 +72,7 @@ public class Consultation implements Serializable{
 -- -----------------------------------------------------------------------------
 */
     
-    public Consultation(Long id, Date date, Date heureDebut, Date heureFin, String Motif, double tarifGroupe, Employe veterinaire, Employe secretaireMedical, FactureConsult factureConsult, List<Animal> animaux, Personne personne) {
+    public Consultation(Long id, Date date, Date heureDebut, Date heureFin, String Motif, double tarifGroupe, Employe veterinaire, Employe secretaireMedical, FactureConsult factureConsult, List<Animal> animaux, User personne) {
         this.id = id;
         this.date = date;
         this.heureDebut = heureDebut;
@@ -169,11 +169,11 @@ public class Consultation implements Serializable{
         this.animaux = animaux;
     }
 
-    public Personne getPersonne() {
+    public User getPersonne() {
         return personne;
     }
 
-    public void setPersonne(Personne personne) {
+    public void setPersonne(User personne) {
         this.personne = personne;
     }
 

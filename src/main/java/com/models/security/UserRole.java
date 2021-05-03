@@ -5,7 +5,7 @@
  */
 package com.models.security;
 
-import com.models.Employe;
+import com.models.User;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -27,20 +27,17 @@ public class UserRole {
 	private Long userRoleId;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name="employe_id")
-	private Employe user;
+	@JoinColumn(name="user_id")
+	private User user;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="role_id")
 	private Role role;
 
-    public UserRole(Long userRoleId, Employe user, Role role) {
+    public UserRole(Long userRoleId, User user, Role role) {
         this.userRoleId = userRoleId;
         this.user = user;
         this.role = role;
-    }
-
-    public UserRole() {
     }
 
     public Long getUserRoleId() {
@@ -51,11 +48,11 @@ public class UserRole {
         this.userRoleId = userRoleId;
     }
 
-    public Employe getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(Employe user) {
+    public void setUser(User user) {
         this.user = user;
     }
 
